@@ -1,7 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
 
-
 const PORT = 3500;
 
 /**
@@ -14,6 +13,5 @@ async function main() {
   server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });
-
 }
 main();
