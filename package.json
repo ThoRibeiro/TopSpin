@@ -1,9 +1,16 @@
 {
     "name": "cours",
     "version": "1.0.0",
+    "main": "index.js",
     "description": "",
     "keywords": [],
     "author": "",
-    "license": "ISC"
+    "license": "ISC",
+    "scripts": {
+        "format:fix": "npx prettier ./**/*.{ts,tsx} --write"
+    },
+    "dependencies": {
+        "prettier": "^3.2.5"
+    }
   }
   
