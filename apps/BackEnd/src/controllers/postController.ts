@@ -1,53 +1,86 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from "express";
 
-import Post, { IPost } from '../models/postModel';
-import Comment, { IComment } from '../models/commentModel';
+import Post, { IPost } from "../models/postModel";
+import Comment, { IComment } from "../models/commentModel";
 
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 
 dotenv.config();
 
-export const createPost = async (req: Request, res: Response, next: NextFunction) => {
-  if (req.body.titlePost === '' || req.body.content === '') {
-    return res.status(400).json({ error: 'Veuillez remplir tous les champs pour votre POST s\'il vous plait !' });
+export const createPost = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  if (req.body.titlePost === "" || req.body.content === "") {
+    return res
+      .status(400)
+      .json({
+        error:
+          "Veuillez remplir tous les champs pour votre POST s'il vous plait !",
+      });
   }
   const myFile = typeof req.body.file;
   const postData: Partial<IPost> = {
     titlePost: req.body.titlePost,
     content: req.body.content,
     date: new Date(),
-    ...(myFile !== 'undefined' && { image: `${req.protocol}://${req.get('host')}/images/${req.body.file.filename}` })
+    ...(myFile !== "undefined" && {
+      image: `${req.protocol}://${req.get("host")}/images/${req.body.file.filename}`,
+    }),
   };
 
   try {
     await Post.create(postData);
-    res.status(201).json({ message: 'Post enregistré avec succès !' });
+    res.status(201).json({ message: "Post enregistré avec succès !" });
   } catch (error) {
     res.status(400).json({ error });
   }
 };
 
-export const updatePost = async (req: Request, res: Response, next: NextFunction) => {
+export const updatePost = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   const idPost = req.body.idPost;
   const myFile = typeof req.body.file;
   const postData: Partial<IPost> = {
     titlePost: req.body.titlePost,
     content: req.body.content,
-    ...(myFile !== 'undefined' && { image: `${req.protocol}://${req.get('host')}/images/${req.body.file.filename}` })
+    ...(myFile !== "undefined" && {
+      image: `${req.protocol}://${req.get("host")}/images/${req.body.file.filename}`,
+    }),
   };
 
   try {
-    const updatedPost = await Post.findByIdAndUpdate(idPost, postData, { new: true });
+    const updatedPost = await Post.findByIdAndUpdate(idPost, postData, {
+      new: true,
+    });
     if (!updatedPost) {
-      return res.status(404).json({ message: "Le post que vous souhaitez modifier n'existe pas, merci de réessayer..." });
+      return res
+        .status(404)
+        .json({
+          message:
+            "Le post que vous souhaitez modifier n'existe pas, merci de réessayer...",
+        });
     }
-    res.status(200).json({ message: 'Le POST a été mis à jour, merci !', post: updatedPost });
+    res
+      .status(200)
+      .json({
+        message: "Le POST a été mis à jour, merci !",
+        post: updatedPost,
+      });
   } catch (error) {
     res.status(400).json({ error });
   }
 };
 
-export const getAllPosts = async (req: Request, res: Response, next: NextFunction) => {
+export const getAllPosts = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const posts = await Post.find();
     res.status(200).json(posts);
@@ -56,7 +89,11 @@ export const getAllPosts = async (req: Request, res: Response, next: NextFunctio
   }
 };
 
-export const getPostById = async (req: Request, res: Response, next: NextFunction) => {
+export const getPostById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   const idPost = req.params.idPost;
   try {
     const post = await Post.findById(idPost);
@@ -69,7 +106,11 @@ export const getPostById = async (req: Request, res: Response, next: NextFunctio
   }
 };
 
-export const getPostsByCategorie = async (req: Request, res: Response, next: NextFunction) => {
+export const getPostsByCategorie = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   const categorie = req.params.categorie;
   try {
     const posts = await Post.find({ categorie });
@@ -79,7 +120,11 @@ export const getPostsByCategorie = async (req: Request, res: Response, next: Nex
   }
 };
 
-export const getPostAndComments = async (req: Request, res: Response, next: NextFunction) => {
+export const getPostAndComments = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   const idPost = req.params.idPost;
   try {
     const post = await Post.findById(idPost);
@@ -94,23 +139,37 @@ export const getPostAndComments = async (req: Request, res: Response, next: Next
 };
 
 // permet de creer un commentaire
-export const createComment = async (req: Request, res: Response, next: NextFunction) => {
+export const createComment = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   const idPost = req.params.idPost;
   try {
     const post = await Post.findById(idPost);
     if (!post) {
-      return res.status(404).json({ message: "Le post auquel vous souhaitez ajouter un commentaire n'existe pas, merci de réessayer" });
+      return res
+        .status(404)
+        .json({
+          message:
+            "Le post auquel vous souhaitez ajouter un commentaire n'existe pas, merci de réessayer",
+        });
     }
-    if (req.body.message === '') {
-      return res.status(400).json({ error: 'Veuillez remplir tous les champs pour votre commentaire SVP !' });
+    if (req.body.message === "") {
+      return res
+        .status(400)
+        .json({
+          error:
+            "Veuillez remplir tous les champs pour votre commentaire SVP !",
+        });
     }
     const commentData: Partial<IComment> = {
       message: req.body.message,
       idPost: req.body.idPost,
-      idUser: req.body.id
+      idUser: req.body.id,
     };
     await Comment.create(commentData);
-    res.status(201).json({ message: 'Commentaire enregistré !' });
+    res.status(201).json({ message: "Commentaire enregistré !" });
   } catch (error) {
     res.status(400).json({ error });
   }

@@ -15,18 +15,18 @@ async function main() {
   server.use(bodyParser.json());
 
   // Utilisez vos routes d'authentification
-  server.use('/auth', authRoutes);
-  server.use('/post', postRoutes)
+  server.use("/auth", authRoutes);
+  server.use("/post", postRoutes);
 
   server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });
 
   try {
-    await mongoose.connect('mongodb://localhost:27017/topSpin', {});
-    console.log('Connected to database');
+    await mongoose.connect("mongodb://localhost:27017/topSpin", {});
+    console.log("Connected to database");
   } catch (error) {
-    console.error('Database connection error:', error);
+    console.error("Database connection error:", error);
   }
 }
 

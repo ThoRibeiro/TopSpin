@@ -9,10 +9,13 @@ interface IComment extends Document {
 const commentSchema: Schema<IComment> = new Schema({
   message: { type: String, required: true },
   idPost: { type: mongoose.Types.ObjectId, required: true },
-  idUser: { type: mongoose.Types.ObjectId, required: true }
+  idUser: { type: mongoose.Types.ObjectId, required: true },
 });
 
-const Comment: Model<IComment> = mongoose.model<IComment>("Comment", commentSchema);
+const Comment: Model<IComment> = mongoose.model<IComment>(
+  "Comment",
+  commentSchema,
+);
 
 export default Comment;
 export { IComment };

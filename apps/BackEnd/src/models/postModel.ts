@@ -11,7 +11,7 @@ const postSchema: Schema<IPost> = new Schema({
   titlePost: { type: String, required: true },
   content: { type: String, required: true },
   date: { type: Date, required: true, default: Date.now },
-  image: { type: String }
+  image: { type: String },
 });
 
 const Post: Model<IPost> = mongoose.model<IPost>("Post", postSchema);
