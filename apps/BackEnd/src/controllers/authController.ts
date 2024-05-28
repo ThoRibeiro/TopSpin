@@ -37,33 +37,37 @@ class AuthController {
 
   async login(req: Request, res: Response, next: NextFunction) {
     try {
-      const user = await User.findOne({ email: req.body.email });
-      if (user) {
-        const success = await bcrypt.compare(
-          req.body.password,
-          user.password.toString(),
-        );
-        if (success) {
-          const token = jwt.sign(
-            {
-              email: user.email,
-              id: user._id,
-            },
-            process.env.JWT_TOKEN as string,
-          );
-
-          res.status(200).json({
-            email: user.email,
-            jwt: token,
-          });
-        } else {
-          res.status(401).json({ message: "Password not correct" });
-        }
-      } else {
-        res.status(404).json({ message: "User not found" });
+      if (!req.body.email || !req.body.password) {
+        return res
+          .status(400)
+          .json({ message: "Email and password are required" });
       }
+
+      const user = await User.findOne({ email: req.body.email });
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      const success = await bcrypt.compare(
+        req.body.password,
+        user.password.toString(),
+      );
+      if (!success) {
+        return res.status(401).json({ message: "Password not correct" });
+      }
+
+      const secret = process.env.JWT_SECRET;
+      if (!secret) {
+        console.error("JWT_SECRET is not defined");
+        return res.status(500).json({ message: "Server configuration error" });
+      }
+
+      const token = jwt.sign({ email: user.email, id: user._id }, secret);
+
+      return res.status(200).json({ email: user.email, jwt: token });
     } catch (error) {
-      res.status(500).json({ message: error });
+      console.error("Error during login:", error);
+      return res.status(500).json({ message: "Internal server error" });
     }
   }
 }

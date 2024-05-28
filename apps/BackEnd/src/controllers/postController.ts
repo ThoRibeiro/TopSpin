@@ -12,25 +12,26 @@ export const createPost = async (
   res: Response,
   next: NextFunction,
 ) => {
-  if (req.body.titlePost === "" || req.body.content === "") {
+  if (!req.body.titlePost || !req.body.content) {
     return res.status(400).json({
       error:
         "Veuillez remplir tous les champs pour votre POST s'il vous plait !",
     });
   }
-  const myFile = typeof req.body.file;
+
+  const myFile = req.file;
   const postData: Partial<IPost> = {
     titlePost: req.body.titlePost,
     content: req.body.content,
     date: new Date(),
-    ...(myFile !== "undefined" && {
-      image: `${req.protocol}://${req.get("host")}/images/${req.body.file.filename}`,
+    ...(myFile && {
+      image: `${req.protocol}://${req.get("host")}/images/${myFile.filename}`,
     }),
   };
 
   try {
-    await Post.create(postData);
-    res.status(201).json({ message: "Post enregistré avec succès !" });
+    const post = await Post.create(postData);
+    res.status(201).json({ message: "Post enregistré avec succès !", post });
   } catch (error) {
     res.status(400).json({ error });
   }

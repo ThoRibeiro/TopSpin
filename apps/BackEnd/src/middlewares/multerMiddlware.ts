@@ -23,11 +23,11 @@ const storage: StorageEngine = multer.diskStorage({
     const extension = MIME_TYPES[file.mimetype];
     callback(
       null,
-      `${file.originalname.split(" ").join("_")}${Date.now()}.${extension}`,
+      `${file.originalname.split(" ").join("_")}_${Date.now()}.${extension}`,
     );
   },
 });
 
-const upload = multer({ storage }).single("image");
+const upload = multer({ storage }).single("image"); // Assurez-vous que le champ fichier est bien "image"
 
 export default upload;
