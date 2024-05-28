@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import ContactModel from "../models/contactModel";
+import Post from "../models/postModel";
 
 export const createContact = async (
   req: Request,
@@ -28,5 +29,16 @@ export const createContact = async (
       .json({ message: "Formulaire de contact enregistré avec succès !" });
   } catch (error) {
     res.status(400).json({ error });
+  }
+};
+
+export const getAllContact = async (
+  res: Response,
+) => {
+  try {
+    const contacts = await ContactModel.find();
+    res.status(200).json(contacts);
+  } catch (error) {
+    res.status(500).json({ error });
   }
 };
