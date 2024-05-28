@@ -1,9 +1,10 @@
-import express from "express";
 import bodyParser from "body-parser";
+import express from "express";
 import mongoose from "mongoose";
+
 import authRoutes from "./routes/authRoute";
-import postRoute from "./routes/postRoute";
 import postRoutes from "./routes/postRoute";
+import contactRoutes from "./routes/contactRoute";
 
 const PORT = 3500;
 
@@ -17,6 +18,7 @@ async function main() {
   // Utilisez vos routes d'authentification
   server.use("/auth", authRoutes);
   server.use("/post", postRoutes);
+  server.use("/contact", contactRoutes)
 
   server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
