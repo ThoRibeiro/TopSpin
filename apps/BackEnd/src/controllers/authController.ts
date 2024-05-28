@@ -13,12 +13,10 @@ class AuthController {
     try {
       const emailExist = await User.findOne({ email: req.body.email });
       if (emailExist) {
-        res
-          .status(484)
-          .json({
-            message:
-              "Vous avez déjà un compte avec cet e-mail, merci de prendre un autre email ou de vous connecter :)",
-          });
+        res.status(484).json({
+          message:
+            "Vous avez déjà un compte avec cet e-mail, merci de prendre un autre email ou de vous connecter :)",
+        });
       } else {
         const hash = await bcrypt.hash(req.body.password, 10);
         try {

@@ -18,7 +18,7 @@ async function main() {
   // Utilisez vos routes d'authentification
   server.use("/auth", authRoutes);
   server.use("/post", postRoutes);
-  server.use("/contact", contactRoutes)
+  server.use("/contact", contactRoutes);
 
   server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

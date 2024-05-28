@@ -13,12 +13,10 @@ export const createPost = async (
   next: NextFunction,
 ) => {
   if (req.body.titlePost === "" || req.body.content === "") {
-    return res
-      .status(400)
-      .json({
-        error:
-          "Veuillez remplir tous les champs pour votre POST s'il vous plait !",
-      });
+    return res.status(400).json({
+      error:
+        "Veuillez remplir tous les champs pour votre POST s'il vous plait !",
+    });
   }
   const myFile = typeof req.body.file;
   const postData: Partial<IPost> = {
@@ -58,19 +56,15 @@ export const updatePost = async (
       new: true,
     });
     if (!updatedPost) {
-      return res
-        .status(404)
-        .json({
-          message:
-            "Le post que vous souhaitez modifier n'existe pas, merci de réessayer...",
-        });
-    }
-    res
-      .status(200)
-      .json({
-        message: "Le POST a été mis à jour, merci !",
-        post: updatedPost,
+      return res.status(404).json({
+        message:
+          "Le post que vous souhaitez modifier n'existe pas, merci de réessayer...",
       });
+    }
+    res.status(200).json({
+      message: "Le POST a été mis à jour, merci !",
+      post: updatedPost,
+    });
   } catch (error) {
     res.status(400).json({ error });
   }
@@ -148,20 +142,15 @@ export const createComment = async (
   try {
     const post = await Post.findById(idPost);
     if (!post) {
-      return res
-        .status(404)
-        .json({
-          message:
-            "Le post auquel vous souhaitez ajouter un commentaire n'existe pas, merci de réessayer",
-        });
+      return res.status(404).json({
+        message:
+          "Le post auquel vous souhaitez ajouter un commentaire n'existe pas, merci de réessayer",
+      });
     }
     if (req.body.message === "") {
-      return res
-        .status(400)
-        .json({
-          error:
-            "Veuillez remplir tous les champs pour votre commentaire SVP !",
-        });
+      return res.status(400).json({
+        error: "Veuillez remplir tous les champs pour votre commentaire SVP !",
+      });
     }
     const commentData: Partial<IComment> = {
       message: req.body.message,
