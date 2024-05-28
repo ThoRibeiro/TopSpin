@@ -5,11 +5,9 @@ import mongoose from "mongoose";
 import authRoutes from "./routes/authRoute";
 import postRoutes from "./routes/postRoute";
 import contactRoutes from "./routes/contactRoute";
-<<<<<<< Updated upstream
 import memberRoutes from "./routes/memberRoute";
-=======
 import eventRoutes from "./routes/eventRoute";
->>>>>>> Stashed changes
+
 
 const PORT = 3500;
 
@@ -24,11 +22,8 @@ async function main() {
   server.use("/auth", authRoutes);
   server.use("/post", postRoutes);
   server.use("/contact", contactRoutes);
-<<<<<<< Updated upstream
   server.use("/members", memberRoutes);
-=======
   server.use("/event", eventRoutes)
->>>>>>> Stashed changes
 
   server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
