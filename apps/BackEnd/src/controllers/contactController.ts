@@ -32,9 +32,7 @@ export const createContact = async (
   }
 };
 
-export const getAllContact = async (
-  res: Response,
-) => {
+export const getAllContact = async (res: Response) => {
   try {
     const contacts = await ContactModel.find();
     res.status(200).json(contacts);

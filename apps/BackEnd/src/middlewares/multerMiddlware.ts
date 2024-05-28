@@ -1,10 +1,10 @@
-import multer, { StorageEngine } from 'multer';
-import { Request } from 'express';
+import multer, { StorageEngine } from "multer";
+import { Request } from "express";
 
 const MIME_TYPES: { [key: string]: string } = {
-  'image/jpg': 'jpg',
-  'image/jpeg': 'jpeg',
-  'image/png': 'png',
+  "image/jpg": "jpg",
+  "image/jpeg": "jpeg",
+  "image/png": "png",
 };
 
 const storage: StorageEngine = multer.diskStorage({
@@ -13,7 +13,7 @@ const storage: StorageEngine = multer.diskStorage({
     file: Express.Multer.File,
     callback: (error: Error | null, destination: string) => void,
   ) => {
-    callback(null, 'images');
+    callback(null, "images");
   },
   filename: (
     req: Request,
@@ -23,11 +23,11 @@ const storage: StorageEngine = multer.diskStorage({
     const extension = MIME_TYPES[file.mimetype];
     callback(
       null,
-      `${file.originalname.split(' ').join('_')}_${Date.now()}.${extension}`,
+      `${file.originalname.split(" ").join("_")}_${Date.now()}.${extension}`,
     );
   },
 });
 
-const upload = multer({ storage }).single('image');  // Assurez-vous que le champ fichier est bien "image"
+const upload = multer({ storage }).single("image"); // Assurez-vous que le champ fichier est bien "image"
 
 export default upload;

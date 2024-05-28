@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import mongoose, { Document, Schema } from "mongoose";
 
 export interface IPost extends Document {
   titlePost: string;
@@ -16,6 +16,6 @@ const PostSchema: Schema = new Schema({
   categorie: { type: String },
 });
 
-const Post = mongoose.model<IPost>('Post', PostSchema);
+const Post = mongoose.model<IPost>("Post", PostSchema);
 
 export default Post;

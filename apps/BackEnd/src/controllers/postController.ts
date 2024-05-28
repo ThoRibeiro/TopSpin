@@ -14,7 +14,8 @@ export const createPost = async (
 ) => {
   if (!req.body.titlePost || !req.body.content) {
     return res.status(400).json({
-      error: "Veuillez remplir tous les champs pour votre POST s'il vous plait !",
+      error:
+        "Veuillez remplir tous les champs pour votre POST s'il vous plait !",
     });
   }
 
@@ -24,13 +25,13 @@ export const createPost = async (
     content: req.body.content,
     date: new Date(),
     ...(myFile && {
-      image: `${req.protocol}://${req.get('host')}/images/${myFile.filename}`,
+      image: `${req.protocol}://${req.get("host")}/images/${myFile.filename}`,
     }),
   };
 
   try {
     const post = await Post.create(postData);
-    res.status(201).json({ message: 'Post enregistré avec succès !', post });
+    res.status(201).json({ message: "Post enregistré avec succès !", post });
   } catch (error) {
     res.status(400).json({ error });
   }
