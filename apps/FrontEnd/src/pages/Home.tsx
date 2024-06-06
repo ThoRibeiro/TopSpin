@@ -1,5 +1,5 @@
-import React from 'react';
-import './Home.css';
+import React from "react";
+import "./Home.css";
 
 const Home: React.FC = () => {
   return (
@@ -14,6 +14,6 @@ const Home: React.FC = () => {
       </div>
     </main>
   );
-}
+};
 
 export default Home;

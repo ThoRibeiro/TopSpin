@@ -1,13 +1,13 @@
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import Header from './components/Header';
-import Home from './pages/Home';
-import News from './pages/News';
-import Events from './pages/Events';
-import Gallery from './pages/Gallery';
-import Resources from './pages/Resources';
-import About from './pages/About';
-import Contact from './pages/Contact';
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import Header from "./components/Header";
+import Home from "./pages/Home";
+import News from "./pages/News";
+import Events from "./pages/Events";
+import Gallery from "./pages/Gallery";
+import Resources from "./pages/Resources";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 
 const App: React.FC = () => {
   return (
@@ -24,6 +24,6 @@ const App: React.FC = () => {
       </Routes>
     </div>
   );
-}
+};
 
 export default App;

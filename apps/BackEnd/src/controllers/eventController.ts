@@ -161,12 +161,10 @@ export const addParticipantToEvent = async (
 
     const updatedEvent = await event.save();
 
-    res
-      .status(200)
-      .json({
-        message: "Participant ajouté à l'événement avec succès !",
-        event: updatedEvent,
-      });
+    res.status(200).json({
+      message: "Participant ajouté à l'événement avec succès !",
+      event: updatedEvent,
+    });
   } catch (error) {
     res.status(500).json({ error });
   }

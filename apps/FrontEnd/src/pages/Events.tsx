@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Events: React.FC = () => {
   return (
@@ -7,6 +7,6 @@ const Events: React.FC = () => {
       <p>Calendrier des événements à venir.</p>
     </main>
   );
-}
+};
 
 export default Events;
