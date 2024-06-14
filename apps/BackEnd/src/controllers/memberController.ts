@@ -1,7 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-
 import Member, { IMembers } from "../models/memberModel";
-
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -21,10 +19,16 @@ export const createMember = async (
         "Veuillez remplir tous les champs pour votre MEMBRE s'il vous plait !",
     });
   }
+
+  const imagePath = req.file
+    ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+    : "";
+
   const memberData: Partial<IMembers> = {
     firstname: req.body.firstname,
     lastname: req.body.lastname,
     role: req.body.role,
+    image: imagePath,
   };
   try {
     await Member.create(memberData);
@@ -40,10 +44,16 @@ export const updateMember = async (
   next: NextFunction,
 ) => {
   const idMember = req.body.idMember;
+
+  const imagePath = req.file
+    ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+    : req.body.image;
+
   const memberData: Partial<IMembers> = {
     firstname: req.body.firstname,
     lastname: req.body.lastname,
     role: req.body.role,
+    image: imagePath,
   };
   try {
     const updatedMember = await Member.findByIdAndUpdate(idMember, memberData, {

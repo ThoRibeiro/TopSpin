@@ -1,4 +1,5 @@
 import mongoose, { Document, Schema } from "mongoose";
+import { IMembers } from "./memberModel";
 
 export interface IPost extends Document {
   titlePost: string;
@@ -6,6 +7,7 @@ export interface IPost extends Document {
   date: Date;
   image?: string;
   categorie?: string;
+  member: IMembers["_id"];
 }
 
 const PostSchema: Schema = new Schema({
@@ -14,6 +16,7 @@ const PostSchema: Schema = new Schema({
   date: { type: Date, required: true },
   image: { type: String },
   categorie: { type: String },
+  member: { type: mongoose.Schema.Types.ObjectId, ref: "Member", required: true },
 });
 
 const Post = mongoose.model<IPost>("Post", PostSchema);

@@ -1,0 +1,42 @@
+/* Presentation.css */
+
+.presentation {
+    text-align: center;
+    padding: 60px;
+    padding-left: 100px;
+    padding-right: 100px;
+    background-color: #fdfdfd;
+    color: #202228;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+}
+
+.presentation h1 {
+    font-size: 48px;
+    color: #ff7f00;
+}
+
+.presentation p {
+    font-size: 18px;
+    margin: 20px 0;
+}
+
+.presentation-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.presentation-buttons button {
+    background-color: #ff7f00;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.presentation-buttons button:hover {
+    background-color: #e67000;
+}

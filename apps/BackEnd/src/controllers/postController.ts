@@ -1,8 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-
 import Post, { IPost } from "../models/postModel";
 import Comment, { IComment } from "../models/commentModel";
-
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -12,7 +10,7 @@ export const createPost = async (
   res: Response,
   next: NextFunction,
 ) => {
-  if (!req.body.titlePost || !req.body.content) {
+  if (!req.body.titlePost || !req.body.content || !req.body.member) {
     return res.status(400).json({
       error:
         "Veuillez remplir tous les champs pour votre POST s'il vous plait !",
@@ -24,6 +22,7 @@ export const createPost = async (
     titlePost: req.body.titlePost,
     content: req.body.content,
     date: new Date(),
+    member: req.body.member,
     ...(myFile && {
       image: `${req.protocol}://${req.get("host")}/images/${myFile.filename}`,
     }),
@@ -47,6 +46,7 @@ export const updatePost = async (
   const postData: Partial<IPost> = {
     titlePost: req.body.titlePost,
     content: req.body.content,
+    member: req.body.member,
     ...(myFile !== "undefined" && {
       image: `${req.protocol}://${req.get("host")}/images/${req.body.file.filename}`,
     }),
@@ -71,13 +71,9 @@ export const updatePost = async (
   }
 };
 
-export const getAllPosts = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const getAllPosts = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const posts = await Post.find();
+    const posts = await Post.find().populate('member').sort({ date: -1 });
     res.status(200).json(posts);
   } catch (error) {
     res.status(500).json({ error });
@@ -91,7 +87,7 @@ export const getPostById = async (
 ) => {
   const idPost = req.params.idPost;
   try {
-    const post = await Post.findById(idPost);
+    const post = await Post.findById(idPost).populate('member');
     if (!post) {
       return res.status(404).json({ message: "Post introuvable..." });
     }
@@ -108,7 +104,7 @@ export const getPostsByCategorie = async (
 ) => {
   const categorie = req.params.categorie;
   try {
-    const posts = await Post.find({ categorie });
+    const posts = await Post.find({ categorie }).populate('member');
     res.status(200).json(posts);
   } catch (error) {
     res.status(500).json({ error });
@@ -122,7 +118,7 @@ export const getPostAndComments = async (
 ) => {
   const idPost = req.params.idPost;
   try {
-    const post = await Post.findById(idPost);
+    const post = await Post.findById(idPost).populate('member');
     if (!post) {
       return res.status(404).json({ message: "Post not found" });
     }

@@ -1,0 +1,54 @@
+/* SideArticleCard.css */
+
+.side-article-card {
+    display: flex;
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.side-article-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+.side-article-card img {
+    width: 50%;
+    height: auto;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.side-article-content {
+    padding: 20px;
+}
+
+.side-article-time {
+    font-size: 14px;
+    color: #888;
+}
+
+.side-article-content h2 {
+    font-size: 20px;
+    margin: 10px 0;
+    color: #202228;
+}
+
+.side-article-content p {
+    font-size: 16px;
+    color: #555;
+}
+
+.side-article-author {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.side-article-author img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}

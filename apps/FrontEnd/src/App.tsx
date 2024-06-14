@@ -1,13 +1,11 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Header from './components/Header';
-import Home from './pages/Home';
-import News from './pages/News';
-import Events from './pages/Events';
-import Gallery from './pages/Gallery';
-import Resources from './pages/Resources';
-import About from './pages/About';
-import Contact from './pages/Contact';
+import Header from './components/Header/Header.tsx';
+import Home from './pages/Home/Home.tsx';
+import News from './pages/News/News.tsx';
+import Gallery from './pages/Gallery/Gallery.tsx';
+import About from './pages/About/About.tsx';
+import Contact from './pages/Contact/Contact.tsx';
 
 const App: React.FC = () => {
   return (
@@ -15,10 +13,8 @@ const App: React.FC = () => {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/news" element={<News />} />
-        <Route path="/events" element={<Events />} />
+        <Route path="/actualites" element={<News />} />
         <Route path="/gallery" element={<Gallery />} />
-        <Route path="/resources" element={<Resources />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>

@@ -1,5 +1,4 @@
 import express from "express";
-
 import authMiddleware from "../middlewares/authMiddleware";
 import {
   createMember,
@@ -15,7 +14,7 @@ const memberRoutes = express.Router();
 memberRoutes.post("/create", authMiddleware, upload, createMember);
 memberRoutes.put("/update", authMiddleware, upload, updateMember);
 memberRoutes.get("/all", getAllMembers);
-memberRoutes.get("/:idMember", authMiddleware, getMemberById);
+memberRoutes.get("/:idMember", getMemberById);
 memberRoutes.delete("/:idMember", authMiddleware, deleteMember);
 
 export default memberRoutes;
