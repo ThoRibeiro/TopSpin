@@ -20,7 +20,7 @@ async function main() {
   server.use("/auth", authRoutes);
   server.use("/post", postRoutes);
   server.use("/contact", contactRoutes);
-  server.use("/event", eventRoutes)
+  server.use("/event", eventRoutes);
 
   server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
