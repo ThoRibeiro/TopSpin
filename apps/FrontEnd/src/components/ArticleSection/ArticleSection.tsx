@@ -67,7 +67,11 @@ const ArticleSection: React.FC = () => {
       <h2>Blog</h2>
       <div className="article-cards">
         {articles.map((article, index) => (
-          <div className="article-card" key={index} onClick={() => openPopup(article)}>
+          <div
+            className="article-card"
+            key={index}
+            onClick={() => openPopup(article)}
+          >
             <img src={article.image || article1} alt={article.titlePost} />
             <div className="article-card-content">
               <h3>{truncateText(article.titlePost, 110)}</h3>

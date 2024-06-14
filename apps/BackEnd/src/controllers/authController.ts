@@ -32,7 +32,7 @@ class AuthController {
         username: req.body.username,
         password: hash,
         member: req.body.memberId,
-        role: req.body.role
+        role: req.body.role,
       });
 
       return res.status(201).json({ message: "Utilisateur créé !" });
@@ -56,24 +56,33 @@ class AuthController {
 
       const success = await bcrypt.compare(
         req.body.password,
-        user.password.toString()
+        user.password.toString(),
       );
       if (!success) {
         return res.status(401).json({ message: "Mot de passe incorrect" });
       }
 
-      const allowedRoles = ['Président', 'Trésorier', 'Secrétaire'];
+      const allowedRoles = ["Président", "Trésorier", "Secrétaire"];
       if (!allowedRoles.includes(user.role)) {
-        return res.status(403).json({ message: "Accès refusé: vous n'avez pas les droits nécessaires." });
+        return res
+          .status(403)
+          .json({
+            message: "Accès refusé: vous n'avez pas les droits nécessaires.",
+          });
       }
 
       const secret = process.env.JWT_SECRET;
       if (!secret) {
         console.error("JWT_SECRET is not defined");
-        return res.status(500).json({ message: "Erreur de configuration du serveur" });
+        return res
+          .status(500)
+          .json({ message: "Erreur de configuration du serveur" });
       }
 
-      const token = jwt.sign({ email: user.email, id: user._id, role: user.role }, secret);
+      const token = jwt.sign(
+        { email: user.email, id: user._id, role: user.role },
+        secret,
+      );
 
       return res.status(200).json({ email: user.email, jwt: token });
     } catch (error) {

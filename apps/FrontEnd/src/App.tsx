@@ -18,7 +18,10 @@ const App: React.FC = () => {
         <Header />
         <Routes>
           <Route path="/login" element={<LoginForm />} />
-          <Route path="/admin" element={<ProtectedRoute element={<AdminPanel />} />} />
+          <Route
+            path="/admin"
+            element={<ProtectedRoute element={<AdminPanel />} />}
+          />
           <Route path="/" element={<Home />} />
           <Route path="/news" element={<News />} />
           <Route path="/gallery" element={<Gallery />} />

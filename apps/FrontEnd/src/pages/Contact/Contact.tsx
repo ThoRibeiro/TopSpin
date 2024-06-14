@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { createContact } from "../../services/contactService.ts";
-import ToastNotification, { notifySuccess, notifyError } from "../../components/Toast/ToastNotification.tsx";
+import ToastNotification, {
+  notifySuccess,
+  notifyError,
+} from "../../components/Toast/ToastNotification.tsx";
 import "./Contact.css";
 import phoneIcon from "../../assets/phone-solid.svg";
 import emailIcon from "../../assets/envelope-solid.svg";
@@ -37,7 +40,9 @@ const Contact: React.FC = () => {
       notifySuccess("Formulaire soumis avec succès !");
       setFormData({ email: "", firstName: "", lastName: "", description: "" });
     } catch (error) {
-      notifyError("Erreur lors de la soumission du formulaire. Veuillez réessayer.");
+      notifyError(
+        "Erreur lors de la soumission du formulaire. Veuillez réessayer.",
+      );
     }
   };
 

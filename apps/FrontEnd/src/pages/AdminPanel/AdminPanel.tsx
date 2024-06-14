@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { getAllPosts, updatePost } from '../../services/postService.ts'
-import './AdminPanel.css';
+import React, { useState, useEffect } from "react";
+import { getAllPosts, updatePost } from "../../services/postService.ts";
+import "./AdminPanel.css";
 
 interface Post {
   _id: string;
@@ -11,7 +11,7 @@ interface Post {
 
 const AdminPanel: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -19,32 +19,37 @@ const AdminPanel: React.FC = () => {
         const response = await getAllPosts();
         setPosts(response.data);
       } catch (err) {
-        setError('Erreur lors de la récupération des posts.');
+        setError("Erreur lors de la récupération des posts.");
       }
     };
 
     fetchPosts();
   }, []);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, id: string) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    id: string,
+  ) => {
     const { name, value } = e.target;
-    setPosts(prevPosts =>
-      prevPosts.map(post => (post._id === id ? { ...post, [name]: value } : post))
+    setPosts((prevPosts) =>
+      prevPosts.map((post) =>
+        post._id === id ? { ...post, [name]: value } : post,
+      ),
     );
   };
 
   const handleUpdatePost = async (post: Post) => {
     try {
       const formData = new FormData();
-      formData.append('idPost', post._id);
-      formData.append('titlePost', post.titlePost);
-      formData.append('content', post.content);
-      formData.append('memberId', post.member);
+      formData.append("idPost", post._id);
+      formData.append("titlePost", post.titlePost);
+      formData.append("content", post.content);
+      formData.append("memberId", post.member);
 
       await updatePost(post._id, formData);
-      alert('Post mis à jour avec succès.');
+      alert("Post mis à jour avec succès.");
     } catch (err) {
-      setError('Erreur lors de la mise à jour du post.');
+      setError("Erreur lors de la mise à jour du post.");
     }
   };
 
@@ -52,7 +57,7 @@ const AdminPanel: React.FC = () => {
     <div className="admin-panel">
       <h1>Gestion des posts</h1>
       {error && <p className="error">{error}</p>}
-      {posts.map(post => (
+      {posts.map((post) => (
         <div key={post._id} className="post">
           <div className="form-group">
             <label>Titre:</label>

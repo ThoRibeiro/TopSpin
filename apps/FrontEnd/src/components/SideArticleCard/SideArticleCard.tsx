@@ -64,14 +64,20 @@ const SideArticleCard: React.FC = () => {
     <>
       <div className="side-articles">
         {sideArticles.map((article, index) => (
-          <div key={index} className="side-article-card" onClick={() => openPopup(article)}>
+          <div
+            key={index}
+            className="side-article-card"
+            onClick={() => openPopup(article)}
+          >
             <img src={article.image} alt="Article" />
             <div className="side-article-content">
               <h2>{truncateText(article.titlePost, 110)}</h2>
               <p>{truncateText(article.content, 110)}</p>
               <div className="side-article-author">
                 <img src={article.member.image} alt="Author" />
-                <span>{article.member.firstname} {article.member.lastname}</span>
+                <span>
+                  {article.member.firstname} {article.member.lastname}
+                </span>
               </div>
             </div>
           </div>

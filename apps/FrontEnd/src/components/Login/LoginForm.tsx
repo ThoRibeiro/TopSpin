@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import LoginService from '../../services/loginService.ts';
-import { useAuth } from '../../Context/AuthContext';
-import './LoginForm.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import LoginService from "../../services/loginService.ts";
+import { useAuth } from "../../Context/AuthContext";
+import "./LoginForm.css";
 
 const LoginForm: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -16,14 +16,14 @@ const LoginForm: React.FC = () => {
     try {
       const response = await LoginService.login(email, password);
       if (response.jwt) {
-        localStorage.setItem('token', response.jwt);
+        localStorage.setItem("token", response.jwt);
         login();
-        navigate('/admin');
+        navigate("/admin");
       } else {
-        setError('Accès refusé: vous n\'avez pas les droits nécessaires.');
+        setError("Accès refusé: vous n'avez pas les droits nécessaires.");
       }
     } catch (err) {
-      setError('Erreur lors de la connexion. Veuillez réessayer.');
+      setError("Erreur lors de la connexion. Veuillez réessayer.");
     }
   };
 

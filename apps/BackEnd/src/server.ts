@@ -30,7 +30,7 @@ async function main() {
   server.use("/auth", authRoutes);
   server.use("/post", postRoutes);
   server.use("/contact", contactRoutes);
-  server.use("/members", memberRoutes)
+  server.use("/members", memberRoutes);
   server.use("/event", eventRoutes);
 
   server.listen(PORT, () => {
