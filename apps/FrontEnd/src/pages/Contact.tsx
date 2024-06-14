@@ -1,22 +1,24 @@
-import React, { useState } from 'react';
-import { submitContactForm } from '../services/contact.ts';
-import './Contact.css';
+import React, { useState } from "react";
+import { submitContactForm } from "../services/contact.ts";
+import "./Contact.css";
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
-    email: '',
-    firstName: '',
-    lastName: '',
-    description: ''
+    email: "",
+    firstName: "",
+    lastName: "",
+    description: "",
   });
 
   const [status, setStatus] = useState<string | null>(null);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -24,9 +26,9 @@ const Contact: React.FC = () => {
     e.preventDefault();
     try {
       await submitContactForm(formData);
-      setStatus('Form submitted successfully!');
+      setStatus("Form submitted successfully!");
     } catch (error) {
-      setStatus('Error submitting form. Please try again.');
+      setStatus("Error submitting form. Please try again.");
     }
   };
 
@@ -78,6 +80,6 @@ const Contact: React.FC = () => {
       {status && <p>{status}</p>}
     </main>
   );
-}
+};
 
 export default Contact;
