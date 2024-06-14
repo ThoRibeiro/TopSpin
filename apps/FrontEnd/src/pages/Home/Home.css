@@ -1,0 +1,28 @@
+/* Home.css */
+
+.home {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+}
+
+.main-article {
+    flex: 1;
+}
+
+.side-articles {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1.33;
+}
+
+.side-article-card {
+    flex: 1;
+}

@@ -21,9 +21,6 @@ const Header: React.FC = () => {
             <Link to="/gallery">Galerie</Link>
           </li>
           <li>
-            <Link to="/resources">Ressources</Link>
-          </li>
-          <li>
             <Link to="/about">À propos</Link>
           </li>
           <li>

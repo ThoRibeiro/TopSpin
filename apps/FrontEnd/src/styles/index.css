@@ -1,1 +1,57 @@
-body { font-family: Arial, sans-serif; }
+/* index.css */
+
+/* Couleur principale : Orange #ff7f00 */
+:root {
+  --primary-color: #ff7f00;
+  --secondary-color: #202228;
+}
+
+/* Styles généraux */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff; /* Fond blanc */
+  color: #202228;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+header, footer {
+  padding: 20px;
+  text-align: center;
+  color: white;
+}
+
+header a, footer a {
+  color: var(--primary-color);
+}
+
+.container {
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  color: #000;
+  border-radius: 8px;
+  max-width: 1200px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--primary-color);
+}
+
+button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: #e67000;
+}

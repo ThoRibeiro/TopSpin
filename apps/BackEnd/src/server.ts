@@ -6,6 +6,7 @@ import authRoutes from "./routes/authRoute";
 import postRoutes from "./routes/postRoute";
 import contactRoutes from "./routes/contactRoute";
 import eventRoutes from "./routes/eventRoute";
+import cors from "cors";
 
 const PORT = 3500;
 
@@ -15,6 +16,14 @@ const PORT = 3500;
 async function main() {
   const server = express();
   server.use(bodyParser.json());
+
+  const corsOptions = {
+    origin: "http://localhost:5173",
+    optionsSuccessStatus: 200,
+  };
+
+  server.use(cors(corsOptions));
+  server.use("/images", express.static("images"));
 
   // Utilisez vos routes d'authentification
   server.use("/auth", authRoutes);

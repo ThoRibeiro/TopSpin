@@ -4,7 +4,9 @@ interface IMembers extends Document {
   firstname: string;
   lastname: string;
   role: Role;
+  image?: string;
 }
+
 enum Role {
   Président = "Président",
   Trésorier = "Trésorier",
@@ -16,6 +18,7 @@ const memberSchema: Schema<IMembers> = new Schema({
   firstname: { type: String, required: true },
   lastname: { type: String, required: true },
   role: { type: String, required: true },
+  image: { type: String },
 });
 
 const Member: Model<IMembers> = mongoose.model<IMembers>(
