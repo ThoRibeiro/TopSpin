@@ -1,20 +1,20 @@
-import axios from 'axios';
+import axios from "axios";
 
-const API_URL = 'http://localhost:3500/post';
+const API_URL = "http://localhost:3500/post";
 
 export const createPost = async (postData: FormData) => {
   return await axios.post(`${API_URL}/create`, postData, {
     headers: {
-      'Content-Type': 'multipart/form-data'
-    }
+      "Content-Type": "multipart/form-data",
+    },
   });
 };
 
 export const updatePost = async (_postId: string, postData: FormData) => {
   return await axios.put(`${API_URL}/update`, postData, {
     headers: {
-      'Content-Type': 'multipart/form-data'
-    }
+      "Content-Type": "multipart/form-data",
+    },
   });
 };
 
@@ -34,6 +34,10 @@ export const getPostAndComments = async (postId: string) => {
   return await axios.get(`${API_URL}/${postId}/comments`);
 };
 
-export const createComment = async (postId: string, message: string, userId: string) => {
+export const createComment = async (
+  postId: string,
+  message: string,
+  userId: string,
+) => {
   return await axios.post(`${API_URL}/${postId}/comments`, { message, userId });
 };

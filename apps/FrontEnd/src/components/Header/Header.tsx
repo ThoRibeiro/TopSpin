@@ -1,7 +1,7 @@
 // Header.tsx
-import React from 'react';
-import './Header.css';
-import logo from '../../assets/logo.webp'; // Assurez-vous que le logo est dans le bon répertoire
+import React from "react";
+import "./Header.css";
+import logo from "../../assets/logo.webp"; // Assurez-vous que le logo est dans le bon répertoire
 
 const Header: React.FC = () => {
   return (
@@ -17,11 +17,10 @@ const Header: React.FC = () => {
           <a href="/about">À propos</a>
           <a href="/contact">Contact</a>
         </nav>
-        <div className="navbar-icons">
-        </div>
+        <div className="navbar-icons"></div>
       </div>
     </header>
   );
-}
+};
 
 export default Header;

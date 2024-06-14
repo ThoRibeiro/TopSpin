@@ -1,12 +1,19 @@
-import axios from 'axios';
+import axios from "axios";
 
-const API_URL = 'http://localhost:3500/members';
+const API_URL = "http://localhost:3500/members";
 
-export const createMember = async (firstname: string, lastname: string, role: string) => {
+export const createMember = async (
+  firstname: string,
+  lastname: string,
+  role: string,
+) => {
   return await axios.post(`${API_URL}/create`, { firstname, lastname, role });
 };
 
-export const updateMember = async (_memberId: string, memberData: { firstname: string, lastname: string, role: string }) => {
+export const updateMember = async (
+  _memberId: string,
+  memberData: { firstname: string; lastname: string; role: string },
+) => {
   return await axios.put(`${API_URL}/update`, memberData);
 };
 

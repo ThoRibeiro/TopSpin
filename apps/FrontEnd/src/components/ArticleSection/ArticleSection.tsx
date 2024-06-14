@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { getAllPosts } from '../../services/postService.ts';
-import './ArticleSection.css';
+import React, { useEffect, useState } from "react";
+import { getAllPosts } from "../../services/postService.ts";
+import "./ArticleSection.css";
 import article1 from "../../assets/article1.jpg";
 import logoArticle from "../../assets/logo-article.jpeg";
 
@@ -28,7 +28,7 @@ const ArticleSection: React.FC = () => {
           setArticles(posts.slice(3, 9)); // Prenez les articles à partir du 4ème jusqu'au 9ème
         }
       } catch (error) {
-        console.error('Error fetching the articles:', error);
+        console.error("Error fetching the articles:", error);
       } finally {
         setLoading(false);
       }
@@ -56,7 +56,10 @@ const ArticleSection: React.FC = () => {
               <h3>{article.titlePost}</h3>
               <p>{article.content}</p>
               <div className="author-info">
-                <img src={article.member.image || logoArticle} alt={article.member.firstname} />
+                <img
+                  src={article.member.image || logoArticle}
+                  alt={article.member.firstname}
+                />
                 <span>{`${article.member.firstname} ${article.member.lastname}`}</span>
               </div>
             </div>
@@ -65,6 +68,6 @@ const ArticleSection: React.FC = () => {
       </div>
     </section>
   );
-}
+};
 
 export default ArticleSection;

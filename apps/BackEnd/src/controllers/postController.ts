@@ -71,9 +71,13 @@ export const updatePost = async (
   }
 };
 
-export const getAllPosts = async (req: Request, res: Response, next: NextFunction) => {
+export const getAllPosts = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
-    const posts = await Post.find().populate('member').sort({ date: -1 });
+    const posts = await Post.find().populate("member").sort({ date: -1 });
     res.status(200).json(posts);
   } catch (error) {
     res.status(500).json({ error });
@@ -87,7 +91,7 @@ export const getPostById = async (
 ) => {
   const idPost = req.params.idPost;
   try {
-    const post = await Post.findById(idPost).populate('member');
+    const post = await Post.findById(idPost).populate("member");
     if (!post) {
       return res.status(404).json({ message: "Post introuvable..." });
     }
@@ -104,7 +108,7 @@ export const getPostsByCategorie = async (
 ) => {
   const categorie = req.params.categorie;
   try {
-    const posts = await Post.find({ categorie }).populate('member');
+    const posts = await Post.find({ categorie }).populate("member");
     res.status(200).json(posts);
   } catch (error) {
     res.status(500).json({ error });
@@ -118,7 +122,7 @@ export const getPostAndComments = async (
 ) => {
   const idPost = req.params.idPost;
   try {
-    const post = await Post.findById(idPost).populate('member');
+    const post = await Post.findById(idPost).populate("member");
     if (!post) {
       return res.status(404).json({ message: "Post not found" });
     }

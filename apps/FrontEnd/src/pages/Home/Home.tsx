@@ -1,7 +1,7 @@
 // Home.tsx
-import React from 'react';
-import './Home.css';
-import ArticleCard from '../../components/ArticleCard/ArticleCard.tsx';
+import React from "react";
+import "./Home.css";
+import ArticleCard from "../../components/ArticleCard/ArticleCard.tsx";
 import Presentation from "../../components/Presentation/Presentation.tsx";
 import ArticleSection from "../../components/ArticleSection/ArticleSection.tsx";
 import Footer from "../../components/Footer/Footer.tsx";
@@ -27,6 +27,6 @@ const Home: React.FC = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Home;

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { getAllPosts } from '../../services/postService.ts';
-import './ArticleCard.css';
+import React, { useEffect, useState } from "react";
+import { getAllPosts } from "../../services/postService.ts";
+import "./ArticleCard.css";
 
 const ArticleCard: React.FC = () => {
   const [latestArticle, setLatestArticle] = useState<any>(null);
@@ -15,7 +15,7 @@ const ArticleCard: React.FC = () => {
           setLatestArticle(posts[0]);
         }
       } catch (error) {
-        console.error('Error fetching the latest article:', error);
+        console.error("Error fetching the latest article:", error);
       } finally {
         setLoading(false);
       }
@@ -44,7 +44,10 @@ const ArticleCard: React.FC = () => {
           {latestArticle.member?.image && (
             <img src={latestArticle.member.image} alt="Author" />
           )}
-          <span>Écrit par {latestArticle.member.firstname}, {latestArticle.member.lastname}</span>
+          <span>
+            Écrit par {latestArticle.member.firstname},{" "}
+            {latestArticle.member.lastname}
+          </span>
         </div>
       </div>
     </div>

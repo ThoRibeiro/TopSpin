@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { getAllPosts } from '../../services/postService.ts';
-import './SideArticleCard.css';
+import React, { useEffect, useState } from "react";
+import { getAllPosts } from "../../services/postService.ts";
+import "./SideArticleCard.css";
 
 interface Article {
   titlePost: string;
@@ -26,7 +26,7 @@ const SideArticleCard: React.FC = () => {
           setSideArticles(posts.slice(1, 3)); // Prenez les 2ème et 3ème articles
         }
       } catch (error) {
-        console.error('Error fetching the articles:', error);
+        console.error("Error fetching the articles:", error);
       } finally {
         setLoading(false);
       }
