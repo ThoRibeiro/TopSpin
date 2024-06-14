@@ -11,10 +11,6 @@ const Presentation: React.FC = () => {
         la passion que nous avons à offrir. C'est cet engagement qui fait de
         nous ce que nous sommes.
       </p>
-      <div className="presentation-buttons">
-        <button>En savoir plus</button>
-        <button>Rejoignez-nous</button>
-      </div>
     </section>
   );
 };
