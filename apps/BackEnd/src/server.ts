@@ -7,6 +7,7 @@ import postRoutes from "./routes/postRoute";
 import contactRoutes from "./routes/contactRoute";
 import eventRoutes from "./routes/eventRoute";
 import cors from "cors";
+import memberRoutes from "./routes/memberRoute";
 
 const PORT = 3500;
 
@@ -29,6 +30,7 @@ async function main() {
   server.use("/auth", authRoutes);
   server.use("/post", postRoutes);
   server.use("/contact", contactRoutes);
+  server.use("/members", memberRoutes)
   server.use("/event", eventRoutes);
 
   server.listen(PORT, () => {

@@ -5,15 +5,10 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-export const createPost = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
-  if (!req.body.titlePost || !req.body.content || !req.body.member) {
+export const createPost = async (req: Request, res: Response, next: NextFunction) => {
+  if (!req.body.titlePost || !req.body.content) {
     return res.status(400).json({
-      error:
-        "Veuillez remplir tous les champs pour votre POST s'il vous plait !",
+      error: "Veuillez remplir tous les champs pour votre POST s'il vous plait !",
     });
   }
 
@@ -22,10 +17,10 @@ export const createPost = async (
     titlePost: req.body.titlePost,
     content: req.body.content,
     date: new Date(),
-    member: req.body.member,
     ...(myFile && {
       image: `${req.protocol}://${req.get("host")}/images/${myFile.filename}`,
     }),
+    member: req.body.memberId
   };
 
   try {
@@ -36,20 +31,16 @@ export const createPost = async (
   }
 };
 
-export const updatePost = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const updatePost = async (req: Request, res: Response, next: NextFunction) => {
   const idPost = req.body.idPost;
   const myFile = typeof req.body.file;
   const postData: Partial<IPost> = {
     titlePost: req.body.titlePost,
     content: req.body.content,
-    member: req.body.member,
     ...(myFile !== "undefined" && {
       image: `${req.protocol}://${req.get("host")}/images/${req.body.file.filename}`,
     }),
+    member: req.body.memberId
   };
 
   try {
@@ -58,8 +49,7 @@ export const updatePost = async (
     });
     if (!updatedPost) {
       return res.status(404).json({
-        message:
-          "Le post que vous souhaitez modifier n'existe pas, merci de réessayer...",
+        message: "Le post que vous souhaitez modifier n'existe pas, merci de réessayer...",
       });
     }
     res.status(200).json({
@@ -71,27 +61,19 @@ export const updatePost = async (
   }
 };
 
-export const getAllPosts = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const getAllPosts = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const posts = await Post.find().populate("member").sort({ date: -1 });
+    const posts = await Post.find().populate('member').sort({ date: -1 });
     res.status(200).json(posts);
   } catch (error) {
     res.status(500).json({ error });
   }
 };
 
-export const getPostById = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const getPostById = async (req: Request, res: Response, next: NextFunction) => {
   const idPost = req.params.idPost;
   try {
-    const post = await Post.findById(idPost).populate("member");
+    const post = await Post.findById(idPost).populate('member');
     if (!post) {
       return res.status(404).json({ message: "Post introuvable..." });
     }
@@ -101,28 +83,20 @@ export const getPostById = async (
   }
 };
 
-export const getPostsByCategorie = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const getPostsByCategorie = async (req: Request, res: Response, next: NextFunction) => {
   const categorie = req.params.categorie;
   try {
-    const posts = await Post.find({ categorie }).populate("member");
+    const posts = await Post.find({ categorie }).populate('member');
     res.status(200).json(posts);
   } catch (error) {
     res.status(500).json({ error });
   }
 };
 
-export const getPostAndComments = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const getPostAndComments = async (req: Request, res: Response, next: NextFunction) => {
   const idPost = req.params.idPost;
   try {
-    const post = await Post.findById(idPost).populate("member");
+    const post = await Post.findById(idPost).populate('member');
     if (!post) {
       return res.status(404).json({ message: "Post not found" });
     }
@@ -133,19 +107,13 @@ export const getPostAndComments = async (
   }
 };
 
-// permet de creer un commentaire
-export const createComment = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const createComment = async (req: Request, res: Response, next: NextFunction) => {
   const idPost = req.params.idPost;
   try {
     const post = await Post.findById(idPost);
     if (!post) {
       return res.status(404).json({
-        message:
-          "Le post auquel vous souhaitez ajouter un commentaire n'existe pas, merci de réessayer",
+        message: "Le post auquel vous souhaitez ajouter un commentaire n'existe pas, merci de réessayer",
       });
     }
     if (req.body.message === "") {

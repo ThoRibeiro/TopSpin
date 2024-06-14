@@ -1,5 +1,6 @@
 import express from "express";
 import AuthController from "../controllers/authController";
+import authMiddleware from "../middlewares/authMiddleware";
 
 const authRoutes = express.Router();
 

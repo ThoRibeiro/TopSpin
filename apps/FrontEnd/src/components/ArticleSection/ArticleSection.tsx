@@ -3,6 +3,7 @@ import { getAllPosts } from "../../services/postService.ts";
 import "./ArticleSection.css";
 import article1 from "../../assets/article1.jpg";
 import logoArticle from "../../assets/logo-article.jpeg";
+import Popup from "../Popup/CardPopup.tsx";
 
 interface Article {
   titlePost: string;
@@ -18,6 +19,7 @@ interface Article {
 const ArticleSection: React.FC = () => {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -37,6 +39,21 @@ const ArticleSection: React.FC = () => {
     fetchArticles();
   }, []);
 
+  const truncateText = (text: string, maxLength: number) => {
+    if (text.length > maxLength) {
+      return text.substring(0, maxLength) + "...";
+    }
+    return text;
+  };
+
+  const openPopup = (article: Article) => {
+    setSelectedArticle(article);
+  };
+
+  const closePopup = () => {
+    setSelectedArticle(null);
+  };
+
   if (loading) {
     return <div>Chargement...</div>;
   }
@@ -50,11 +67,11 @@ const ArticleSection: React.FC = () => {
       <h2>Blog</h2>
       <div className="article-cards">
         {articles.map((article, index) => (
-          <div className="article-card" key={index}>
+          <div className="article-card" key={index} onClick={() => openPopup(article)}>
             <img src={article.image || article1} alt={article.titlePost} />
             <div className="article-card-content">
-              <h3>{article.titlePost}</h3>
-              <p>{article.content}</p>
+              <h3>{truncateText(article.titlePost, 110)}</h3>
+              <p>{truncateText(article.content, 110)}</p>
               <div className="author-info">
                 <img
                   src={article.member.image || logoArticle}
@@ -66,6 +83,9 @@ const ArticleSection: React.FC = () => {
           </div>
         ))}
       </div>
+      {selectedArticle && (
+        <Popup article={selectedArticle} onClose={closePopup} />
+      )}
     </section>
   );
 };

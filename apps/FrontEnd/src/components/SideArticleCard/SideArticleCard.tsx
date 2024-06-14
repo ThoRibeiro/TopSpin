@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { getAllPosts } from "../../services/postService.ts";
+import { getAllPosts } from "../../services/postService";
 import "./SideArticleCard.css";
+import Popup from "../Popup/CardPopup.tsx";
 
 interface Article {
   titlePost: string;
@@ -16,6 +17,7 @@ interface Article {
 const SideArticleCard: React.FC = () => {
   const [sideArticles, setSideArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -35,6 +37,21 @@ const SideArticleCard: React.FC = () => {
     fetchArticles();
   }, []);
 
+  const truncateText = (text: string, maxLength: number) => {
+    if (text.length > maxLength) {
+      return text.substring(0, maxLength) + "...";
+    }
+    return text;
+  };
+
+  const openPopup = (article: Article) => {
+    setSelectedArticle(article);
+  };
+
+  const closePopup = () => {
+    setSelectedArticle(null);
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -44,21 +61,26 @@ const SideArticleCard: React.FC = () => {
   }
 
   return (
-    <div className="side-articles">
-      {sideArticles.map((article, index) => (
-        <div key={index} className="side-article-card">
-          <img src={article.image} alt="Article" />
-          <div className="side-article-content">
-            <h2>{article.titlePost}</h2>
-            <p>{article.content}</p>
-            <div className="side-article-author">
-              <img src={article.member.image} alt="Author" />
-              <span>{`${article.member.firstname} ${article.member.lastname}`}</span>
+    <>
+      <div className="side-articles">
+        {sideArticles.map((article, index) => (
+          <div key={index} className="side-article-card" onClick={() => openPopup(article)}>
+            <img src={article.image} alt="Article" />
+            <div className="side-article-content">
+              <h2>{truncateText(article.titlePost, 110)}</h2>
+              <p>{truncateText(article.content, 110)}</p>
+              <div className="side-article-author">
+                <img src={article.member.image} alt="Author" />
+                <span>{article.member.firstname} {article.member.lastname}</span>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+      {selectedArticle && (
+        <Popup article={selectedArticle} onClose={closePopup} />
+      )}
+    </>
   );
 };
 

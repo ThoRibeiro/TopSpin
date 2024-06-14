@@ -1,5 +1,13 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
 
+declare global {
+  namespace Express {
+    interface Request {
+      user?: IMembers;
+    }
+  }
+}
+
 interface IMembers extends Document {
   firstname: string;
   lastname: string;
@@ -7,7 +15,7 @@ interface IMembers extends Document {
   image?: string;
 }
 
-enum Role {
+export enum Role {
   Président = "Président",
   Trésorier = "Trésorier",
   Secrétaire = "Secrétaire",
