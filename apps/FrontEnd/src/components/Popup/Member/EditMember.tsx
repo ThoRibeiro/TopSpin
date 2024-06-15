@@ -1,20 +1,37 @@
-import React, { useState, useEffect, useRef } from 'react';
-import './AddMember.css';
+import React, { useState, useEffect, useRef } from "react";
+import "./AddMember.css";
 
 interface EditMemberPopinProps {
   show: boolean;
   onClose: () => void;
-  onSave: (memberData: { firstname: string; lastname: string; email: string; role: string; image?: string }) => void;
-  member: { firstname: string; lastname: string; email: string; role: string; image?: string };
+  onSave: (memberData: {
+    firstname: string;
+    lastname: string;
+    email: string;
+    role: string;
+    image?: string;
+  }) => void;
+  member: {
+    firstname: string;
+    lastname: string;
+    email: string;
+    role: string;
+    image?: string;
+  };
 }
 
 const roles = ["Président", "Trésorier", "Secrétaire", "Membre"];
 
-const EditMemberPopin: React.FC<EditMemberPopinProps> = ({ show, onClose, onSave, member }) => {
-  const [firstname, setFirstname] = useState('');
-  const [lastname, setLastname] = useState('');
-  const [email, setEmail] = useState('');
-  const [role, setRole] = useState('Président');
+const EditMemberPopin: React.FC<EditMemberPopinProps> = ({
+  show,
+  onClose,
+  onSave,
+  member,
+}) => {
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [email, setEmail] = useState("");
+  const [role, setRole] = useState("Président");
   const [image, setImage] = useState<File | null>(null);
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -53,12 +70,12 @@ const EditMemberPopin: React.FC<EditMemberPopinProps> = ({ show, onClose, onSave
 
   useEffect(() => {
     if (show) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
     } else {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     }
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [show]);
 
@@ -72,21 +89,35 @@ const EditMemberPopin: React.FC<EditMemberPopinProps> = ({ show, onClose, onSave
         <h2>Modifier le membre</h2>
         <label>
           Prénom:
-          <input type="text" value={firstname} onChange={(e) => setFirstname(e.target.value)} />
+          <input
+            type="text"
+            value={firstname}
+            onChange={(e) => setFirstname(e.target.value)}
+          />
         </label>
         <label>
           Nom:
-          <input type="text" value={lastname} onChange={(e) => setLastname(e.target.value)} />
+          <input
+            type="text"
+            value={lastname}
+            onChange={(e) => setLastname(e.target.value)}
+          />
         </label>
         <label>
           Email:
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </label>
         <label>
           Rôle:
           <select value={role} onChange={(e) => setRole(e.target.value)}>
-            {roles.map(role => (
-              <option key={role} value={role}>{role}</option>
+            {roles.map((role) => (
+              <option key={role} value={role}>
+                {role}
+              </option>
             ))}
           </select>
         </label>

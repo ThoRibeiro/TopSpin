@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useAuth } from '../../../Context/AuthContext.tsx';
+import React, { useEffect } from "react";
+import { useAuth } from "../../../Context/AuthContext.tsx";
 
 const ManagePosts: React.FC = () => {
   const { setIsAdminPage } = useAuth();

@@ -5,10 +5,10 @@ import { useAuth } from "../../Context/AuthContext";
 import { Link } from "react-router-dom";
 
 const Header: React.FC = () => {
-  const { isAuthenticated, isAdminPage} = useAuth();
+  const { isAuthenticated, isAdminPage } = useAuth();
 
-  console.log('isAuthenticated:', isAuthenticated);
-  console.log('isAdminPage:', isAdminPage);
+  console.log("isAuthenticated:", isAuthenticated);
+  console.log("isAdminPage:", isAdminPage);
 
   return (
     <header className="navbar">

@@ -1,16 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import memberManageService from '../../../services/Admin/ManageMemberService';
-import './ManageMember.css';
-import { useAuth } from '../../../Context/AuthContext';
-import addIcon from '../../../assets/Add.svg';
-import AddMemberPopin from '../../../components/Popup/Member/AddMember';
-import EditMemberPopin from '../../../components/Popup/Member/EditMember';
-import { notifySuccess, notifyError } from '../../../components/Toast/ToastNotification';
-import { Member, UpdatedMemberInfo, NewMemberInfo } from '../../../data/interfaces/Member';
+import React, { useState, useEffect } from "react";
+import memberManageService from "../../../services/Admin/ManageMemberService";
+import "./ManageMember.css";
+import { useAuth } from "../../../Context/AuthContext";
+import addIcon from "../../../assets/Add.svg";
+import AddMemberPopin from "../../../components/Popup/Member/AddMember";
+import EditMemberPopin from "../../../components/Popup/Member/EditMember";
+import {
+  notifySuccess,
+  notifyError,
+} from "../../../components/Toast/ToastNotification";
+import {
+  Member,
+  UpdatedMemberInfo,
+  NewMemberInfo,
+} from "../../../data/interfaces/Member";
 
 const ManageMembers: React.FC = () => {
   const [members, setMembers] = useState<Member[]>([]);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [editingMember, setEditingMember] = useState<Member | null>(null);
   const [showAddMemberPopin, setShowAddMemberPopin] = useState(false);
   const [showEditMemberPopin, setShowEditMemberPopin] = useState(false);
@@ -29,8 +36,8 @@ const ManageMembers: React.FC = () => {
         const response = await memberManageService.getAllMembers();
         setMembers(response.data);
       } catch (error) {
-        console.error('Error fetching members:', error);
-        notifyError('Erreur lors de la récupération des membres.');
+        console.error("Error fetching members:", error);
+        notifyError("Erreur lors de la récupération des membres.");
       }
     };
     fetchMembers();
@@ -45,26 +52,34 @@ const ManageMembers: React.FC = () => {
     setShowEditMemberPopin(true); // Afficher la modal d'édition
   };
 
-  const handleSaveClick = async (memberData: UpdatedMemberInfo | NewMemberInfo) => {
+  const handleSaveClick = async (
+    memberData: UpdatedMemberInfo | NewMemberInfo,
+  ) => {
     if (editingMember) {
       try {
         await memberManageService.updateMember(editingMember._id, memberData);
-        setMembers(members.map(member => (member._id === editingMember._id ? { ...member, ...memberData } : member)));
+        setMembers(
+          members.map((member) =>
+            member._id === editingMember._id
+              ? { ...member, ...memberData }
+              : member,
+          ),
+        );
         setEditingMember(null);
-        notifySuccess('Membre mis à jour avec succès.');
+        notifySuccess("Membre mis à jour avec succès.");
       } catch (error) {
-        console.error('Error updating member:', error);
-        notifyError('Erreur lors de la mise à jour du membre.');
+        console.error("Error updating member:", error);
+        notifyError("Erreur lors de la mise à jour du membre.");
       }
     } else {
       try {
         await memberManageService.createMember(memberData as NewMemberInfo);
         const response = await memberManageService.getAllMembers();
         setMembers(response.data);
-        notifySuccess('Membre ajouté avec succès.');
+        notifySuccess("Membre ajouté avec succès.");
       } catch (error) {
-        console.error('Error adding member:', error);
-        notifyError('Erreur lors de l\'ajout du membre.');
+        console.error("Error adding member:", error);
+        notifyError("Erreur lors de l'ajout du membre.");
       }
     }
     setShowAddMemberPopin(false);
@@ -72,18 +87,18 @@ const ManageMembers: React.FC = () => {
   };
 
   const handleDeleteClick = async (_id: string) => {
-    console.log('Deleting member with id:', _id);
+    console.log("Deleting member with id:", _id);
     if (isAuthenticated) {
       try {
         await memberManageService.deleteMember(_id);
-        setMembers(members.filter(member => member._id !== _id));
-        notifySuccess('Membre supprimé avec succès.');
+        setMembers(members.filter((member) => member._id !== _id));
+        notifySuccess("Membre supprimé avec succès.");
       } catch (error) {
-        console.error('Error deleting member:', error);
-        notifyError('Erreur lors de la suppression du membre.');
+        console.error("Error deleting member:", error);
+        notifyError("Erreur lors de la suppression du membre.");
       }
     } else {
-      notifyError('Vous devez être connecté pour effectuer cette action.');
+      notifyError("Vous devez être connecté pour effectuer cette action.");
     }
   };
 
@@ -93,15 +108,17 @@ const ManageMembers: React.FC = () => {
       const response = await memberManageService.getAllMembers();
       setMembers(response.data);
       setShowAddMemberPopin(false);
-      notifySuccess('Membre ajouté avec succès.');
+      notifySuccess("Membre ajouté avec succès.");
     } catch (error) {
-      console.error('Error adding member:', error);
-      notifyError('Erreur lors de l\'ajout du membre.');
+      console.error("Error adding member:", error);
+      notifyError("Erreur lors de l'ajout du membre.");
     }
   };
 
-  const filteredMembers = members.filter(member =>
-    `${member.firstname} ${member.lastname}`.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredMembers = members.filter((member) =>
+    `${member.firstname} ${member.lastname}`
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase()),
   );
 
   return (
@@ -123,25 +140,29 @@ const ManageMembers: React.FC = () => {
       </div>
       <table>
         <thead>
-        <tr>
-          <th>Prénom</th>
-          <th>Nom</th>
-          <th>Rôle</th>
-          <th>Actions</th>
-        </tr>
+          <tr>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>Rôle</th>
+            <th>Actions</th>
+          </tr>
         </thead>
         <tbody>
-        {filteredMembers.map(member => (
-          <tr key={member._id}>
-            <td>{member.firstname}</td>
-            <td>{member.lastname}</td>
-            <td>{member.role}</td>
-            <td>
-              <button onClick={() => handleEditClick(member)}>Modifier</button>
-              <button onClick={() => handleDeleteClick(member._id)}>Supprimer</button>
-            </td>
-          </tr>
-        ))}
+          {filteredMembers.map((member) => (
+            <tr key={member._id}>
+              <td>{member.firstname}</td>
+              <td>{member.lastname}</td>
+              <td>{member.role}</td>
+              <td>
+                <button onClick={() => handleEditClick(member)}>
+                  Modifier
+                </button>
+                <button onClick={() => handleDeleteClick(member._id)}>
+                  Supprimer
+                </button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
       <AddMemberPopin

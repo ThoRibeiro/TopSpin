@@ -6,9 +6,7 @@ interface ProtectedRouteProps extends RouteProps {
   element: React.ReactElement;
 }
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
-  element,
-}) => {
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
   const { isAuthenticated } = useAuth();
 
   return isAuthenticated ? element : <Navigate to="/login" />;

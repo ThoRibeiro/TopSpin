@@ -1,20 +1,37 @@
-import React, { useState, useEffect, useRef } from 'react';
-import './AddMember.css';
+import React, { useState, useEffect, useRef } from "react";
+import "./AddMember.css";
 
 interface AddMemberPopinProps {
   show: boolean;
   onClose: () => void;
-  onSave: (memberData: { firstname: string; lastname: string; email: string; role: string; image?: string }) => void;
-  member?: { firstname: string; lastname: string; email: string; role: string; image?: string };
+  onSave: (memberData: {
+    firstname: string;
+    lastname: string;
+    email: string;
+    role: string;
+    image?: string;
+  }) => void;
+  member?: {
+    firstname: string;
+    lastname: string;
+    email: string;
+    role: string;
+    image?: string;
+  };
 }
 
 const roles = ["Président", "Trésorier", "Secrétaire", "Membre"];
 
-const AddMember: React.FC<AddMemberPopinProps> = ({ show, onClose, onSave, member }) => {
-  const [firstname, setFirstname] = useState('');
-  const [lastname, setLastname] = useState('');
-  const [email, setEmail] = useState('');
-  const [role, setRole] = useState('Président');
+const AddMember: React.FC<AddMemberPopinProps> = ({
+  show,
+  onClose,
+  onSave,
+  member,
+}) => {
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [email, setEmail] = useState("");
+  const [role, setRole] = useState("Président");
   const [image, setImage] = useState<File | null>(null);
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -25,10 +42,10 @@ const AddMember: React.FC<AddMemberPopinProps> = ({ show, onClose, onSave, membe
       setEmail(member.email);
       setRole(member.role);
     } else {
-      setFirstname('');
-      setLastname('');
-      setEmail('');
-      setRole('Président');
+      setFirstname("");
+      setLastname("");
+      setEmail("");
+      setRole("Président");
     }
   }, [member]);
 
@@ -58,12 +75,12 @@ const AddMember: React.FC<AddMemberPopinProps> = ({ show, onClose, onSave, membe
 
   useEffect(() => {
     if (show) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
     } else {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     }
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [show]);
 
@@ -74,24 +91,38 @@ const AddMember: React.FC<AddMemberPopinProps> = ({ show, onClose, onSave, membe
   return (
     <div className="modal">
       <div className="modal-content" ref={modalRef}>
-        <h2>{member ? 'Modifier le membre' : 'Ajouter un membre'}</h2>
+        <h2>{member ? "Modifier le membre" : "Ajouter un membre"}</h2>
         <label>
           Prénom:
-          <input type="text" value={firstname} onChange={(e) => setFirstname(e.target.value)} />
+          <input
+            type="text"
+            value={firstname}
+            onChange={(e) => setFirstname(e.target.value)}
+          />
         </label>
         <label>
           Nom:
-          <input type="text" value={lastname} onChange={(e) => setLastname(e.target.value)} />
+          <input
+            type="text"
+            value={lastname}
+            onChange={(e) => setLastname(e.target.value)}
+          />
         </label>
         <label>
           Email:
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </label>
         <label>
           Rôle:
           <select value={role} onChange={(e) => setRole(e.target.value)}>
-            {roles.map(role => (
-              <option key={role} value={role}>{role}</option>
+            {roles.map((role) => (
+              <option key={role} value={role}>
+                {role}
+              </option>
             ))}
           </select>
         </label>
@@ -99,7 +130,9 @@ const AddMember: React.FC<AddMemberPopinProps> = ({ show, onClose, onSave, membe
           Image:
           <input type="file" onChange={handleFileChange} />
         </label>
-        <button onClick={handleSave}>{member ? 'Enregistrer' : 'Ajouter'}</button>
+        <button onClick={handleSave}>
+          {member ? "Enregistrer" : "Ajouter"}
+        </button>
       </div>
     </div>
   );

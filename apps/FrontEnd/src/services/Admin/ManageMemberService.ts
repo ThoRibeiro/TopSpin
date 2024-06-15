@@ -1,9 +1,9 @@
-import axios from 'axios';
+import axios from "axios";
 
 const API_URL = "http://localhost:3500/members";
 
 const getAuthHeaders = () => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   return {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -16,7 +16,11 @@ export const getAllMembers = async () => {
 };
 
 export const updateMember = async (id: string, updatedInfo: any) => {
-  return await axios.put(`${API_URL}/update`, { idMember: id, ...updatedInfo }, getAuthHeaders());
+  return await axios.put(
+    `${API_URL}/update`,
+    { idMember: id, ...updatedInfo },
+    getAuthHeaders(),
+  );
 };
 
 export const deleteMember = async (id: string) => {

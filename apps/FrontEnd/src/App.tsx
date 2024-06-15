@@ -22,10 +22,22 @@ const App: React.FC = () => {
         <Header />
         <Routes>
           <Route path="/login" element={<LoginForm />} />
-          <Route path="/admin" element={<ProtectedRoute element={<AdminPanel />} />} />
-          <Route path="/admin/manage-posts" element={<ProtectedRoute element={<ManagePosts />} />} />
-          <Route path="/admin/manage-member" element={<ProtectedRoute element={<ManageMember />} />} />
-          <Route path="/admin/manage-account" element={<ProtectedRoute element={<ManageAccount />} />} />
+          <Route
+            path="/admin"
+            element={<ProtectedRoute element={<AdminPanel />} />}
+          />
+          <Route
+            path="/admin/manage-posts"
+            element={<ProtectedRoute element={<ManagePosts />} />}
+          />
+          <Route
+            path="/admin/manage-member"
+            element={<ProtectedRoute element={<ManageMember />} />}
+          />
+          <Route
+            path="/admin/manage-account"
+            element={<ProtectedRoute element={<ManageAccount />} />}
+          />
           <Route path="/" element={<Home />} />
           <Route path="/news" element={<News />} />
           <Route path="/gallery" element={<Gallery />} />

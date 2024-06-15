@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useAuth } from '../../../Context/AuthContext.tsx';
+import React, { useEffect } from "react";
+import { useAuth } from "../../../Context/AuthContext.tsx";
 
 const ManageAccount: React.FC = () => {
   const { setIsAdminPage } = useAuth();
@@ -14,7 +14,6 @@ const ManageAccount: React.FC = () => {
   return (
     <div>
       <h1>Gérer un compte</h1>
-
     </div>
   );
 };
