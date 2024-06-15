@@ -8,7 +8,6 @@ interface ProtectedRouteProps extends RouteProps {
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   element,
-  ...rest
 }) => {
   const { isAuthenticated } = useAuth();
 

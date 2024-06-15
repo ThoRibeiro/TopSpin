@@ -79,7 +79,7 @@ export const deleteMember = async (
   res: Response,
   next: NextFunction,
 ) => {
-  const idMember = req.body.idMember;
+  const idMember = req.params.idMember;
   try {
     const member = await Member.findByIdAndDelete(idMember);
     if (!member) {

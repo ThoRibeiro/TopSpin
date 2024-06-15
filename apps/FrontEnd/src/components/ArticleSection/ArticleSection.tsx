@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getAllPosts } from "../../services/postService.ts";
 import "./ArticleSection.css";
-import article1 from "../../assets/article1.jpg";
-import logoArticle from "../../assets/logo-article.jpeg";
-import Popup from "../Popup/CardPopup.tsx";
+import Popup from "../Popup/Card/CardPopup.tsx";
 
 interface Article {
   titlePost: string;
@@ -72,13 +70,13 @@ const ArticleSection: React.FC = () => {
             key={index}
             onClick={() => openPopup(article)}
           >
-            <img src={article.image || article1} alt={article.titlePost} />
+            <img src={article.image} alt={article.titlePost} />
             <div className="article-card-content">
               <h3>{truncateText(article.titlePost, 110)}</h3>
               <p>{truncateText(article.content, 110)}</p>
               <div className="author-info">
                 <img
-                  src={article.member.image || logoArticle}
+                  src={article.member.image}
                   alt={article.member.firstname}
                 />
                 <span>{`${article.member.firstname} ${article.member.lastname}`}</span>

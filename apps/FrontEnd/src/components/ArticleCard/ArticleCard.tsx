@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getAllPosts } from "../../services/postService";
 import "./ArticleCard.css";
-import Popup from "../Popup/CardPopup.tsx";
+import Popup from "../Popup/Card/CardPopup.tsx";
 
 const ArticleCard: React.FC = () => {
   const [latestArticle, setLatestArticle] = useState<any>(null);
