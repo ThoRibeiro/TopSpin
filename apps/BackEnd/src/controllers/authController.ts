@@ -64,11 +64,9 @@ class AuthController {
 
       const allowedRoles = ["Président", "Trésorier", "Secrétaire"];
       if (!allowedRoles.includes(user.role)) {
-        return res
-          .status(403)
-          .json({
-            message: "Accès refusé: vous n'avez pas les droits nécessaires.",
-          });
+        return res.status(403).json({
+          message: "Accès refusé: vous n'avez pas les droits nécessaires.",
+        });
       }
 
       const secret = process.env.JWT_SECRET;
