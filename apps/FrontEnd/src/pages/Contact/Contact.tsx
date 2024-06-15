@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import { createContact } from "../../services/contactService.ts";
+import ToastNotification, {
+  notifySuccess,
+  notifyError,
+} from "../../components/Toast/ToastNotification.tsx";
 import "./Contact.css";
 import phoneIcon from "../../assets/phone-solid.svg";
 import emailIcon from "../../assets/envelope-solid.svg";
@@ -13,8 +17,6 @@ const Contact: React.FC = () => {
     lastName: "",
     description: "",
   });
-
-  const [status, setStatus] = useState<string | null>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -35,14 +37,18 @@ const Contact: React.FC = () => {
         formData.lastName,
         formData.description,
       );
-      setStatus("Form submitted successfully!");
+      notifySuccess("Formulaire soumis avec succès !");
+      setFormData({ email: "", firstName: "", lastName: "", description: "" });
     } catch (error) {
-      setStatus("Error submitting form. Please try again.");
+      notifyError(
+        "Erreur lors de la soumission du formulaire. Veuillez réessayer.",
+      );
     }
   };
 
   return (
     <main className="contact">
+      <ToastNotification />
       <div className="contact-info">
         <div className="contact-details">
           <div className="contact-item">
@@ -104,7 +110,6 @@ const Contact: React.FC = () => {
           </div>
           <button type="submit">Envoyer !</button>
         </form>
-        {status && <p>{status}</p>}
       </div>
     </main>
   );

@@ -10,7 +10,7 @@ export const createPost = async (
   res: Response,
   next: NextFunction,
 ) => {
-  if (!req.body.titlePost || !req.body.content || !req.body.member) {
+  if (!req.body.titlePost || !req.body.content) {
     return res.status(400).json({
       error:
         "Veuillez remplir tous les champs pour votre POST s'il vous plait !",
@@ -22,10 +22,10 @@ export const createPost = async (
     titlePost: req.body.titlePost,
     content: req.body.content,
     date: new Date(),
-    member: req.body.member,
     ...(myFile && {
       image: `${req.protocol}://${req.get("host")}/images/${myFile.filename}`,
     }),
+    member: req.body.memberId,
   };
 
   try {
@@ -46,10 +46,10 @@ export const updatePost = async (
   const postData: Partial<IPost> = {
     titlePost: req.body.titlePost,
     content: req.body.content,
-    member: req.body.member,
     ...(myFile !== "undefined" && {
       image: `${req.protocol}://${req.get("host")}/images/${req.body.file.filename}`,
     }),
+    member: req.body.memberId,
   };
 
   try {
@@ -133,7 +133,6 @@ export const getPostAndComments = async (
   }
 };
 
-// permet de creer un commentaire
 export const createComment = async (
   req: Request,
   res: Response,

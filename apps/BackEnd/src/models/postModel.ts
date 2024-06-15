@@ -13,7 +13,7 @@ export interface IPost extends Document {
 const PostSchema: Schema = new Schema({
   titlePost: { type: String, required: true },
   content: { type: String, required: true },
-  date: { type: Date, required: true },
+  date: { type: Date, default: Date.now },
   image: { type: String },
   categorie: { type: String },
   member: {
