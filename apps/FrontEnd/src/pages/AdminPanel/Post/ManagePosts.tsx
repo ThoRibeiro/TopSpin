@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { useAuth } from "../../Context/AuthContext";
+import { useAuth } from "../../../Context/AuthContext.tsx";
 
-const AdminPanel: React.FC = () => {
+const ManagePosts: React.FC = () => {
   const { setIsAdminPage } = useAuth();
 
   useEffect(() => {
@@ -13,10 +13,10 @@ const AdminPanel: React.FC = () => {
 
   return (
     <div>
-      <h1>Admin Panel</h1>
-      {/* Admin panel content */}
+      <h1>Gérer les articles</h1>
+      {/* Logic to manage posts */}
     </div>
   );
 };
 
-export default AdminPanel;
+export default ManagePosts;

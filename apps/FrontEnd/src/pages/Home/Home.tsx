@@ -1,4 +1,3 @@
-// Home.tsx
 import React from "react";
 import "./Home.css";
 import ArticleCard from "../../components/ArticleCard/ArticleCard.tsx";

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getAllPosts } from "../../services/postService";
 import "./SideArticleCard.css";
-import Popup from "../Popup/CardPopup.tsx";
+import Popup from "../Popup/Card/CardPopup.tsx";
 
 interface Article {
   titlePost: string;
@@ -25,7 +25,7 @@ const SideArticleCard: React.FC = () => {
         const response = await getAllPosts();
         const posts: Article[] = response.data;
         if (posts.length > 1) {
-          setSideArticles(posts.slice(1, 3)); // Prenez les 2ème et 3ème articles
+          setSideArticles(posts.slice(1, 3));
         }
       } catch (error) {
         console.error("Error fetching the articles:", error);
