@@ -7,7 +7,7 @@ import {
   getPostById,
   getPostsByCategorie,
   getPostAndComments,
-  createComment,
+  createComment, deletePost,
 } from "../controllers/postController";
 import upload from "../middlewares/multerMiddlware";
 
@@ -20,5 +20,6 @@ postRoutes.get("/:idPost", authMiddleware, getPostById);
 postRoutes.get("/category/:categorie", getPostsByCategorie);
 postRoutes.get("/:idPost/comments", authMiddleware, getPostAndComments);
 postRoutes.post("/:idPost/comments", authMiddleware, createComment);
+postRoutes.delete("/:idPost", authMiddleware, deletePost);
 
 export default postRoutes;

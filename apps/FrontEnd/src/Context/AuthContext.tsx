@@ -9,7 +9,7 @@ import React, {
 interface AuthContextProps {
   isAuthenticated: boolean;
   isAdminPage: boolean;
-  login: () => void;
+  login: (token: string) => void;
   logout: () => void;
   setIsAdminPage: (isAdminPage: boolean) => void;
 }
@@ -17,8 +17,8 @@ interface AuthContextProps {
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
+                                                                  children,
+                                                                }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isAdminPage, setIsAdminPage] = useState<boolean>(false);
 
@@ -29,15 +29,17 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     }
   }, []);
 
-  const login = () => {
+  const login = (token: string) => {
     setIsAuthenticated(true);
     localStorage.setItem("isAuthenticated", "true");
+    localStorage.setItem("jwtToken", token);
   };
 
   const logout = () => {
     setIsAuthenticated(false);
     setIsAdminPage(false);
     localStorage.removeItem("isAuthenticated");
+    localStorage.removeItem("jwtToken");
   };
 
   return (

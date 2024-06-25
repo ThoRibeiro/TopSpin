@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import memberManageService from "../../../services/Admin/ManageMemberService";
 import "./ManageMember.css";
 import { useAuth } from "../../../Context/AuthContext";
-import addIcon from "../../../assets/Add.svg";
 import AddMemberPopin from "../../../components/Popup/Member/AddMember";
 import EditMemberPopin from "../../../components/Popup/Member/EditMember";
 import {
@@ -52,16 +51,14 @@ const ManageMembers: React.FC = () => {
     setShowEditMemberPopin(true); // Afficher la modal d'édition
   };
 
-  const handleSaveClick = async (
-    memberData: UpdatedMemberInfo | NewMemberInfo,
-  ) => {
+  const handleSaveClick = async (memberData: FormData) => {
     if (editingMember) {
       try {
         await memberManageService.updateMember(editingMember._id, memberData);
         setMembers(
           members.map((member) =>
             member._id === editingMember._id
-              ? { ...member, ...memberData }
+              ? { ...member, ...Object.fromEntries(memberData.entries()) }
               : member,
           ),
         );
@@ -73,7 +70,7 @@ const ManageMembers: React.FC = () => {
       }
     } else {
       try {
-        await memberManageService.createMember(memberData as NewMemberInfo);
+        await memberManageService.createMember(memberData);
         const response = await memberManageService.getAllMembers();
         setMembers(response.data);
         notifySuccess("Membre ajouté avec succès.");
@@ -83,7 +80,7 @@ const ManageMembers: React.FC = () => {
       }
     }
     setShowAddMemberPopin(false);
-    setShowEditMemberPopin(false); // Masquer la modal d'édition
+    setShowEditMemberPopin(false);
   };
 
   const handleDeleteClick = async (_id: string) => {
@@ -102,7 +99,7 @@ const ManageMembers: React.FC = () => {
     }
   };
 
-  const handleAddMemberSave = async (newMember: NewMemberInfo) => {
+  const handleAddMemberSave = async (newMember: FormData) => {
     try {
       await memberManageService.createMember(newMember);
       const response = await memberManageService.getAllMembers();
@@ -131,38 +128,37 @@ const ManageMembers: React.FC = () => {
           value={searchTerm}
           onChange={handleSearchChange}
         />
-        <img
-          src={addIcon}
-          alt="Add Member"
-          className="add-member-icon"
-          onClick={() => setShowAddMemberPopin(true)}
-        />
+        <button className="add-member-button" onClick={() => setShowAddMemberPopin(true)}>
+          Créer un nouveau membre
+        </button>
       </div>
       <table>
         <thead>
-          <tr>
-            <th>Prénom</th>
-            <th>Nom</th>
-            <th>Rôle</th>
-            <th>Actions</th>
-          </tr>
+        <tr>
+          <th>Prénom</th>
+          <th>Nom</th>
+          <th>Logo</th>
+          <th>Rôle</th>
+          <th>Actions</th>
+        </tr>
         </thead>
         <tbody>
-          {filteredMembers.map((member) => (
-            <tr key={member._id}>
-              <td>{member.firstname}</td>
-              <td>{member.lastname}</td>
-              <td>{member.role}</td>
-              <td>
-                <button onClick={() => handleEditClick(member)}>
-                  Modifier
-                </button>
-                <button onClick={() => handleDeleteClick(member._id)}>
-                  Supprimer
-                </button>
-              </td>
-            </tr>
-          ))}
+        {filteredMembers.map((member) => (
+          <tr key={member._id}>
+            <td>{member.firstname}</td>
+            <td>{member.lastname}</td>
+            <td className="logo-member"><img src={member.image} alt="Logo Membre" /></td>
+            <td>{member.role}</td>
+            <td className="manage-members-button">
+              <button onClick={() => handleEditClick(member)}>
+                Modifier
+              </button>
+              <button onClick={() => handleDeleteClick(member._id)}>
+                Supprimer
+              </button>
+            </td>
+          </tr>
+        ))}
         </tbody>
       </table>
       <AddMemberPopin

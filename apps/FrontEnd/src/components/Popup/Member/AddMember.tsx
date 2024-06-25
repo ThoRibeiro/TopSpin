@@ -133,6 +133,7 @@ const AddMember: React.FC<AddMemberPopinProps> = ({
         <button onClick={handleSave}>
           {member ? "Enregistrer" : "Ajouter"}
         </button>
+
       </div>
     </div>
   );

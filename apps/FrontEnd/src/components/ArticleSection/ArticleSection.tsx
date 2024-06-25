@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAllPosts } from "../../services/postService.ts";
+import { getAllPosts } from "../../services/Admin/postService.ts";
 import "./ArticleSection.css";
 import Popup from "../Popup/Card/CardPopup.tsx";
 

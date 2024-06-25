@@ -20,22 +20,24 @@
 }
 
 .modal-content h2 {
-    margin-bottom: 5px;
+    margin-bottom: 20px;
     text-align: center;
     font-size: 30px;
+    color: #ff7f00;
 }
 
 .modal-content label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .modal-content input[type="text"],
 .modal-content input[type="email"],
 .modal-content input[type="file"],
-.modal-content select {
+.modal-content select,
+.modal-content textarea {
     width: calc(100% - 22px);
-    padding: 9px;
+    padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -52,4 +54,25 @@
     cursor: pointer;
     margin: 0 15px auto;
     font-size: 16px;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #ff7f00;
+}
+
+.modal-content button:hover {
+    background-color: #e66a00;
+}
+
+.image-preview img {
+    max-width: 20%;
+    height: auto;
+    border-radius: 5px;
 }

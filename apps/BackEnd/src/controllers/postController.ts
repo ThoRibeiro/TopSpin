@@ -5,50 +5,43 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-export const createPost = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const createPost = async (req: Request, res: Response, next: NextFunction) => {
   if (!req.body.titlePost || !req.body.content) {
     return res.status(400).json({
-      error:
-        "Veuillez remplir tous les champs pour votre POST s'il vous plait !",
+      error: "Veuillez remplir tous les champs pour votre POST s'il vous plait !",
     });
   }
 
-  const myFile = req.file;
-  const postData: Partial<IPost> = {
-    titlePost: req.body.titlePost,
-    content: req.body.content,
-    date: new Date(),
-    ...(myFile && {
-      image: `${req.protocol}://${req.get("host")}/images/${myFile.filename}`,
-    }),
-    member: req.body.memberId,
-  };
-
   try {
+    const file = req.file;
+    const image = file ? `${req.protocol}://${req.get("host")}/images/${file.filename}` : undefined;
+
+    const postData: Partial<IPost> = {
+      titlePost: req.body.titlePost,
+      content: req.body.content,
+      date: new Date(),
+      image: image,
+      categorie: req.body.categorie,
+      member: req.body.memberId,
+    };
+
     const post = await Post.create(postData);
     res.status(201).json({ message: "Post enregistré avec succès !", post });
   } catch (error) {
-    res.status(400).json({ error });
+    console.error("Error creating post:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
-export const updatePost = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const updatePost = async (req: Request, res: Response, next: NextFunction) => {
   const idPost = req.body.idPost;
-  const myFile = typeof req.body.file;
+  const file = req.file as Express.Multer.File;
+  const image = file ? `${req.protocol}://${req.get("host")}/images/${file.filename}` : undefined;
   const postData: Partial<IPost> = {
     titlePost: req.body.titlePost,
     content: req.body.content,
-    ...(myFile !== "undefined" && {
-      image: `${req.protocol}://${req.get("host")}/images/${req.body.file.filename}`,
-    }),
+    image: image,
+    categorie: req.body.categorie,
     member: req.body.memberId,
   };
 
@@ -58,8 +51,7 @@ export const updatePost = async (
     });
     if (!updatedPost) {
       return res.status(404).json({
-        message:
-          "Le post que vous souhaitez modifier n'existe pas, merci de réessayer...",
+        message: "Le post que vous souhaitez modifier n'existe pas, merci de réessayer...",
       });
     }
     res.status(200).json({
@@ -159,6 +151,21 @@ export const createComment = async (
     };
     await Comment.create(commentData);
     res.status(201).json({ message: "Commentaire enregistré !" });
+  } catch (error) {
+    res.status(400).json({ error });
+  }
+};
+
+export const deletePost = async (req: Request, res: Response, next: NextFunction) => {
+  const idPost = req.params.idPost;
+  try {
+    const post = await Post.findByIdAndDelete(idPost);
+    if (!post) {
+      return res.status(404).json({
+        message: "Le post que vous souhaitez supprimer n'existe pas, merci de réessayer...",
+      });
+    }
+    res.status(200).json({ message: "Post supprimé avec succès !" });
   } catch (error) {
     res.status(400).json({ error });
   }

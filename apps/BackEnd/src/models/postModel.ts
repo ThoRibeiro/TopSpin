@@ -16,11 +16,7 @@ const PostSchema: Schema = new Schema({
   date: { type: Date, default: Date.now },
   image: { type: String },
   categorie: { type: String },
-  member: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Member",
-    required: true,
-  },
+  member: { type: mongoose.Schema.Types.ObjectId, ref: "Member", required: true },
 });
 
 const Post = mongoose.model<IPost>("Post", PostSchema);
