@@ -5,16 +5,23 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-export const createPost = async (req: Request, res: Response, next: NextFunction) => {
+export const createPost = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   if (!req.body.titlePost || !req.body.content) {
     return res.status(400).json({
-      error: "Veuillez remplir tous les champs pour votre POST s'il vous plait !",
+      error:
+        "Veuillez remplir tous les champs pour votre POST s'il vous plait !",
     });
   }
 
   try {
     const file = req.file;
-    const image = file ? `${req.protocol}://${req.get("host")}/images/${file.filename}` : undefined;
+    const image = file
+      ? `${req.protocol}://${req.get("host")}/images/${file.filename}`
+      : undefined;
 
     const postData: Partial<IPost> = {
       titlePost: req.body.titlePost,
@@ -33,10 +40,16 @@ export const createPost = async (req: Request, res: Response, next: NextFunction
   }
 };
 
-export const updatePost = async (req: Request, res: Response, next: NextFunction) => {
+export const updatePost = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   const idPost = req.body.idPost;
   const file = req.file as Express.Multer.File;
-  const image = file ? `${req.protocol}://${req.get("host")}/images/${file.filename}` : undefined;
+  const image = file
+    ? `${req.protocol}://${req.get("host")}/images/${file.filename}`
+    : undefined;
   const postData: Partial<IPost> = {
     titlePost: req.body.titlePost,
     content: req.body.content,
@@ -51,7 +64,8 @@ export const updatePost = async (req: Request, res: Response, next: NextFunction
     });
     if (!updatedPost) {
       return res.status(404).json({
-        message: "Le post que vous souhaitez modifier n'existe pas, merci de réessayer...",
+        message:
+          "Le post que vous souhaitez modifier n'existe pas, merci de réessayer...",
       });
     }
     res.status(200).json({
@@ -156,13 +170,18 @@ export const createComment = async (
   }
 };
 
-export const deletePost = async (req: Request, res: Response, next: NextFunction) => {
+export const deletePost = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   const idPost = req.params.idPost;
   try {
     const post = await Post.findByIdAndDelete(idPost);
     if (!post) {
       return res.status(404).json({
-        message: "Le post que vous souhaitez supprimer n'existe pas, merci de réessayer...",
+        message:
+          "Le post que vous souhaitez supprimer n'existe pas, merci de réessayer...",
       });
     }
     res.status(200).json({ message: "Post supprimé avec succès !" });

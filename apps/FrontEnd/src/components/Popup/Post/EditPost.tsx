@@ -16,7 +16,12 @@ interface EditPostPopinProps {
   post: Post | null;
 }
 
-const EditPostPopin: React.FC<EditPostPopinProps> = ({ show, onClose, onSave, post }) => {
+const EditPostPopin: React.FC<EditPostPopinProps> = ({
+  show,
+  onClose,
+  onSave,
+  post,
+}) => {
   const [titlePost, setTitlePost] = useState("");
   const [content, setContent] = useState("");
   const [categorie, setCategorie] = useState("");
@@ -108,7 +113,10 @@ const EditPostPopin: React.FC<EditPostPopinProps> = ({ show, onClose, onSave, po
         </label>
         <label>
           Catégorie:
-          <select value={categorie} onChange={(e) => setCategorie(e.target.value)}>
+          <select
+            value={categorie}
+            onChange={(e) => setCategorie(e.target.value)}
+          >
             <option value="">Sélectionner une catégorie</option>
             <option value="Actualités">Actualités</option>
             <option value="Événements">Événements</option>
@@ -117,11 +125,7 @@ const EditPostPopin: React.FC<EditPostPopinProps> = ({ show, onClose, onSave, po
         </label>
         <label>
           Images:
-          <input
-            type="file"
-            multiple
-            onChange={handleFileChange}
-          />
+          <input type="file" multiple onChange={handleFileChange} />
           {imagePreview && (
             <div className="image-preview">
               <img src={imagePreview} alt="Preview" />

@@ -94,7 +94,9 @@ const ManagePosts: React.FC = () => {
   );
 
   const truncateDescription = (description: string) => {
-    return description.length > 100 ? description.substring(0, 70) + "..." : description;
+    return description.length > 100
+      ? description.substring(0, 70) + "..."
+      : description;
   };
 
   return (
@@ -107,37 +109,50 @@ const ManagePosts: React.FC = () => {
           value={searchTerm}
           onChange={handleSearchChange}
         />
-        <button className="add-post-button" onClick={() => setShowAddPostPopin(true)}>
+        <button
+          className="add-post-button"
+          onClick={() => setShowAddPostPopin(true)}
+        >
           Créer un nouveau post
         </button>
       </div>
       <table>
         <thead>
-        <tr>
-          <th className="title-table">Titre</th>
-          <th className="content-table">Description</th>
-          <th>Catégorie</th>
-          <th>Auteur</th>
-          <th>Actions</th>
-        </tr>
+          <tr>
+            <th className="title-table">Titre</th>
+            <th className="content-table">Description</th>
+            <th>Catégorie</th>
+            <th>Auteur</th>
+            <th>Actions</th>
+          </tr>
         </thead>
         <tbody>
-        {filteredPosts.map((post) => (
-          <tr key={post._id}>
-            <td>{post.titlePost}</td>
-            <td>{truncateDescription(post.content)}</td>
-            <td>{post.categorie}</td>
-            <td>{post.member ? `${post.member.firstname} ${post.member.lastname}` : "Inconnu"}</td>
-            <td className="actions">
-              <button className="edit-button" onClick={() => handleEditClick(post)}>
-                Modifier
-              </button>
-              <button className="delete-button" onClick={() => handleDeleteClick(post._id)}>
-                Supprimer
-              </button>
-            </td>
-          </tr>
-        ))}
+          {filteredPosts.map((post) => (
+            <tr key={post._id}>
+              <td>{post.titlePost}</td>
+              <td>{truncateDescription(post.content)}</td>
+              <td>{post.categorie}</td>
+              <td>
+                {post.member
+                  ? `${post.member.firstname} ${post.member.lastname}`
+                  : "Inconnu"}
+              </td>
+              <td className="actions">
+                <button
+                  className="edit-button"
+                  onClick={() => handleEditClick(post)}
+                >
+                  Modifier
+                </button>
+                <button
+                  className="delete-button"
+                  onClick={() => handleDeleteClick(post._id)}
+                >
+                  Supprimer
+                </button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
       <AddPostPopin

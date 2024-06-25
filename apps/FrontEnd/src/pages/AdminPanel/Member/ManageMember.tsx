@@ -128,37 +128,42 @@ const ManageMembers: React.FC = () => {
           value={searchTerm}
           onChange={handleSearchChange}
         />
-        <button className="add-member-button" onClick={() => setShowAddMemberPopin(true)}>
+        <button
+          className="add-member-button"
+          onClick={() => setShowAddMemberPopin(true)}
+        >
           Créer un nouveau membre
         </button>
       </div>
       <table>
         <thead>
-        <tr>
-          <th>Prénom</th>
-          <th>Nom</th>
-          <th>Logo</th>
-          <th>Rôle</th>
-          <th>Actions</th>
-        </tr>
+          <tr>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>Logo</th>
+            <th>Rôle</th>
+            <th>Actions</th>
+          </tr>
         </thead>
         <tbody>
-        {filteredMembers.map((member) => (
-          <tr key={member._id}>
-            <td>{member.firstname}</td>
-            <td>{member.lastname}</td>
-            <td className="logo-member"><img src={member.image} alt="Logo Membre" /></td>
-            <td>{member.role}</td>
-            <td className="manage-members-button">
-              <button onClick={() => handleEditClick(member)}>
-                Modifier
-              </button>
-              <button onClick={() => handleDeleteClick(member._id)}>
-                Supprimer
-              </button>
-            </td>
-          </tr>
-        ))}
+          {filteredMembers.map((member) => (
+            <tr key={member._id}>
+              <td>{member.firstname}</td>
+              <td>{member.lastname}</td>
+              <td className="logo-member">
+                <img src={member.image} alt="Logo Membre" />
+              </td>
+              <td>{member.role}</td>
+              <td className="manage-members-button">
+                <button onClick={() => handleEditClick(member)}>
+                  Modifier
+                </button>
+                <button onClick={() => handleDeleteClick(member._id)}>
+                  Supprimer
+                </button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
       <AddMemberPopin

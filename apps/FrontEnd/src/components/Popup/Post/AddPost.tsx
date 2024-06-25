@@ -49,7 +49,10 @@ const AddPost: React.FC<AddPostPopinProps> = ({ show, onClose, onSave }) => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
         onClose();
       }
     };
@@ -65,7 +68,11 @@ const AddPost: React.FC<AddPostPopinProps> = ({ show, onClose, onSave }) => {
     };
   }, [show, onClose]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+  ) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -126,7 +133,13 @@ const AddPost: React.FC<AddPostPopinProps> = ({ show, onClose, onSave }) => {
           </div>
           <div className="form-group">
             <label htmlFor="categorie">Catégorie</label>
-            <select id="categorie" name="categorie" value={formData.categorie} onChange={handleChange} required>
+            <select
+              id="categorie"
+              name="categorie"
+              value={formData.categorie}
+              onChange={handleChange}
+              required
+            >
               <option value="">Sélectionner une catégorie</option>
               <option value="Actualités">Actualités</option>
               <option value="Événements">Événements</option>
@@ -135,9 +148,15 @@ const AddPost: React.FC<AddPostPopinProps> = ({ show, onClose, onSave }) => {
           </div>
           <div className="form-group">
             <label htmlFor="memberId">Membre</label>
-            <select id="memberId" name="memberId" value={formData.memberId} onChange={handleChange} required>
+            <select
+              id="memberId"
+              name="memberId"
+              value={formData.memberId}
+              onChange={handleChange}
+              required
+            >
               <option value="">Sélectionner un membre</option>
-              {members.map(member => (
+              {members.map((member) => (
                 <option key={member._id} value={member._id}>
                   {`${member.firstname} ${member.lastname}`}
                 </option>

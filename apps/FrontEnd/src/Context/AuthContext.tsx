@@ -17,8 +17,8 @@ interface AuthContextProps {
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({
-                                                                  children,
-                                                                }) => {
+  children,
+}) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isAdminPage, setIsAdminPage] = useState<boolean>(false);
 

@@ -7,7 +7,8 @@ import {
   getPostById,
   getPostsByCategorie,
   getPostAndComments,
-  createComment, deletePost,
+  createComment,
+  deletePost,
 } from "../controllers/postController";
 import upload from "../middlewares/multerMiddlware";
 

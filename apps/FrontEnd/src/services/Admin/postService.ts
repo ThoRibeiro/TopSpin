@@ -40,7 +40,10 @@ export const getPostById = async (postId: string) => {
 };
 
 export const getPostsByCategory = async (category: string) => {
-  return await axios.get<Post[]>(`${API_URL}/category/${category}`, getAuthHeaders());
+  return await axios.get<Post[]>(
+    `${API_URL}/category/${category}`,
+    getAuthHeaders(),
+  );
 };
 
 export const getPostAndComments = async (postId: string) => {

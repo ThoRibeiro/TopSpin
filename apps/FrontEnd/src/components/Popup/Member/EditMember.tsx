@@ -19,11 +19,11 @@ interface EditMemberPopinProps {
 const roles = ["Président", "Trésorier", "Secrétaire", "Membre"];
 
 const EditMemberPopin: React.FC<EditMemberPopinProps> = ({
-                                                           show,
-                                                           onClose,
-                                                           onSave,
-                                                           member,
-                                                         }) => {
+  show,
+  onClose,
+  onSave,
+  member,
+}) => {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [role, setRole] = useState("Président");
