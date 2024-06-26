@@ -1,8 +1,8 @@
 import axios from "axios";
 import {
   Member,
-  UpdatedMemberInfo,
   NewMemberInfo,
+  UpdatedMemberInfo,
 } from "../data/interfaces/Member";
 
 const API_URL = "http://localhost:3500/members";
@@ -42,7 +42,6 @@ export const createMember = async (newMember: NewMemberInfo) => {
     getAuthHeaders(),
   );
 };
-
 export default {
   getAllMembers,
   updateMember,

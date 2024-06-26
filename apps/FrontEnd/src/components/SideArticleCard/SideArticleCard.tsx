@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { getAllPosts } from "../../services/postService";
+import { getAllPosts } from "../../services/Admin/postService";
 import "./SideArticleCard.css";
-import Popup from "../Popup/Card/CardPopup.tsx";
+import Popup from "../Popup/Card/CardPopup";
 
 interface Article {
+  _id: string;
   titlePost: string;
   content: string;
   image: string;
@@ -74,7 +75,9 @@ const SideArticleCard: React.FC = () => {
               <h2>{truncateText(article.titlePost, 110)}</h2>
               <p>{truncateText(article.content, 110)}</p>
               <div className="side-article-author">
-                <img src={article.member.image} alt="Author" />
+                {article.member.image && (
+                  <img src={article.member.image} alt="Author" />
+                )}
                 <span>
                   {article.member.firstname} {article.member.lastname}
                 </span>

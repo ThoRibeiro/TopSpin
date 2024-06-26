@@ -1,18 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { getAllPosts } from "../../services/postService";
+import { getAllPosts } from "../../services/Admin/postService";
 import "./ArticleCard.css";
-import Popup from "../Popup/Card/CardPopup.tsx";
+import Popup from "../Popup/Card/CardPopup";
+
+interface Article {
+  _id: string;
+  titlePost: string;
+  content: string;
+  image: string;
+  member: {
+    firstname: string;
+    lastname: string;
+    image: string;
+  };
+}
 
 const ArticleCard: React.FC = () => {
-  const [latestArticle, setLatestArticle] = useState<any>(null);
+  const [latestArticle, setLatestArticle] = useState<Article | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [selectedArticle, setSelectedArticle] = useState<any>(null);
+  const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
 
   useEffect(() => {
     const fetchLatestArticle = async () => {
       try {
         const response = await getAllPosts();
-        const posts = response.data;
+        const posts: Article[] = response.data;
         if (posts.length > 0) {
           setLatestArticle(posts[0]);
         }
@@ -33,7 +45,7 @@ const ArticleCard: React.FC = () => {
     return text;
   };
 
-  const openPopup = (article: any) => {
+  const openPopup = (article: Article) => {
     setSelectedArticle(article);
   };
 

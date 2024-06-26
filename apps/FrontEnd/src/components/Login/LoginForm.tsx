@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LoginService from "../../services/loginService.ts";
+import LoginService from "../../services/loginService";
 import { useAuth } from "../../Context/AuthContext";
 import "./LoginForm.css";
 
@@ -16,8 +16,8 @@ const LoginForm: React.FC = () => {
     try {
       const response = await LoginService.login(email, password);
       if (response.jwt) {
-        localStorage.setItem("token", response.jwt);
-        login();
+        localStorage.setItem("jwtToken", response.jwt);
+        login(response.jwt);
         navigate("/admin");
       } else {
         setError("Accès refusé: vous n'avez pas les droits nécessaires.");

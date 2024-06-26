@@ -7,9 +7,6 @@ import { Link } from "react-router-dom";
 const Header: React.FC = () => {
   const { isAuthenticated, isAdminPage } = useAuth();
 
-  console.log("isAuthenticated:", isAuthenticated);
-  console.log("isAdminPage:", isAdminPage);
-
   return (
     <header className="navbar">
       <div className="navbar-container">

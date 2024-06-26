@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const toastOptions: ToastOptions = {
   position: "top-right",
-  autoClose: 5000,
+  autoClose: 1500,
   hideProgressBar: false,
   closeOnClick: true,
   pauseOnHover: true,
@@ -12,7 +12,7 @@ const toastOptions: ToastOptions = {
   progress: undefined,
   theme: "colored",
   style: {
-    backgroundColor: "var(--primary-color)",
+    backgroundColor: "green",
     color: "#ffffff",
   },
   transition: Slide,
@@ -21,7 +21,7 @@ const toastOptions: ToastOptions = {
 export const notifySuccess = (message: string) => {
   toast.success(message, {
     ...toastOptions,
-    icon: <div style={{ color: "#ffffff" }}>✔️</div>,
+    icon: <div style={{ color: "#FFFFF" }}>✔️</div>,
     closeButton: <div style={{ color: "#ffffff" }}>✖</div>,
   });
 };
