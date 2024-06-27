@@ -2,18 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getAllPosts } from "../../services/Admin/postService";
 import "./SideArticleCard.css";
 import Popup from "../Popup/Card/CardPopup";
-
-interface Article {
-  _id: string;
-  titlePost: string;
-  content: string;
-  image: string;
-  member: {
-    firstname: string;
-    lastname: string;
-    image: string;
-  };
-}
+import { Article } from "../../data/interfaces/Article.ts";
 
 const SideArticleCard: React.FC = () => {
   const [sideArticles, setSideArticles] = useState<Article[]>([]);

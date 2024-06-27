@@ -7,6 +7,7 @@ const getAuthHeaders = () => {
   return {
     headers: {
       Authorization: `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data'
     },
   };
 };
@@ -15,10 +16,10 @@ export const getAllMembers = async () => {
   return await axios.get(`${API_URL}/all`);
 };
 
-export const updateMember = async (id: string, updatedInfo: any) => {
+export const updateMember = async (id: string, updatedInfo: FormData) => {
   return await axios.put(
     `${API_URL}/update`,
-    { idMember: id, ...updatedInfo },
+    updatedInfo,
     getAuthHeaders(),
   );
 };
@@ -27,7 +28,7 @@ export const deleteMember = async (id: string) => {
   return await axios.delete(`${API_URL}/${id}`, getAuthHeaders());
 };
 
-export const createMember = async (newMember: any) => {
+export const createMember = async (newMember: FormData) => {
   return await axios.post(`${API_URL}/create`, newMember, getAuthHeaders());
 };
 
