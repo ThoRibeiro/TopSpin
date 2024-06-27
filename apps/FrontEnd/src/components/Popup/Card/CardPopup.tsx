@@ -1,11 +1,6 @@
-// Popup.tsx
 import React from "react";
 import "./CardPopup.css";
-
-interface PopupProps {
-  article: any;
-  onClose: () => void;
-}
+import { PopupProps } from "../../../data/interfaces/Article.ts";
 
 const Popup: React.FC<PopupProps> = ({ article, onClose }) => {
   return (
@@ -19,7 +14,7 @@ const Popup: React.FC<PopupProps> = ({ article, onClose }) => {
               <img src={article.member.image} alt="Author" />
             )}
             <span>
-              {article.member.firstname} {article.member.lastname}
+              {article.member?.firstname} {article.member?.lastname}
             </span>
           </div>
         </div>

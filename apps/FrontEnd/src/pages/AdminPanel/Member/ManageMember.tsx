@@ -8,11 +8,7 @@ import {
   notifySuccess,
   notifyError,
 } from "../../../components/Toast/ToastNotification";
-import {
-  Member,
-  UpdatedMemberInfo,
-  NewMemberInfo,
-} from "../../../data/interfaces/Member";
+import { Member } from "../../../data/interfaces/Member";
 
 const ManageMembers: React.FC = () => {
   const [members, setMembers] = useState<Member[]>([]);
@@ -48,17 +44,24 @@ const ManageMembers: React.FC = () => {
 
   const handleEditClick = (member: Member) => {
     setEditingMember(member);
-    setShowEditMemberPopin(true); // Afficher la modal d'édition
+    setShowEditMemberPopin(true);
   };
 
   const handleSaveClick = async (memberData: FormData) => {
     if (editingMember) {
       try {
-        await memberManageService.updateMember(editingMember._id, memberData);
+        const updatedMember = await memberManageService.updateMember(
+          editingMember._id,
+          memberData,
+        );
         setMembers(
           members.map((member) =>
             member._id === editingMember._id
-              ? { ...member, ...Object.fromEntries(memberData.entries()) }
+              ? {
+                  ...member,
+                  ...Object.fromEntries(memberData.entries()),
+                  image: updatedMember.data.member.image,
+                }
               : member,
           ),
         );
@@ -171,12 +174,14 @@ const ManageMembers: React.FC = () => {
         onClose={() => setShowAddMemberPopin(false)}
         onSave={handleAddMemberSave}
       />
-      <EditMemberPopin
-        show={showEditMemberPopin}
-        onClose={() => setShowEditMemberPopin(false)}
-        onSave={handleSaveClick}
-        member={editingMember!}
-      />
+      {editingMember && (
+        <EditMemberPopin
+          show={showEditMemberPopin}
+          onClose={() => setShowEditMemberPopin(false)}
+          onSave={handleSaveClick}
+          member={editingMember}
+        />
+      )}
     </div>
   );
 };

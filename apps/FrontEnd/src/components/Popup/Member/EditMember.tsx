@@ -1,20 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./AddMember.css";
-
-interface Member {
-  firstname: string;
-  lastname: string;
-  email: string;
-  role: string;
-  image?: string;
-}
-
-interface EditMemberPopinProps {
-  show: boolean;
-  onClose: () => void;
-  onSave: (memberData: FormData) => void;
-  member: Member;
-}
+import { EditMemberPopinProps } from "../../../data/interfaces/Member.ts";
 
 const roles = ["Président", "Trésorier", "Secrétaire", "Membre"];
 
@@ -40,16 +26,22 @@ const EditMemberPopin: React.FC<EditMemberPopinProps> = ({
     }
   }, [member]);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const formData = new FormData();
+    formData.append("idMember", member._id);
     formData.append("firstname", firstname);
     formData.append("lastname", lastname);
     formData.append("role", role);
     if (image) {
       formData.append("image", image);
     }
-    onSave(formData);
-    onClose();
+
+    try {
+      onSave(formData);
+      onClose();
+    } catch (error) {
+      console.error("Erreur lors de la mise à jour du membre:", error);
+    }
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
