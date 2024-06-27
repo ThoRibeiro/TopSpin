@@ -50,11 +50,18 @@ const ManageMembers: React.FC = () => {
   const handleSaveClick = async (memberData: FormData) => {
     if (editingMember) {
       try {
-        const updatedMember = await memberManageService.updateMember(editingMember._id, memberData);
+        const updatedMember = await memberManageService.updateMember(
+          editingMember._id,
+          memberData,
+        );
         setMembers(
           members.map((member) =>
             member._id === editingMember._id
-              ? { ...member, ...Object.fromEntries(memberData.entries()), image: updatedMember.data.member.image }
+              ? {
+                  ...member,
+                  ...Object.fromEntries(memberData.entries()),
+                  image: updatedMember.data.member.image,
+                }
               : member,
           ),
         );
@@ -133,33 +140,33 @@ const ManageMembers: React.FC = () => {
       </div>
       <table>
         <thead>
-        <tr>
-          <th>Prénom</th>
-          <th>Nom</th>
-          <th>Logo</th>
-          <th>Rôle</th>
-          <th>Actions</th>
-        </tr>
+          <tr>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>Logo</th>
+            <th>Rôle</th>
+            <th>Actions</th>
+          </tr>
         </thead>
         <tbody>
-        {filteredMembers.map((member) => (
-          <tr key={member._id}>
-            <td>{member.firstname}</td>
-            <td>{member.lastname}</td>
-            <td className="logo-member">
-              <img src={member.image} alt="Logo Membre" />
-            </td>
-            <td>{member.role}</td>
-            <td className="manage-members-button">
-              <button onClick={() => handleEditClick(member)}>
-                Modifier
-              </button>
-              <button onClick={() => handleDeleteClick(member._id)}>
-                Supprimer
-              </button>
-            </td>
-          </tr>
-        ))}
+          {filteredMembers.map((member) => (
+            <tr key={member._id}>
+              <td>{member.firstname}</td>
+              <td>{member.lastname}</td>
+              <td className="logo-member">
+                <img src={member.image} alt="Logo Membre" />
+              </td>
+              <td>{member.role}</td>
+              <td className="manage-members-button">
+                <button onClick={() => handleEditClick(member)}>
+                  Modifier
+                </button>
+                <button onClick={() => handleDeleteClick(member._id)}>
+                  Supprimer
+                </button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
       <AddMemberPopin

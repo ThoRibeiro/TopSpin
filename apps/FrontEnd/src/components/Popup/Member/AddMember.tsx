@@ -5,11 +5,11 @@ import { AddMemberPopinProps } from "../../../data/interfaces/Member.ts";
 const roles = ["Président", "Trésorier", "Secrétaire", "Membre"];
 
 const AddMember: React.FC<AddMemberPopinProps> = ({
-                                                    show,
-                                                    onClose,
-                                                    onSave,
-                                                    member,
-                                                  }) => {
+  show,
+  onClose,
+  onSave,
+  member,
+}) => {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");

@@ -2,7 +2,6 @@ import React from "react";
 import "./CardPopup.css";
 import { PopupProps } from "../../../data/interfaces/Article.ts";
 
-
 const Popup: React.FC<PopupProps> = ({ article, onClose }) => {
   return (
     <div className="popup-overlay" onClick={onClose}>

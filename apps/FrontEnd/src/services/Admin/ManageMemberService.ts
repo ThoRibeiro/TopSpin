@@ -7,7 +7,7 @@ const getAuthHeaders = () => {
   return {
     headers: {
       Authorization: `Bearer ${token}`,
-      'Content-Type': 'multipart/form-data'
+      "Content-Type": "multipart/form-data",
     },
   };
 };
@@ -17,11 +17,7 @@ export const getAllMembers = async () => {
 };
 
 export const updateMember = async (id: string, updatedInfo: FormData) => {
-  return await axios.put(
-    `${API_URL}/update`,
-    updatedInfo,
-    getAuthHeaders(),
-  );
+  return await axios.put(`${API_URL}/update`, updatedInfo, getAuthHeaders());
 };
 
 export const deleteMember = async (id: string) => {
