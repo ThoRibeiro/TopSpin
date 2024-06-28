@@ -17,28 +17,55 @@ const Footer: React.FC = () => {
           </a>
         </div>
         <ul className="footer-links">
-          <li><a href="/">Accueil</a></li>
-          <li><a href="/news">Actualités</a></li>
-          <li><a href="/gallery">Galerie</a></li>
-          <li><a href="/about">À propos</a></li>
-          <li><a href="/contact">Contact</a></li>
+          <li>
+            <a href="/">Accueil</a>
+          </li>
+          <li>
+            <a href="/news">Actualités</a>
+          </li>
+          <li>
+            <a href="/gallery">Galerie</a>
+          </li>
+          <li>
+            <a href="/about">À propos</a>
+          </li>
+          <li>
+            <a href="/contact">Contact</a>
+          </li>
         </ul>
         <div className="footer-socials">
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://instagram.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src={instagramLogo} alt="Instagram" />
           </a>
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src={facebookLogo} alt="Facebook" />
           </a>
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://twitter.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src={xLogo} alt="Twitter" />
           </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src={linkedinLogo} alt="LinkedIn" />
           </a>
         </div>
         <p className="footer-copyright">
-          &copy; {new Date().getFullYear()} Association de Tennis de Table de Lille. Tous droits réservés.
+          &copy; {new Date().getFullYear()} Association de Tennis de Table de
+          Lille. Tous droits réservés.
         </p>
       </div>
     </footer>

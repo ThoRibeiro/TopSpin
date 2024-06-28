@@ -12,7 +12,7 @@ const Header: React.FC = () => {
       <div className="navbar-container">
         <div className="navbar-logo">
           <a href="/">
-            <img src={logo} alt="Ping Pong Lille"/>
+            <img src={logo} alt="Ping Pong Lille" />
           </a>
         </div>
         <nav className="navbar-links">
