@@ -11,7 +11,9 @@ const Header: React.FC = () => {
     <header className="navbar">
       <div className="navbar-container">
         <div className="navbar-logo">
-          <img src={logo} alt="Ping Pong Lille" />
+          <a href="/">
+            <img src={logo} alt="Ping Pong Lille"/>
+          </a>
         </div>
         <nav className="navbar-links">
           {isAuthenticated && isAdminPage ? (
