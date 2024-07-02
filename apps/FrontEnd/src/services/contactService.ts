@@ -15,7 +15,7 @@ export const createContact = async (
   email: string,
   firstName: string,
   lastName: string,
-  content: string
+  content: string,
 ) => {
   return await axios.post(`${API_URL}/create`, {
     email,
@@ -30,11 +30,19 @@ export const getAllContacts = async () => {
 };
 
 export const updateContactStatus = async (id: string, status: string) => {
-  return await axios.put(`${API_URL}/${id}/status`, { status }, getAuthHeaders());
+  return await axios.put(
+    `${API_URL}/${id}/status`,
+    { status },
+    getAuthHeaders(),
+  );
 };
 
 export const updateContactReferent = async (id: string, referent: string) => {
-  return await axios.put(`${API_URL}/${id}/referent`, { referent }, getAuthHeaders());
+  return await axios.put(
+    `${API_URL}/${id}/referent`,
+    { referent },
+    getAuthHeaders(),
+  );
 };
 
 export const getAllMembers = async () => {

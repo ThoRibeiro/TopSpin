@@ -3,7 +3,7 @@ import {
   createContact,
   getAllContact,
   updateContactStatus,
-  updateContactReferent
+  updateContactReferent,
 } from "../controllers/contactController";
 import authMiddleware from "../middlewares/authMiddleware";
 

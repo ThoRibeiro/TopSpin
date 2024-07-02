@@ -30,15 +30,19 @@ const About: React.FC = () => {
       <div className="about-content">
         <div className="about-section">
           <p className="about-text">
-            TopSpin Lille est une association dédiée à la promotion et à la pratique du tennis de table dans la région
-            de Lille. Notre mission est de fournir une plateforme où les passionnés de ce sport peuvent se réunir,
-            s'entraîner, et participer à des compétitions de tous niveaux.
+            TopSpin Lille est une association dédiée à la promotion et à la
+            pratique du tennis de table dans la région de Lille. Notre mission
+            est de fournir une plateforme où les passionnés de ce sport peuvent
+            se réunir, s'entraîner, et participer à des compétitions de tous
+            niveaux.
           </p>
           <p className="about-text">
-            Depuis notre création, nous avons travaillé sans relâche pour créer un environnement inclusif et accueillant
-            pour tous nos membres, qu'ils soient débutants ou joueurs confirmés. Nous croyons fermement que le tennis de
-            table est plus qu'un simple sport; c'est un moyen de développer des compétences, de la discipline, et de
-            créer des amitiés durables.
+            Depuis notre création, nous avons travaillé sans relâche pour créer
+            un environnement inclusif et accueillant pour tous nos membres,
+            qu'ils soient débutants ou joueurs confirmés. Nous croyons fermement
+            que le tennis de table est plus qu'un simple sport; c'est un moyen
+            de développer des compétences, de la discipline, et de créer des
+            amitiés durables.
           </p>
         </div>
 
@@ -64,13 +68,15 @@ const About: React.FC = () => {
           <div className="stats-text">
             <h2 className="about-subtitle">Nos Activités</h2>
             <p className="about-text">
-              Nous organisons régulièrement des entraînements, des tournois, et des événements sociaux pour nos membres.
-              Nos coachs expérimentés sont là pour aider chaque joueur à atteindre ses objectifs...
+              Nous organisons régulièrement des entraînements, des tournois, et
+              des événements sociaux pour nos membres. Nos coachs expérimentés
+              sont là pour aider chaque joueur à atteindre ses objectifs...
             </p>
             <p className="about-text">
-              En plus des entraînements et des compétitions, nous nous engageons à promouvoir le tennis de table dans
-              les écoles et les communautés locales, en offrant des sessions de découverte et des programmes de
-              formation pour les jeunes.
+              En plus des entraînements et des compétitions, nous nous engageons
+              à promouvoir le tennis de table dans les écoles et les communautés
+              locales, en offrant des sessions de découverte et des programmes
+              de formation pour les jeunes.
             </p>
           </div>
         </div>
@@ -78,14 +84,20 @@ const About: React.FC = () => {
           <h2> Les membres de notre association </h2>
         </div>
         <div className="members-section">
-        {members.map((member) => (
+          {members.map((member) => (
             <div className="member-card" key={member._id}>
               <div className="member-image-container">
-                <img className="member-image" src={member.image} alt={`${member.firstname} ${member.lastname}`} />
+                <img
+                  className="member-image"
+                  src={member.image}
+                  alt={`${member.firstname} ${member.lastname}`}
+                />
                 <div className="member-role">{member.role}</div>
               </div>
               <div className="member-details">
-                <h3 className="member-name">{member.firstname} {member.lastname}</h3>
+                <h3 className="member-name">
+                  {member.firstname} {member.lastname}
+                </h3>
               </div>
             </div>
           ))}

@@ -7,7 +7,7 @@ import ContactModel from "../models/contactModel";
 export const createContact = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   const { email, firstName, lastName, content } = req.body;
 
@@ -26,7 +26,9 @@ export const createContact = async (
 
   try {
     await ContactModel.create(contactData);
-    res.status(201).json({ message: "Formulaire de contact enregistré avec succès !" });
+    res
+      .status(201)
+      .json({ message: "Formulaire de contact enregistré avec succès !" });
   } catch (error) {
     res.status(400).json({ error });
   }
@@ -38,7 +40,7 @@ export const createContact = async (
 export const getAllContact = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void> => {
   try {
     const contacts = await ContactModel.find().populate("referent");
@@ -54,7 +56,7 @@ export const getAllContact = async (
 export const updateContactStatus = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   const { id } = req.params;
   const { status } = req.body;
@@ -63,7 +65,7 @@ export const updateContactStatus = async (
     const updatedContact = await ContactModel.findByIdAndUpdate(
       id,
       { status },
-      { new: true }
+      { new: true },
     );
     if (!updatedContact) {
       return res.status(404).json({ message: "Contact introuvable..." });
@@ -80,7 +82,7 @@ export const updateContactStatus = async (
 export const updateContactReferent = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   const { id } = req.params;
   const { referent, status } = req.body;
@@ -89,7 +91,7 @@ export const updateContactReferent = async (
     const updatedContact = await ContactModel.findByIdAndUpdate(
       id,
       { referent, status },
-      { new: true }
+      { new: true },
     ).populate("referent");
     if (!updatedContact) {
       return res.status(404).json({ message: "Contact introuvable..." });

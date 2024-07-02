@@ -10,7 +10,6 @@ import {
 import { Member } from "../../../data/interfaces/Member.ts";
 import { Contact } from "../../../data/interfaces/Contact.ts";
 
-
 const ManageContacts: React.FC = () => {
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [members, setMembers] = useState<Member[]>([]);
@@ -59,8 +58,8 @@ const ManageContacts: React.FC = () => {
       await contactService.updateContactStatus(id, status);
       setContacts(
         contacts.map((contact) =>
-          contact._id === id ? { ...contact, status } : contact
-        )
+          contact._id === id ? { ...contact, status } : contact,
+        ),
       );
       notifySuccess("Statut du contact mis à jour avec succès.");
     } catch (error) {
@@ -71,11 +70,16 @@ const ManageContacts: React.FC = () => {
 
   const handleReferentChange = async (id: string, referent: string) => {
     try {
-      const updatedContact = await contactService.updateContactReferent(id, referent);
+      const updatedContact = await contactService.updateContactReferent(
+        id,
+        referent,
+      );
       setContacts(
         contacts.map((contact) =>
-          contact._id === id ? { ...contact, referent: updatedContact.data.referent } : contact
-        )
+          contact._id === id
+            ? { ...contact, referent: updatedContact.data.referent }
+            : contact,
+        ),
       );
       notifySuccess("Référent du contact mis à jour avec succès.");
     } catch (error) {
@@ -87,7 +91,7 @@ const ManageContacts: React.FC = () => {
   const filteredContacts = contacts.filter((contact) =>
     `${contact.firstName} ${contact.lastName}`
       .toLowerCase()
-      .includes(searchTerm.toLowerCase())
+      .includes(searchTerm.toLowerCase()),
   );
 
   return (
@@ -95,52 +99,52 @@ const ManageContacts: React.FC = () => {
       <h1>Gérer les contacts</h1>
       <table>
         <thead>
-        <tr>
-          <th>Email</th>
-          <th>Prénom</th>
-          <th>Nom</th>
-          <th>Contenu</th>
-          <th>Statut</th>
-          <th>Référent</th>
-        </tr>
+          <tr>
+            <th>Email</th>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>Contenu</th>
+            <th>Statut</th>
+            <th>Référent</th>
+          </tr>
         </thead>
         <tbody>
-        {filteredContacts.map((contact) => (
-          <tr key={contact._id}>
-            <td>{contact.email}</td>
-            <td>{contact.firstName}</td>
-            <td>{contact.lastName}</td>
-            <td>{contact.content}</td>
-            <td>
-              <select
-                value={contact.status}
-                onChange={(e) =>
-                  handleStatusChange(contact._id, e.target.value)
-                }
-              >
-                <option value="non consulté">Non consulté</option>
-                <option value="en cours">En cours</option>
-                <option value="e-mail envoyé">E-mail envoyé</option>
-                <option value="clôturé">Clôturé</option>
-              </select>
-            </td>
-            <td>
-              <select
-                value={contact.referent?._id || ""}
-                onChange={(e) =>
-                  handleReferentChange(contact._id, e.target.value)
-                }
-              >
-                <option value="">Aucun</option>
-                {members.map((member) => (
-                  <option key={member._id} value={member._id}>
-                    {member.firstname} {member.lastname}
-                  </option>
-                ))}
-              </select>
-            </td>
-          </tr>
-        ))}
+          {filteredContacts.map((contact) => (
+            <tr key={contact._id}>
+              <td>{contact.email}</td>
+              <td>{contact.firstName}</td>
+              <td>{contact.lastName}</td>
+              <td>{contact.content}</td>
+              <td>
+                <select
+                  value={contact.status}
+                  onChange={(e) =>
+                    handleStatusChange(contact._id, e.target.value)
+                  }
+                >
+                  <option value="non consulté">Non consulté</option>
+                  <option value="en cours">En cours</option>
+                  <option value="e-mail envoyé">E-mail envoyé</option>
+                  <option value="clôturé">Clôturé</option>
+                </select>
+              </td>
+              <td>
+                <select
+                  value={contact.referent?._id || ""}
+                  onChange={(e) =>
+                    handleReferentChange(contact._id, e.target.value)
+                  }
+                >
+                  <option value="">Aucun</option>
+                  {members.map((member) => (
+                    <option key={member._id} value={member._id}>
+                      {member.firstname} {member.lastname}
+                    </option>
+                  ))}
+                </select>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
