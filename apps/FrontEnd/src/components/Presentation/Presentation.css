@@ -1,10 +1,10 @@
 /* Presentation.css */
 
 .presentation {
+    padding: 30px;
     text-align: center;
-    padding: 60px;
-    padding-left: 100px;
-    padding-right: 100px;
+    margin-left: 100px;
+    margin-right: 100px;
     background-color: #fdfdfd;
     color: #202228;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
