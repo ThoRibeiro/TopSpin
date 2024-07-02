@@ -10,10 +10,10 @@ import LoginForm from "./components/Login/LoginForm";
 import AdminPanel from "./pages/AdminPanel/AdminPanel";
 import ManagePosts from "./pages/AdminPanel/Post/ManagePosts.tsx";
 import ManageMember from "./pages/AdminPanel/Member/ManageMember.tsx";
-import ManageAccount from "./pages/AdminPanel/Account/ManageAccount.tsx";
 import { AuthProvider } from "./Context/AuthContext";
 import ProtectedRoute from "./hoc/ProtectedRoute";
 import ToastNotification from "./components/Toast/ToastNotification.tsx";
+import ManageContacts from "./pages/AdminPanel/Contact/ManageContact.tsx";
 
 const App: React.FC = () => {
   return (
@@ -35,8 +35,8 @@ const App: React.FC = () => {
             element={<ProtectedRoute element={<ManageMember />} />}
           />
           <Route
-            path="/admin/manage-account"
-            element={<ProtectedRoute element={<ManageAccount />} />}
+            path="/admin/manage-contact"
+            element={<ProtectedRoute element={<ManageContacts />} />}
           />
           <Route path="/" element={<Home />} />
           <Route path="/news" element={<News />} />
