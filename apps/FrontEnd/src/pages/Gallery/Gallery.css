@@ -1,0 +1,43 @@
+/* Gallery.css */
+
+.section {
+    margin-bottom: 40px;
+    padding: 0 150px; /* Added padding for sections */
+    height: 600px; /* Fixed height for each section */
+    overflow: hidden; /* Ensure content does not overflow the section */
+  }
+  
+  .section-title {
+    font-size: 1.5em;
+    margin: 20px 0;
+    text-align: center;
+  }
+  
+  .container2 {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr); /* Divide into 12 parts */
+    gap: 10px;
+    height: 100%;
+    grid-auto-rows: minmax(50px, 1fr); /* Adjust rows to fit dynamically */
+  }
+  
+  .image-wrapper {
+    position: relative;
+    overflow: hidden;
+    box-shadow: 5px 5px 10px rgba(0,0,0,.2), 
+                5px 5px 25px rgba(0,0,0,.1);
+    transition: all .3s ease-in-out;
+  }
+  
+  .image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-height: 100%; /* Ensure images do not exceed section height */
+    transition: all .6s ease-in-out;
+  }
+  
+  .image-wrapper:hover img {
+    transform: scale(1.05);
+  }
+  
