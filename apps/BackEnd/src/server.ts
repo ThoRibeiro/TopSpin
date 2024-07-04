@@ -8,6 +8,7 @@ import contactRoutes from "./routes/contactRoute";
 import eventRoutes from "./routes/eventRoute";
 import cors from "cors";
 import memberRoutes from "./routes/memberRoute";
+import galleryRoutes from "./routes/galleryRoute";
 
 const PORT = 3500;
 
@@ -32,6 +33,7 @@ async function main() {
   server.use("/contact", contactRoutes);
   server.use("/members", memberRoutes);
   server.use("/event", eventRoutes);
+  server.use("/gallery", galleryRoutes);
 
   server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
