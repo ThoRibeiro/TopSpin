@@ -11,23 +11,23 @@ const storage: StorageEngine = multer.diskStorage({
   destination: (
     req: Request,
     file: Express.Multer.File,
-    callback: (error: Error | null, destination: string) => void,
+    callback: (error: Error | null, destination: string) => void
   ) => {
     callback(null, "images");
   },
   filename: (
     req: Request,
     file: Express.Multer.File,
-    callback: (error: Error | null, filename: string) => void,
+    callback: (error: Error | null, filename: string) => void
   ) => {
     const extension = MIME_TYPES[file.mimetype];
     callback(
       null,
-      `${file.originalname.split(" ").join("_")}_${Date.now()}.${extension}`,
+      `${file.originalname.split(" ").join("_")}_${Date.now()}.${extension}`
     );
   },
 });
 
-const upload = multer({ storage }).array("images", 30);
+const singleUpload = multer({ storage }).single("image");
 
-export default upload;
+export default singleUpload;

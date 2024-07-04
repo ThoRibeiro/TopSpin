@@ -1,0 +1,116 @@
+.add-gallery-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1200;
+}
+
+.add-gallery-modal-content {
+    background: #fff;
+    border-radius: 5px;
+    width: 50%;
+    max-width: 1000px;
+    padding: 22px;
+}
+
+.add-gallery-modal-content h2 {
+    margin-bottom: 5px;
+    text-align: center;
+    font-size: 30px;
+}
+
+.add-gallery-label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.add-gallery-input[type="text"],
+.add-gallery-input[type="date"],
+.add-gallery-input[type="file"],
+.add-gallery-input select {
+    width: calc(100% - 22px);
+    padding: 9px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-top: 20px;
+}
+
+.add-gallery-button {
+    padding: 10px 20px;
+    background-color: #ff7f00;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 15px auto;
+    font-size: 16px;
+}
+
+.add-gallery-button:hover {
+    background-color: #e66a00;
+}
+
+.add-gallery-image-previews {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.add-gallery-image-previews {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+    flex-direction: column-reverse;
+}
+.add-gallery-preview-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+.add-gallery-image-previews {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.image-preview-container {
+    position: relative;
+}
+
+.add-gallery-preview-image {
+    max-width: 100px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.remove-image-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: white;
+    border: none;
+    border-radius: 100%;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    background: none;
+}
+
+

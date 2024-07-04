@@ -10,12 +10,12 @@ import {
   createComment,
   deletePost,
 } from "../controllers/postController";
-import upload from "../middlewares/multerMiddlware";
+import singleUpload from "../middlewares/multerMiddlwareSingleImage";
 
 const postRoutes = express.Router();
 
-postRoutes.post("/create", authMiddleware, upload, createPost);
-postRoutes.put("/update", authMiddleware, upload, updatePost);
+postRoutes.post("/create", authMiddleware, singleUpload, createPost);
+postRoutes.put('/update/:idPost', authMiddleware, singleUpload, updatePost);
 postRoutes.get("/all", getAllPosts);
 postRoutes.get("/:idPost", authMiddleware, getPostById);
 postRoutes.get("/category/:categorie", getPostsByCategorie);
