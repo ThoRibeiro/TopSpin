@@ -5,11 +5,13 @@ import upload from "../middlewares/multerMiddlware";
 export const createGallery = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   upload(req, res, async (err: any) => {
     if (err) {
-      return res.status(400).json({ error: "Erreur lors du téléchargement des images." });
+      return res
+        .status(400)
+        .json({ error: "Erreur lors du téléchargement des images." });
     }
 
     const { title, startDate, endDate } = req.body;
@@ -17,12 +19,13 @@ export const createGallery = async (
 
     if (!title || !startDate || !endDate || !files || files.length === 0) {
       return res.status(400).json({
-        error: "Veuillez remplir tous les champs et télécharger au moins une image.",
+        error:
+          "Veuillez remplir tous les champs et télécharger au moins une image.",
       });
     }
 
     const images = files.map(
-      (file) => `${req.protocol}://${req.get("host")}/images/${file.filename}`
+      (file) => `${req.protocol}://${req.get("host")}/images/${file.filename}`,
     );
 
     try {
@@ -30,7 +33,9 @@ export const createGallery = async (
       await gallery.save();
       res.status(201).json({ message: "Galerie créée avec succès !", gallery });
     } catch (error) {
-      res.status(500).json({ error: "Erreur serveur, veuillez réessayer plus tard." });
+      res
+        .status(500)
+        .json({ error: "Erreur serveur, veuillez réessayer plus tard." });
     }
   });
 };
@@ -38,11 +43,13 @@ export const createGallery = async (
 export const updateGallery = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   upload(req, res, async (err: any) => {
     if (err) {
-      return res.status(400).json({ error: "Erreur lors du téléchargement des images." });
+      return res
+        .status(400)
+        .json({ error: "Erreur lors du téléchargement des images." });
     }
 
     const { title, startDate, endDate, existingImages } = req.body;
@@ -51,7 +58,8 @@ export const updateGallery = async (
 
     if (files && files.length > 0) {
       const newImages = files.map(
-        (file) => `${req.protocol}://${req.get("host")}/images/${file.filename}`
+        (file) =>
+          `${req.protocol}://${req.get("host")}/images/${file.filename}`,
       );
       images = [...images, ...newImages];
     }
@@ -60,16 +68,20 @@ export const updateGallery = async (
       const gallery = await GalleryModel.findByIdAndUpdate(
         req.params.id,
         { title, startDate, endDate, images },
-        { new: true }
+        { new: true },
       );
 
       if (!gallery) {
         return res.status(404).json({ message: "Galerie non trouvée." });
       }
 
-      res.status(200).json({ message: "Galerie mise à jour avec succès !", gallery });
+      res
+        .status(200)
+        .json({ message: "Galerie mise à jour avec succès !", gallery });
     } catch (error) {
-      res.status(500).json({ error: "Erreur serveur, veuillez réessayer plus tard." });
+      res
+        .status(500)
+        .json({ error: "Erreur serveur, veuillez réessayer plus tard." });
     }
   });
 };
@@ -77,20 +89,22 @@ export const updateGallery = async (
 export const getAllGalleries = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
     const galleries = await GalleryModel.find();
     res.status(200).json(galleries);
   } catch (error) {
-    res.status(500).json({ error: "Erreur serveur, veuillez réessayer plus tard." });
+    res
+      .status(500)
+      .json({ error: "Erreur serveur, veuillez réessayer plus tard." });
   }
 };
 
 export const deleteGallery = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   const id = req.params.id;
   try {
@@ -100,6 +114,8 @@ export const deleteGallery = async (
     }
     res.status(200).json({ message: "Galerie supprimée avec succès." });
   } catch (error) {
-    res.status(500).json({ error: "Erreur serveur, veuillez réessayer plus tard." });
+    res
+      .status(500)
+      .json({ error: "Erreur serveur, veuillez réessayer plus tard." });
   }
 };

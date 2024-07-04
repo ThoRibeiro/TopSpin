@@ -77,54 +77,61 @@ const ManageGallery: React.FC = () => {
   return (
     <div className="manage-gallery">
       <h1 className="manage-gallery-title">Gérer les Galeries</h1>
-      <button onClick={() => setShowAddPopin(true)} className="manage-gallery-add-button">
+      <button
+        onClick={() => setShowAddPopin(true)}
+        className="manage-gallery-add-button"
+      >
         Créer une Galerie
       </button>
       <table className="manage-gallery-table">
         <thead className="manage-gallery-thead">
-        <tr className="manage-gallery-thead-tr">
-          <th className="manage-gallery-th">Titre</th>
-          <th className="manage-gallery-th">Date de début</th>
-          <th className="manage-gallery-th">Date de fin</th>
-          <th className="manage-gallery-th">Images</th>
-          <th className="manage-gallery-th">Actions</th>
-        </tr>
+          <tr className="manage-gallery-thead-tr">
+            <th className="manage-gallery-th">Titre</th>
+            <th className="manage-gallery-th">Date de début</th>
+            <th className="manage-gallery-th">Date de fin</th>
+            <th className="manage-gallery-th">Images</th>
+            <th className="manage-gallery-th">Actions</th>
+          </tr>
         </thead>
         <tbody className="manage-gallery-tbody">
-        {galleries.map((gallery) => (
-          <tr key={gallery._id} className="manage-gallery-tbody-tr">
-            <td className="manage-gallery-td">{gallery.title}</td>
-            <td className="manage-gallery-td">{new Date(gallery.startDate).toLocaleDateString()}</td>
-            <td className="manage-gallery-td">{new Date(gallery.endDate).toLocaleDateString()}</td>
-            <td className="manage-gallery-td">
-              {gallery.images.map((image, index) => (
-                <img
-                  key={index}
-                  src={image}
-                  alt={`Gallery Image ${index + 1}`}
-                  className="manage-gallery-image"
-                />
-              ))}
-            </td>
-            <td className="manage-gallery-td">
-              <button
-                onClick={() => {
-                  setEditingGallery(gallery);
-                  setShowEditPopin(true);
-                }}
-                className="manage-gallery-edit-button"
-              >
-                Modifier
-              </button>
-              <button
-                onClick={() => handleDelete(gallery._id)}
-                className="manage-gallery-delete-button"
-              >
-                Supprimer
-              </button>
-            </td>
-          </tr>
-        ))}
+          {galleries.map((gallery) => (
+            <tr key={gallery._id} className="manage-gallery-tbody-tr">
+              <td className="manage-gallery-td">{gallery.title}</td>
+              <td className="manage-gallery-td">
+                {new Date(gallery.startDate).toLocaleDateString()}
+              </td>
+              <td className="manage-gallery-td">
+                {new Date(gallery.endDate).toLocaleDateString()}
+              </td>
+              <td className="manage-gallery-td">
+                {gallery.images.map((image, index) => (
+                  <img
+                    key={index}
+                    src={image}
+                    alt={`Gallery Image ${index + 1}`}
+                    className="manage-gallery-image"
+                  />
+                ))}
+              </td>
+              <td className="manage-gallery-td">
+                <button
+                  onClick={() => {
+                    setEditingGallery(gallery);
+                    setShowEditPopin(true);
+                  }}
+                  className="manage-gallery-edit-button"
+                >
+                  Modifier
+                </button>
+                <button
+                  onClick={() => handleDelete(gallery._id)}
+                  className="manage-gallery-delete-button"
+                >
+                  Supprimer
+                </button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
       <AddGalleryPopin

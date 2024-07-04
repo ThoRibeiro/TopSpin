@@ -15,7 +15,7 @@ import singleUpload from "../middlewares/multerMiddlwareSingleImage";
 const postRoutes = express.Router();
 
 postRoutes.post("/create", authMiddleware, singleUpload, createPost);
-postRoutes.put('/update/:idPost', authMiddleware, singleUpload, updatePost);
+postRoutes.put("/update/:idPost", authMiddleware, singleUpload, updatePost);
 postRoutes.get("/all", getAllPosts);
 postRoutes.get("/:idPost", authMiddleware, getPostById);
 postRoutes.get("/category/:categorie", getPostsByCategorie);

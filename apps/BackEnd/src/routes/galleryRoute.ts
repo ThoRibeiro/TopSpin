@@ -1,6 +1,7 @@
 import express from "express";
 import {
-  createGallery, deleteGallery,
+  createGallery,
+  deleteGallery,
   getAllGalleries,
   updateGallery,
 } from "../controllers/galleryController";
