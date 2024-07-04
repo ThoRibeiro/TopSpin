@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document } from "mongoose";
 
-interface IGallery extends Document {
+export interface IGallery extends Document {
   title: string;
   startDate: Date;
   endDate: Date;

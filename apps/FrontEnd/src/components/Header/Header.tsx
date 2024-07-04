@@ -18,9 +18,10 @@ const Header: React.FC = () => {
         <nav className="navbar-links">
           {isAuthenticated && isAdminPage ? (
             <>
-              <Link to="/admin/manage-posts">Gérer les posts</Link>
-              <Link to="/admin/manage-member">Gérer un membre</Link>
-              <Link to="/admin/manage-contact">Gérer les contacts</Link>
+              <Link to="/admin/manage-posts">Posts</Link>
+              <Link to="/admin/manage-member">Membres</Link>
+              <Link to="/admin/manage-contact">Contacts</Link>
+              <Link to="/admin/manage-gallery">Galeries</Link>
             </>
           ) : (
             <>

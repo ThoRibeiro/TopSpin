@@ -14,6 +14,7 @@ import { AuthProvider } from "./Context/AuthContext";
 import ProtectedRoute from "./hoc/ProtectedRoute";
 import ToastNotification from "./components/Toast/ToastNotification.tsx";
 import ManageContacts from "./pages/AdminPanel/Contact/ManageContact.tsx";
+import ManageGallery from "./pages/AdminPanel/Gallery/ManageGallery.tsx";
 
 const App: React.FC = () => {
   return (
@@ -37,6 +38,10 @@ const App: React.FC = () => {
           <Route
             path="/admin/manage-contact"
             element={<ProtectedRoute element={<ManageContacts />} />}
+          />
+          <Route
+            path="/admin/manage-gallery"
+            element={<ProtectedRoute element={<ManageGallery />} />}
           />
           <Route path="/" element={<Home />} />
           <Route path="/news" element={<News />} />
