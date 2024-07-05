@@ -44,6 +44,7 @@ const EditGallery: React.FC<EditGalleryPopinProps> = ({
       formData.append("startDate", startDate);
       formData.append("endDate", endDate);
       images.forEach((image) => formData.append("images", image));
+      formData.append("existingImages", JSON.stringify(existingImages));
       formData.append("removedImages", JSON.stringify(removedImages));
       await onSave(gallery?._id, formData);
       onClose();
