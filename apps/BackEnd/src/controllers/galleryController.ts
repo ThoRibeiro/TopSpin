@@ -52,9 +52,14 @@ export const updateGallery = async (
         .json({ error: "Erreur lors du téléchargement des images." });
     }
 
-    const { title, startDate, endDate, existingImages } = req.body;
+    const { title, startDate, endDate, existingImages, removedImages } = req.body;
     const files = req.files as Express.Multer.File[];
     let images = existingImages ? JSON.parse(existingImages) : [];
+
+    if (removedImages) {
+      const removedImagesArray = JSON.parse(removedImages);
+      images = images.filter((image: string) => !removedImagesArray.includes(image));
+    }
 
     if (files && files.length > 0) {
       const newImages = files.map(

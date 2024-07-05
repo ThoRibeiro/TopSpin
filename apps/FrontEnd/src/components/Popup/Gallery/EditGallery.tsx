@@ -3,11 +3,11 @@ import "./EditGallery.css";
 import { EditGalleryPopinProps } from "../../../data/interfaces/Gallery";
 
 const EditGallery: React.FC<EditGalleryPopinProps> = ({
-  show,
-  onClose,
-  onSave,
-  gallery,
-}) => {
+                                                        show,
+                                                        onClose,
+                                                        onSave,
+                                                        gallery,
+                                                      }) => {
   const [title, setTitle] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -44,6 +44,7 @@ const EditGallery: React.FC<EditGalleryPopinProps> = ({
       formData.append("startDate", startDate);
       formData.append("endDate", endDate);
       images.forEach((image) => formData.append("images", image));
+      formData.append("existingImages", JSON.stringify(existingImages));
       formData.append("removedImages", JSON.stringify(removedImages));
       await onSave(gallery?._id, formData);
       onClose();
