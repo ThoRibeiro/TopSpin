@@ -1,0 +1,91 @@
+.manage-gallery {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.manage-gallery-title {
+    margin-top: 65px;
+    margin-bottom: 20px;
+    font-size: 2em;
+    text-align: center;
+}
+
+.manage-gallery-add-button {
+    padding: 15px;
+    background-color: #ff7f00;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 12%;
+    align-self: flex-end;
+}
+
+.manage-gallery-add-button:hover {
+    background-color: #e66a00;
+}
+
+.manage-gallery-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.manage-gallery-thead {
+    background-color: #f4f4f4;
+}
+
+.manage-gallery-thead-tr,
+.manage-gallery-tbody-tr {
+    border-bottom: 1px solid #ddd;
+}
+
+.manage-gallery-th,
+.manage-gallery-td {
+    padding: 10px;
+    text-align: center;
+}
+
+.manage-gallery-th:nth-child(1),
+.manage-gallery-td:nth-child(1) {
+    width: 15%;
+}
+
+.manage-gallery-th:nth-child(2),
+.manage-gallery-td:nth-child(2) {
+    width: 13%;
+}
+
+.manage-gallery-th:nth-child(3),
+.manage-gallery-td:nth-child(3) {
+    width: 13%;
+}
+
+.manage-gallery-th:nth-child(4),
+.manage-gallery-td:nth-child(4) {
+    width: 33%;
+}
+
+.manage-gallery-th:nth-child(5),
+.manage-gallery-td:nth-child(5) {
+    width: 22%;
+}
+
+.manage-gallery-td img {
+    max-width: 50px;
+    height: auto;
+    display: inline-block;
+    margin: 5px;
+}
+
+.manage-gallery-edit-button,
+.manage-gallery-delete-button {
+    padding: 16px;
+    background-color: #ff7f00;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin: 20px;
+    cursor: pointer;
+}

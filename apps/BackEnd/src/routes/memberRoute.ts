@@ -7,12 +7,12 @@ import {
   getMemberById,
   deleteMember,
 } from "../controllers/memberController";
-import upload from "../middlewares/multerMiddlware";
+import singleUpload from "../middlewares/multerMiddlwareSingleImage";
 
 const memberRoutes = express.Router();
 
-memberRoutes.post("/create", authMiddleware, upload, createMember);
-memberRoutes.put("/update", authMiddleware, upload, updateMember);
+memberRoutes.post("/create", authMiddleware, singleUpload, createMember);
+memberRoutes.put("/update", authMiddleware, singleUpload, updateMember);
 memberRoutes.get("/all", getAllMembers);
 memberRoutes.get("/:idMember", getMemberById);
 memberRoutes.delete("/:idMember", authMiddleware, deleteMember);
