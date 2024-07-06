@@ -1,5 +1,5 @@
 import React from "react";
-import './Gallery.css';
+import "./Gallery.css";
 
 const imageSections = [
   {
@@ -24,17 +24,17 @@ const imageSections = [
       "https://images.unsplash.com/photo-1519999482648-25049ddd37b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=926&q=80",
       "https://images.unsplash.com/photo-1460627390041-532a28402358?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
       "https://images.unsplash.com/photo-1514673309919-5998bbbadf7f?ixlib=rb-1.2.1&auto=format&fit=crop&w=688&q=80",
-      "https://images.unsplash.com/photo-1543335785-8aadf6d8183c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80"
-    ]
-  }
+      "https://images.unsplash.com/photo-1543335785-8aadf6d8183c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80",
+    ],
+  },
 ];
 
 const fixedSizes = [
-  { colSpan: 'span 2', rowSpan: 'span 2' },
-  { colSpan: 'span 2', rowSpan: 'span 3' },
-  { colSpan: 'span 3', rowSpan: 'span 2' },
-  { colSpan: 'span 3', rowSpan: 'span 3' },
-  { colSpan: 'span 4', rowSpan: 'span 4' },
+  { colSpan: "span 2", rowSpan: "span 2" },
+  { colSpan: "span 2", rowSpan: "span 3" },
+  { colSpan: "span 3", rowSpan: "span 2" },
+  { colSpan: "span 3", rowSpan: "span 3" },
+  { colSpan: "span 4", rowSpan: "span 4" },
 ];
 
 const getRandomSize = () => {
