@@ -43,10 +43,10 @@ const Gallery: React.FC = () => {
     <>
       <div className="blur"></div>
       {galleries.map((gallery, sectionIndex) => (
-        <Section 
-          key={gallery._id} 
-          title={gallery.title} 
-          images={gallery.images.slice(0, 10)} 
+        <Section
+          key={gallery._id}
+          title={gallery.title}
+          images={gallery.images.slice(0, 10)}
         />
       ))}
     </>
