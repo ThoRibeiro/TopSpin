@@ -15,7 +15,7 @@ const News: React.FC = () => {
         const articles = await fetchArticles();
         setArticles(articles);
       } catch (error) {
-        setError('Erreur lors de la récupération des articles');
+        setError("Erreur lors de la récupération des articles");
       } finally {
         setLoading(false);
       }
