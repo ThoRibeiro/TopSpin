@@ -4,13 +4,10 @@ interface ImageWrapperProps {
   url: string;
   colSpan: string;
   rowSpan: string;
+  onClick: () => void;
 }
 
-export const ImageWrapper: React.FC<ImageWrapperProps> = ({
-  url,
-  colSpan,
-  rowSpan,
-}) => {
+export const ImageWrapper: React.FC<ImageWrapperProps> = ({ url, colSpan, rowSpan, onClick }) => {
   return (
     <div
       className="image-wrapper"
@@ -18,6 +15,7 @@ export const ImageWrapper: React.FC<ImageWrapperProps> = ({
         gridColumn: colSpan,
         gridRow: rowSpan,
       }}
+      onClick={onClick}
     >
       <img src={url} alt={url} />
     </div>
