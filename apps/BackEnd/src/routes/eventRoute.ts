@@ -23,6 +23,9 @@ eventRoutes.get("/:eventId", getEventById);
 eventRoutes.delete("/:eventId", authMiddleware, deleteEvent);
 eventRoutes.post("/:eventId/addParticipant", addParticipantToEvent);
 eventRoutes.get("/:eventId/participants", getAllParticipantsByEvent);
-eventRoutes.put("/:eventId/participants/:participantId/status", updateParticipantStatus);
+eventRoutes.put(
+  "/:eventId/participants/:participantId/status",
+  updateParticipantStatus,
+);
 
 export default eventRoutes;

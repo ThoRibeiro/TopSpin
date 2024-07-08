@@ -3,11 +3,11 @@ import "./EditEvent.css";
 import { EditEventPopinProps } from "../../../data/interfaces/Event";
 
 const EditEvent: React.FC<EditEventPopinProps> = ({
-                                                    show,
-                                                    onClose,
-                                                    onSave,
-                                                    event,
-                                                  }) => {
+  show,
+  onClose,
+  onSave,
+  event,
+}) => {
   const [title, setTitle] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");

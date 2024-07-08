@@ -1,14 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./ManageParticipant.css";
-import { Participant, ManageParticipantsPopinProps } from "../../../data/interfaces/Event";
+import {
+  Participant,
+  ManageParticipantsPopinProps,
+} from "../../../data/interfaces/Event";
 import eventService from "../../../services/eventService";
 
 const ManageParticipants: React.FC<ManageParticipantsPopinProps> = ({
-                                                                      show,
-                                                                      onClose,
-                                                                      event,
-                                                                      onParticipantStatusChange,
-                                                                    }) => {
+  show,
+  onClose,
+  event,
+  onParticipantStatusChange,
+}) => {
   const [participants, setParticipants] = useState<Participant[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [showUnvalidatedOnly, setShowUnvalidatedOnly] = useState(false);
@@ -29,26 +32,31 @@ const ManageParticipants: React.FC<ManageParticipantsPopinProps> = ({
     }
   }, [show, event._id]);
 
-  const handleStatusChange = async (participantId: string, newStatus: "non-inscrit" | "inscrit") => {
+  const handleStatusChange = async (
+    participantId: string,
+    newStatus: "non-inscrit" | "inscrit",
+  ) => {
     try {
       await onParticipantStatusChange(event._id, participantId, newStatus);
       setParticipants((prevParticipants) =>
         prevParticipants.map((participant) =>
           participant._id === participantId
             ? { ...participant, status: newStatus }
-            : participant
-        )
+            : participant,
+        ),
       );
     } catch (error) {
       console.error("Error updating participant status:", error);
     }
   };
 
-  const filteredParticipants = participants.filter(participant => {
+  const filteredParticipants = participants.filter((participant) => {
     const matchesSearchTerm =
       participant.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       participant.lastName.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesValidationFilter = showUnvalidatedOnly ? participant.status === "non-inscrit" : true;
+    const matchesValidationFilter = showUnvalidatedOnly
+      ? participant.status === "non-inscrit"
+      : true;
     return matchesSearchTerm && matchesValidationFilter;
   });
 
@@ -95,12 +103,19 @@ const ManageParticipants: React.FC<ManageParticipantsPopinProps> = ({
           </label>
         </div>
         <ul className="manage-participants-list">
-          {filteredParticipants.map(participant => (
+          {filteredParticipants.map((participant) => (
             <li key={participant._id} className="manage-participants-item">
-              <span>{participant.firstName} {participant.lastName}</span>
+              <span>
+                {participant.firstName} {participant.lastName}
+              </span>
               <select
                 value={participant.status}
-                onChange={(e) => handleStatusChange(participant._id, e.target.value as "non-inscrit" | "inscrit")}
+                onChange={(e) =>
+                  handleStatusChange(
+                    participant._id,
+                    e.target.value as "non-inscrit" | "inscrit",
+                  )
+                }
                 className="manage-participants-dropdown"
               >
                 <option value="non-inscrit">Non-inscrit</option>

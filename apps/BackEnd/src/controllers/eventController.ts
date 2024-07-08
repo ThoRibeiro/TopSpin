@@ -44,9 +44,7 @@ export const createEvent = async (
 
   try {
     const event = await Event.create(eventData);
-    res
-      .status(201)
-      .json({ message: "Événement enregistré avec succès !" });
+    res.status(201).json({ message: "Événement enregistré avec succès !" });
   } catch (error) {
     res.status(400).json({ error });
   }
@@ -120,13 +118,20 @@ export const updateEventStatus = async (
   try {
     const event = await Event.findById(eventId);
     if (!event) {
-      return res.status(404).json({ message: "L'événement spécifié n'existe pas." });
+      return res
+        .status(404)
+        .json({ message: "L'événement spécifié n'existe pas." });
     }
 
     event.status = status;
     await event.save();
 
-    res.status(200).json({ message: "Statut de l'événement mis à jour avec succès.", event });
+    res
+      .status(200)
+      .json({
+        message: "Statut de l'événement mis à jour avec succès.",
+        event,
+      });
   } catch (error) {
     res.status(500).json({ error });
   }
@@ -138,7 +143,7 @@ export const getAllEvents = async (
   next: NextFunction,
 ) => {
   try {
-    const events = await Event.find().select('-participants');
+    const events = await Event.find().select("-participants");
     res.status(200).json(events);
   } catch (error) {
     res.status(500).json({ error });
@@ -209,7 +214,9 @@ export const deleteEvent = async (
   try {
     const event = await Event.findByIdAndDelete(eventId);
     if (!event) {
-      return res.status(404).json({ message: "L'événement spécifié n'existe pas." });
+      return res
+        .status(404)
+        .json({ message: "L'événement spécifié n'existe pas." });
     }
     res.status(200).json({ message: "Événement supprimé avec succès." });
   } catch (error) {
@@ -224,7 +231,7 @@ export const getAllParticipantsByEvent = async (
 ) => {
   const eventId = req.params.eventId;
   try {
-    const event = await Event.findById(eventId).select('participants');
+    const event = await Event.findById(eventId).select("participants");
     if (!event) {
       return res.status(404).json({ message: "Événement introuvable..." });
     }
@@ -246,18 +253,27 @@ export const updateParticipantStatus = async (
   try {
     const event = await Event.findById(eventId);
     if (!event) {
-      return res.status(404).json({ message: "L'événement spécifié n'existe pas." });
+      return res
+        .status(404)
+        .json({ message: "L'événement spécifié n'existe pas." });
     }
 
     const participant = event.participants.id(participantId);
     if (!participant) {
-      return res.status(404).json({ message: "Le participant spécifié n'existe pas." });
+      return res
+        .status(404)
+        .json({ message: "Le participant spécifié n'existe pas." });
     }
 
     participant.status = status;
     await event.save();
 
-    res.status(200).json({ message: "Statut du participant mis à jour avec succès.", participant });
+    res
+      .status(200)
+      .json({
+        message: "Statut du participant mis à jour avec succès.",
+        participant,
+      });
   } catch (error) {
     res.status(500).json({ error });
   }

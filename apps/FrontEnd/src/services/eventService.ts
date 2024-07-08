@@ -35,7 +35,11 @@ export const updateEvent = async (id: string, formData: FormData) => {
 };
 
 export const updateEventStatus = async (eventId: string, status: string) => {
-  return await axios.put(`${API_URL}/update/${eventId}/status`, { status }, getAuthHeaders());
+  return await axios.put(
+    `${API_URL}/update/${eventId}/status`,
+    { status },
+    getAuthHeaders(),
+  );
 };
 
 export const deleteEvent = async (id: string) => {
@@ -46,16 +50,23 @@ export const getEventById = async (id: string) => {
   return await axios.get<Event>(`${API_URL}/${id}`, getAuthHeaders());
 };
 
-export const updateParticipantStatus = async (eventId: string, participantId: string, status: string) => {
+export const updateParticipantStatus = async (
+  eventId: string,
+  participantId: string,
+  status: string,
+) => {
   return await axios.put(
     `${API_URL}/${eventId}/participants/${participantId}/status`,
     { status },
-    getAuthHeaders()
+    getAuthHeaders(),
   );
 };
 
 export const getParticipantsByEvent = async (eventId: string) => {
-  return await axios.get<Participant[]>(`${API_URL}/${eventId}/participants`, getAuthHeaders());
+  return await axios.get<Participant[]>(
+    `${API_URL}/${eventId}/participants`,
+    getAuthHeaders(),
+  );
 };
 
 export default {

@@ -37,5 +37,9 @@ export interface ManageParticipantsPopinProps {
   show: boolean;
   onClose: () => void;
   event: Event;
-  onParticipantStatusChange: (eventId: string, participantId: string, status: string) => void;
+  onParticipantStatusChange: (
+    eventId: string,
+    participantId: string,
+    status: string,
+  ) => void;
 }

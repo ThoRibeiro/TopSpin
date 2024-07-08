@@ -88,9 +88,17 @@ const ManageEvents: React.FC = () => {
     }
   };
 
-  const handleParticipantStatusChange = async (eventId: string, participantId: string, status: string) => {
+  const handleParticipantStatusChange = async (
+    eventId: string,
+    participantId: string,
+    status: string,
+  ) => {
     try {
-      await eventService.updateParticipantStatus(eventId, participantId, status);
+      await eventService.updateParticipantStatus(
+        eventId,
+        participantId,
+        status,
+      );
       notifySuccess("Statut du participant mis à jour avec succès.");
       const response = await eventService.getEventById(eventId);
       setEditingEvent(response.data);
@@ -111,62 +119,64 @@ const ManageEvents: React.FC = () => {
       </button>
       <table className="manage-events-table">
         <thead className="manage-events-thead">
-        <tr className="manage-events-thead-tr">
-          <th className="manage-events-th">Titre</th>
-          <th className="manage-events-th">Date de début</th>
-          <th className="manage-events-th">Date de fin</th>
-          <th className="manage-events-th">Statut</th>
-          <th className="manage-events-th">Actions</th>
-        </tr>
+          <tr className="manage-events-thead-tr">
+            <th className="manage-events-th">Titre</th>
+            <th className="manage-events-th">Date de début</th>
+            <th className="manage-events-th">Date de fin</th>
+            <th className="manage-events-th">Statut</th>
+            <th className="manage-events-th">Actions</th>
+          </tr>
         </thead>
         <tbody className="manage-events-tbody">
-        {events.map((event) => (
-          <tr key={event._id} className="manage-events-tbody-tr">
-            <td className="manage-events-td">{event.title}</td>
-            <td className="manage-events-td">
-              {new Date(event.startDate).toLocaleDateString()}
-            </td>
-            <td className="manage-events-td">
-              {new Date(event.endDate).toLocaleDateString()}
-            </td>
-            <td className="manage-events-td">
-              <select
-                value={event.status}
-                onChange={(e) => handleStatusChange(event._id, e.target.value)}
-                className="manage-events-dropdown"
-              >
-                <option value="ouvert">Ouvert</option>
-                <option value="fermé">Fermé</option>
-              </select>
-            </td>
-            <td className="manage-events-td">
-              <button
-                onClick={() => {
-                  setEditingEvent(event);
-                  setShowEditPopin(true);
-                }}
-                className="manage-events-edit-button"
-              >
-                Modifier
-              </button>
-              <button
-                onClick={() => handleDelete(event._id)}
-                className="manage-events-delete-button"
-              >
-                Supprimer
-              </button>
-              <button
-                onClick={() => {
-                  setEditingEvent(event);
-                  setShowParticipantsPopin(true);
-                }}
-                className="manage-events-participants-button"
-              >
-                Participants
-              </button>
-            </td>
-          </tr>
-        ))}
+          {events.map((event) => (
+            <tr key={event._id} className="manage-events-tbody-tr">
+              <td className="manage-events-td">{event.title}</td>
+              <td className="manage-events-td">
+                {new Date(event.startDate).toLocaleDateString()}
+              </td>
+              <td className="manage-events-td">
+                {new Date(event.endDate).toLocaleDateString()}
+              </td>
+              <td className="manage-events-td">
+                <select
+                  value={event.status}
+                  onChange={(e) =>
+                    handleStatusChange(event._id, e.target.value)
+                  }
+                  className="manage-events-dropdown"
+                >
+                  <option value="ouvert">Ouvert</option>
+                  <option value="fermé">Fermé</option>
+                </select>
+              </td>
+              <td className="manage-events-td">
+                <button
+                  onClick={() => {
+                    setEditingEvent(event);
+                    setShowEditPopin(true);
+                  }}
+                  className="manage-events-edit-button"
+                >
+                  Modifier
+                </button>
+                <button
+                  onClick={() => handleDelete(event._id)}
+                  className="manage-events-delete-button"
+                >
+                  Supprimer
+                </button>
+                <button
+                  onClick={() => {
+                    setEditingEvent(event);
+                    setShowParticipantsPopin(true);
+                  }}
+                  className="manage-events-participants-button"
+                >
+                  Participants
+                </button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
       <AddEventPopin
