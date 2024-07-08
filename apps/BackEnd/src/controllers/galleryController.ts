@@ -127,3 +127,44 @@ export const deleteGallery = async (
       .json({ error: "Erreur serveur, veuillez réessayer plus tard." });
   }
 };
+
+// Get 10 Images by Title
+export const getTenImagesByTitle = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  const title = req.params.title;
+  try {
+    const gallery = await GalleryModel.findOne({ title });
+    if (!gallery) {
+      return res.status(404).json({ message: "Galerie non trouvée." });
+    }
+    const images = gallery.images.slice(0, 10);
+    res.status(200).json(images);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "Erreur serveur, veuillez réessayer plus tard." });
+  }
+};
+
+// Get All Images by Title
+export const getAllImagesByTitle = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  const title = req.params.title;
+  try {
+    const gallery = await GalleryModel.findOne({ title });
+    if (!gallery) {
+      return res.status(404).json({ message: "Galerie non trouvée." });
+    }
+    res.status(200).json(gallery.images);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "Erreur serveur, veuillez réessayer plus tard." });
+  }
+};  
