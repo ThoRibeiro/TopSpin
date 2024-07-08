@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Section } from "../../components/Section/Section";
-import "./Gallery.css";
+import './Gallery.css';
 
 interface Gallery {
   _id: string;
@@ -43,10 +43,10 @@ const Gallery: React.FC = () => {
     <>
       <div className="blur"></div>
       {galleries.map((gallery, sectionIndex) => (
-        <Section
-          key={gallery._id}
-          title={gallery.title}
-          images={gallery.images.slice(0, 10)}
+        <Section 
+          key={gallery._id} 
+          title={gallery.title} 
+          images={gallery.images.slice(0, 10)} 
         />
       ))}
     </>
