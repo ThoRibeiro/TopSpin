@@ -1,33 +1,43 @@
 import React, { useEffect, useState } from "react";
 import "./News.css";
+import NewsCard from "../../components/NewsCard/NewsCard";
+import { Article } from "../../data/interfaces/Article";
+import { fetchArticles } from "../../services/newsService";
 
 const News: React.FC = () => {
-  const [articles, setArticles] = useState([]);
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    setArticles([
-      {
-        id: 1,
-        title: "Résultat du match A",
-        content: "Contenu de l'article A",
-      },
-      {
-        id: 2,
-        title: "Annonce importante B",
-        content: "Contenu de l'article B",
-      },
-    ]);
+    const getArticles = async () => {
+      try {
+        const articles = await fetchArticles();
+        setArticles(articles);
+      } catch (error) {
+        setError("Erreur lors de la récupération des articles");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getArticles();
   }, []);
+
+  if (loading) {
+    return <div>Chargement...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
     <main className="news">
       <h1>Actualités</h1>
       <div className="articles">
         {articles.map((article) => (
-          <div key={article.id} className="article">
-            <h2>{article.title}</h2>
-            <p>{article.content}</p>
-          </div>
+          <NewsCard key={article.id} article={article} />
         ))}
       </div>
     </main>

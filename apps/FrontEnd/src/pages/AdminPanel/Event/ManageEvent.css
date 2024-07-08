@@ -1,0 +1,102 @@
+.manage-events {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.manage-events-title {
+    margin-top: 65px;
+    margin-bottom: 20px;
+    font-size: 2em;
+    text-align: center;
+}
+
+.manage-events-add-button {
+    padding: 15px;
+    background-color: #ff7f00;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 13%;
+    align-self: flex-end;
+}
+
+.manage-events-add-button:hover {
+    background-color: #e66a00;
+}
+
+.manage-events-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.manage-events-thead {
+    background-color: #f4f4f4;
+}
+
+.manage-events-thead-tr,
+.manage-events-tbody-tr {
+    border-bottom: 1px solid #ddd;
+}
+
+.manage-events-th,
+.manage-events-td {
+    padding: 10px;
+    text-align: center;
+}
+
+.manage-events-th:nth-child(1),
+.manage-events-td:nth-child(1) {
+    width: 15%;
+}
+
+.manage-events-th:nth-child(2),
+.manage-events-td:nth-child(2) {
+    width: 13%;
+}
+
+.manage-events-th:nth-child(3),
+.manage-events-td:nth-child(3) {
+    width: 13%;
+}
+
+.manage-events-th:nth-child(4),
+.manage-events-td:nth-child(4) {
+    width: 15%;
+}
+
+.manage-events-th:nth-child(5),
+.manage-events-td:nth-child(5) {
+    width: 26%;
+}
+
+.manage-events-td img {
+    max-width: 50px;
+    height: auto;
+    display: inline-block;
+    margin: 5px;
+}
+
+.manage-events-edit-button,
+.manage-events-delete-button,
+.manage-events-participants-button {
+    padding: 16px;
+    background-color: #ff7f00;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin: 10px;
+    cursor: pointer;
+    width: 25%;
+}
+
+.manage-events-dropdown {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+}
