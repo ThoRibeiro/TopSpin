@@ -7,7 +7,12 @@ interface ImageWrapperProps {
   onClick: () => void;
 }
 
-export const ImageWrapper: React.FC<ImageWrapperProps> = ({ url, colSpan, rowSpan, onClick }) => {
+export const ImageWrapper: React.FC<ImageWrapperProps> = ({
+  url,
+  colSpan,
+  rowSpan,
+  onClick,
+}) => {
   return (
     <div
       className="image-wrapper"

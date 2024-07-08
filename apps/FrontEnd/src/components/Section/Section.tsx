@@ -3,11 +3,11 @@ import { ImageWrapper } from "../ImageWrapper/ImageWrapper";
 import { Modal } from "../Modal/Modal";
 
 const fixedSizes = [
-  { colSpan: 'span 2', rowSpan: 'span 2' },
-  { colSpan: 'span 2', rowSpan: 'span 3' },
-  { colSpan: 'span 3', rowSpan: 'span 2' },
-  { colSpan: 'span 3', rowSpan: 'span 3' },
-  { colSpan: 'span 4', rowSpan: 'span 4' },
+  { colSpan: "span 2", rowSpan: "span 2" },
+  { colSpan: "span 2", rowSpan: "span 3" },
+  { colSpan: "span 3", rowSpan: "span 2" },
+  { colSpan: "span 3", rowSpan: "span 3" },
+  { colSpan: "span 4", rowSpan: "span 4" },
 ];
 
 const getRandomSize = () => {
