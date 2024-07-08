@@ -126,12 +126,10 @@ export const updateEventStatus = async (
     event.status = status;
     await event.save();
 
-    res
-      .status(200)
-      .json({
-        message: "Statut de l'événement mis à jour avec succès.",
-        event,
-      });
+    res.status(200).json({
+      message: "Statut de l'événement mis à jour avec succès.",
+      event,
+    });
   } catch (error) {
     res.status(500).json({ error });
   }
@@ -268,12 +266,10 @@ export const updateParticipantStatus = async (
     participant.status = status;
     await event.save();
 
-    res
-      .status(200)
-      .json({
-        message: "Statut du participant mis à jour avec succès.",
-        participant,
-      });
+    res.status(200).json({
+      message: "Statut du participant mis à jour avec succès.",
+      participant,
+    });
   } catch (error) {
     res.status(500).json({ error });
   }
