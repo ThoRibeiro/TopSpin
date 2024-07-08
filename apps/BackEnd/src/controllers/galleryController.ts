@@ -167,4 +167,4 @@ export const getAllImagesByTitle = async (
       .status(500)
       .json({ error: "Erreur serveur, veuillez réessayer plus tard." });
   }
-};  
+};
