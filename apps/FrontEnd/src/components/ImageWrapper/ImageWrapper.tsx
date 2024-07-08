@@ -6,7 +6,11 @@ interface ImageWrapperProps {
   rowSpan: string;
 }
 
-export const ImageWrapper: React.FC<ImageWrapperProps> = ({ url, colSpan, rowSpan }) => {
+export const ImageWrapper: React.FC<ImageWrapperProps> = ({
+  url,
+  colSpan,
+  rowSpan,
+}) => {
   return (
     <div
       className="image-wrapper"

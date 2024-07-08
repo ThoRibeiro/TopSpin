@@ -2,11 +2,11 @@ import React from "react";
 import { ImageWrapper } from "../ImageWrapper/ImageWrapper";
 
 const fixedSizes = [
-  { colSpan: 'span 2', rowSpan: 'span 2' },
-  { colSpan: 'span 2', rowSpan: 'span 3' },
-  { colSpan: 'span 3', rowSpan: 'span 2' },
-  { colSpan: 'span 3', rowSpan: 'span 3' },
-  { colSpan: 'span 4', rowSpan: 'span 4' },
+  { colSpan: "span 2", rowSpan: "span 2" },
+  { colSpan: "span 2", rowSpan: "span 3" },
+  { colSpan: "span 3", rowSpan: "span 2" },
+  { colSpan: "span 3", rowSpan: "span 3" },
+  { colSpan: "span 4", rowSpan: "span 4" },
 ];
 
 const getRandomSize = () => {
@@ -26,11 +26,11 @@ export const Section: React.FC<SectionProps> = ({ title, images }) => {
         {images.map((url, index) => {
           const size = getRandomSize();
           return (
-            <ImageWrapper 
-              key={index} 
-              url={url} 
-              colSpan={size.colSpan} 
-              rowSpan={size.rowSpan} 
+            <ImageWrapper
+              key={index}
+              url={url}
+              colSpan={size.colSpan}
+              rowSpan={size.rowSpan}
             />
           );
         })}
