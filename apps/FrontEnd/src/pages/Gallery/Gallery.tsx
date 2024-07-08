@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Section } from "../../components/Section/Section";
-import './Gallery.css';
+import "./Gallery.css";
 
 interface Gallery {
   _id: string;
