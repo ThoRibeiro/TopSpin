@@ -1,23 +1,32 @@
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose, { Schema, Document, Types } from "mongoose";
 
-// Définir une interface pour le sous-objet participer
-interface IParticipant {
+export interface IParticipant {
+  _id: Types.ObjectId;
   email: string;
   firstName: string;
   lastName: string;
   age: number;
+  status: "non-inscrit" | "inscrit";
 }
 
 export interface IEvent extends Document {
   title: string;
   startDate: Date;
   endDate: Date;
-  category: "senior" | "jeune" | "adulte";
+  category: "senior" | "jeune" | "adulte" | "toute catégorie";
   status: "ouvert" | "fermé";
   images: string[];
   content: string;
-  participate: IParticipant[];
+  participants: Types.DocumentArray<IParticipant>;
 }
+
+const participantSchema: Schema = new Schema({
+  email: { type: String, required: true },
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
+  age: { type: Number, required: true },
+  status: { type: String, enum: ["non-inscrit", "inscrit"], required: true },
+});
 
 const eventSchema: Schema = new Schema({
   title: { type: String, required: true },
@@ -25,20 +34,13 @@ const eventSchema: Schema = new Schema({
   endDate: { type: Date, required: true },
   category: {
     type: String,
-    enum: ["senior", "jeune", "adulte"],
+    enum: ["senior", "jeune", "adulte", "toute catégorie"],
     required: true,
   },
   status: { type: String, enum: ["ouvert", "fermé"], required: true },
   images: { type: [String], required: true },
   content: { type: String, required: true },
-  participate: [
-    {
-      email: { type: String, required: true },
-      firstName: { type: String, required: true },
-      lastName: { type: String, required: true },
-      age: { type: Number, required: true },
-    },
-  ],
+  participants: [participantSchema],
 });
 
 const Event = mongoose.model<IEvent>("Event", eventSchema);

@@ -20,8 +20,9 @@ const Header: React.FC = () => {
             <>
               <Link to="/admin/manage-posts">Posts</Link>
               <Link to="/admin/manage-member">Membres</Link>
-              <Link to="/admin/manage-contact">Contacts</Link>
+              <Link to="/admin/manage-event">Évènements</Link>
               <Link to="/admin/manage-gallery">Galeries</Link>
+              <Link to="/admin/manage-contact">Contacts</Link>
             </>
           ) : (
             <>

@@ -15,6 +15,7 @@ import ProtectedRoute from "./hoc/ProtectedRoute";
 import ToastNotification from "./components/Toast/ToastNotification.tsx";
 import ManageContacts from "./pages/AdminPanel/Contact/ManageContact.tsx";
 import ManageGallery from "./pages/AdminPanel/Gallery/ManageGallery.tsx";
+import ManageEvents from "./pages/AdminPanel/Event/ManageEvent.tsx";
 
 const App: React.FC = () => {
   return (
@@ -36,12 +37,16 @@ const App: React.FC = () => {
             element={<ProtectedRoute element={<ManageMember />} />}
           />
           <Route
-            path="/admin/manage-contact"
-            element={<ProtectedRoute element={<ManageContacts />} />}
+            path="/admin/manage-event"
+            element={<ProtectedRoute element={<ManageEvents />} />}
           />
           <Route
             path="/admin/manage-gallery"
             element={<ProtectedRoute element={<ManageGallery />} />}
+          />
+          <Route
+            path="/admin/manage-contact"
+            element={<ProtectedRoute element={<ManageContacts />} />}
           />
           <Route path="/" element={<Home />} />
           <Route path="/news" element={<News />} />

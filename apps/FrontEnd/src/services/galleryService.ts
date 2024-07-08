@@ -17,14 +17,12 @@ export const getAllGalleries = async () => {
 };
 
 export const createGallery = async (formData: FormData) => {
-  console.log("Sending createGallery request");
   const response = await axios.post(`${API_URL}/create`, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
       ...getAuthHeaders().headers,
     },
   });
-  console.log("createGallery response:", response);
   return response;
 };
 
