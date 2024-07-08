@@ -15,7 +15,7 @@ const News: React.FC = () => {
         const response = await eventService.getAllEvents(); // Utiliser getAllEvents
         setArticles(response.data);
       } catch (error) {
-        setError('Erreur lors de la récupération des articles');
+        setError("Erreur lors de la récupération des articles");
       } finally {
         setLoading(false);
       }
