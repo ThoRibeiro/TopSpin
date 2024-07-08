@@ -87,7 +87,6 @@ const ManageMembers: React.FC = () => {
   };
 
   const handleDeleteClick = async (_id: string) => {
-    console.log("Deleting member with id:", _id);
     if (isAuthenticated) {
       try {
         await memberManageService.deleteMember(_id);

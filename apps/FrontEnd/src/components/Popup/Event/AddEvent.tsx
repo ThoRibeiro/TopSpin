@@ -1,37 +1,31 @@
 import React, { useState, useEffect, useRef } from "react";
-import "./AddGallery.css";
-import { AddGalleryPopinProps } from "../../../data/interfaces/Gallery";
+import "./AddEvent.css";
+import { AddEventPopinProps } from "../../../data/interfaces/Event";
 
-const AddGallery: React.FC<AddGalleryPopinProps> = ({
-  show,
-  onClose,
-  onSave,
-  gallery,
-}) => {
+const AddEvent: React.FC<AddEventPopinProps> = ({ show, onClose, onSave }) => {
   const [title, setTitle] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [category, setCategory] = useState("");
+  const [status, setStatus] = useState("");
+  const [content, setContent] = useState("");
   const [images, setImages] = useState<File[]>([]);
   const [imagePreviews, setImagePreviews] = useState<string[]>([]);
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (show) {
-      if (gallery) {
-        setTitle(gallery.title);
-        setStartDate(gallery.startDate);
-        setEndDate(gallery.endDate);
-        setImagePreviews(gallery.images);
-      } else {
-        resetForm();
-      }
+      resetForm();
     }
-  }, [show, gallery]);
+  }, [show]);
 
   const resetForm = () => {
     setTitle("");
     setStartDate("");
     setEndDate("");
+    setCategory("");
+    setStatus("");
+    setContent("");
     setImages([]);
     setImagePreviews([]);
   };
@@ -42,15 +36,16 @@ const AddGallery: React.FC<AddGalleryPopinProps> = ({
       formData.append("title", title);
       formData.append("startDate", startDate);
       formData.append("endDate", endDate);
-      images.forEach((image) => {
-        formData.append("images", image);
-      });
+      formData.append("category", category);
+      formData.append("status", status);
+      formData.append("content", content);
+      images.forEach((image) => formData.append("images", image));
 
       await onSave(formData);
       onClose();
       resetForm();
     } catch (error) {
-      console.error("Error creating gallery:", error);
+      console.error("Error creating event:", error);
     }
   };
 
@@ -92,52 +87,86 @@ const AddGallery: React.FC<AddGalleryPopinProps> = ({
   }
 
   return (
-    <div className="add-gallery-modal">
-      <div className="add-gallery-modal-content" ref={modalRef}>
-        <h2>{gallery ? "Modifier la galerie" : "Ajouter une galerie"}</h2>
-        <label className="add-gallery-label">
+    <div className="add-event-modal">
+      <div className="add-event-modal-content" ref={modalRef}>
+        <h2>Ajouter un événement</h2>
+        <label className="add-event-label">
           Titre:
           <input
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="add-gallery-input"
+            className="add-event-input"
           />
         </label>
-        <label className="add-gallery-label">
+        <label className="add-event-label">
           Date de début:
           <input
             type="date"
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
-            className="add-gallery-input"
+            className="add-event-input"
           />
         </label>
-        <label className="add-gallery-label">
+        <label className="add-event-label">
           Date de fin:
           <input
             type="date"
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
-            className="add-gallery-input"
+            className="add-event-input"
           />
         </label>
-        <label className="add-gallery-label">
+        <label className="add-event-label">
+          Catégorie:
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            className="add-event-dropdown"
+          >
+            <option value="">Sélectionnez une catégorie</option>
+            <option value="jeune">Jeune</option>
+            <option value="adulte">Adulte</option>
+            <option value="senior">Senior</option>
+            <option value="toute catégorie">Toute catégorie</option>
+          </select>
+        </label>
+        <label className="add-event-label">
+          Statut:
+          <select
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+            className="add-event-dropdown"
+          >
+            <option value="">Sélectionnez un statut</option>
+            <option value="ouvert">Ouvert</option>
+            <option value="fermé">Fermé</option>
+          </select>
+        </label>
+        <label className="add-event-label">
+          Contenu:
+          <textarea
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            className="add-event-textarea"
+          />
+        </label>
+        <label className="add-event-label">
           Images:
           <input
             type="file"
             multiple
             onChange={handleFileChange}
-            className="add-gallery-input"
+            className="add-event-input"
           />
         </label>
-        <div className="add-gallery-image-previews">
+        <div className="add-event-image-previews">
           {imagePreviews.map((preview, index) => (
             <div key={index} className="image-preview-container">
               <img
                 src={preview}
                 alt={`Preview ${index + 1}`}
-                className="add-gallery-preview-image"
+                className="add-event-preview-image"
               />
               <button
                 className="remove-image-button"
@@ -148,12 +177,12 @@ const AddGallery: React.FC<AddGalleryPopinProps> = ({
             </div>
           ))}
         </div>
-        <button onClick={handleSave} className="add-gallery-button">
-          {gallery ? "Enregistrer" : "Ajouter"}
+        <button onClick={handleSave} className="add-event-button">
+          Ajouter
         </button>
       </div>
     </div>
   );
 };
 
-export default AddGallery;
+export default AddEvent;
