@@ -52,9 +52,9 @@ const EditPostPopin: React.FC<EditPostPopinProps> = ({
     formData.append("content", content);
     formData.append("categorie", categorie);
     images.forEach((image) => {
-      formData.append("images", image);
+      formData.append("image", image);
     });
-    formData.append("idPost", post?._id || ""); // Append post ID
+    formData.append("idPost", post?._id || "");
     onSave(formData);
     onClose();
   };

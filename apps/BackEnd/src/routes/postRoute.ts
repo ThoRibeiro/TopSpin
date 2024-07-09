@@ -11,6 +11,7 @@ import {
   deletePost,
 } from "../controllers/postController";
 import singleUpload from "../middlewares/multerMiddlwareSingleImage";
+import upload from "../middlewares/multerMiddlware";
 
 const postRoutes = express.Router();
 

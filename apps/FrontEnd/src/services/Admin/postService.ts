@@ -23,7 +23,7 @@ export const createPost = async (postData: FormData) => {
 
 export const updatePost = async (postId: string, postData: FormData) => {
   postData.append("idPost", postId);
-  return await axios.put(`${API_URL}/update`, postData, {
+  return await axios.put(`${API_URL}/update/${postId}`, postData, {
     headers: {
       "Content-Type": "multipart/form-data",
       ...getAuthHeaders().headers,

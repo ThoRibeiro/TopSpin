@@ -40,16 +40,11 @@ export const createPost = async (
   }
 };
 
-export const updatePost = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
-  const idPost = req.body.idPost;
+export const updatePost = async (req: Request, res: Response, next: NextFunction) => {
+  const idPost = req.params.idPost;
   const file = req.file as Express.Multer.File;
-  const image = file
-    ? `${req.protocol}://${req.get("host")}/images/${file.filename}`
-    : undefined;
+  const image = file ? `${req.protocol}://${req.get("host")}/images/${file.filename}` : undefined;
+
   const postData: Partial<IPost> = {
     titlePost: req.body.titlePost,
     content: req.body.content,
@@ -59,23 +54,17 @@ export const updatePost = async (
   };
 
   try {
-    const updatedPost = await Post.findByIdAndUpdate(idPost, postData, {
-      new: true,
-    });
+    const updatedPost = await Post.findByIdAndUpdate(idPost, postData, { new: true });
     if (!updatedPost) {
-      return res.status(404).json({
-        message:
-          "Le post que vous souhaitez modifier n'existe pas, merci de réessayer...",
-      });
+      return res.status(404).json({ message: "Le post que vous souhaitez modifier n'existe pas, merci de réessayer..." });
     }
-    res.status(200).json({
-      message: "Le POST a été mis à jour, merci !",
-      post: updatedPost,
-    });
+    res.status(200).json({ message: "Le POST a été mis à jour, merci !", post: updatedPost });
   } catch (error) {
-    res.status(400).json({ error });
+    console.error("Error updating post:", error); // Log the error for debugging
+    res.status(500).json({ error: "Erreur lors de la mise à jour du post." });
   }
 };
+
 
 export const getAllPosts = async (
   req: Request,

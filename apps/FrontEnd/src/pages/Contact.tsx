@@ -34,7 +34,7 @@ const Contact: React.FC = () => {
 
   return (
     <main className="contact">
-      <h1>Contact nous !</h1>
+      <h1>Contacte nous !</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="lastName">Nom</label>
