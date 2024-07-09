@@ -64,19 +64,15 @@ export const updatePost = async (
       new: true,
     });
     if (!updatedPost) {
-      return res
-        .status(404)
-        .json({
-          message:
-            "Le post que vous souhaitez modifier n'existe pas, merci de réessayer...",
-        });
-    }
-    res
-      .status(200)
-      .json({
-        message: "Le POST a été mis à jour, merci !",
-        post: updatedPost,
+      return res.status(404).json({
+        message:
+          "Le post que vous souhaitez modifier n'existe pas, merci de réessayer...",
       });
+    }
+    res.status(200).json({
+      message: "Le POST a été mis à jour, merci !",
+      post: updatedPost,
+    });
   } catch (error) {
     console.error("Error updating post:", error); // Log the error for debugging
     res.status(500).json({ error: "Erreur lors de la mise à jour du post." });
