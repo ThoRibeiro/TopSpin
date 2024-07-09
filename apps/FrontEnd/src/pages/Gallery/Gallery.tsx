@@ -43,7 +43,7 @@ const Gallery: React.FC = () => {
           images={gallery.images.slice(0, 10)}
         />
       ))}
-      <Footer/>
+      <Footer />
     </>
   );
 };
