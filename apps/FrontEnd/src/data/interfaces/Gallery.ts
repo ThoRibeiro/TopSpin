@@ -20,6 +20,13 @@ export interface Gallery {
   images: string[];
 }
 
+export interface Gallery_ {
+  _id: string;
+  title: string;
+  startDate: Date;
+  endDate: Date;
+  images: string[];
+}
 export interface NewGallery {
   title: string;
   startDate: string;

@@ -1,24 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Section } from "../../components/Section/Section";
 import "./Gallery.css";
-
-interface Gallery {
-  _id: string;
-  title: string;
-  startDate: Date;
-  endDate: Date;
-  images: string[];
-}
+import { Gallery_ } from "../../data/interfaces/Gallery.ts";
+import Footer from "../../components/Footer/Footer.tsx";
 
 const Gallery: React.FC = () => {
-  const [galleries, setGalleries] = useState<Gallery[]>([]);
+  const [galleries, setGalleries] = useState<Gallery_[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchGalleries = async () => {
       try {
-        const response = await fetch("/api/galleries");
+        const response = await fetch("http://localhost:3500/gallery");
         const data = await response.json();
         setGalleries(data);
         setLoading(false);
@@ -42,13 +36,14 @@ const Gallery: React.FC = () => {
   return (
     <>
       <div className="blur"></div>
-      {galleries.map((gallery, sectionIndex) => (
+      {galleries.map((gallery) => (
         <Section
           key={gallery._id}
           title={gallery.title}
           images={gallery.images.slice(0, 10)}
         />
       ))}
+      <Footer/>
     </>
   );
 };
