@@ -17,7 +17,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ article }) => {
     return text;
   };
 
-  const openPopup = () => {
+  const openPopup = (article: Article) => {
     setSelectedArticle(article);
   };
 
@@ -27,15 +27,13 @@ const NewsCard: React.FC<NewsCardProps> = ({ article }) => {
 
   return (
     <>
-      <div className="news-card" onClick={openPopup}>
-        <div className="news-image">
-          <img src={article.image} alt="Article" />
-        </div>
-        <div className="news-content">
-          <h2>{truncateText(article.title, 110)}</h2>
+      <div className="news-card" onClick={() => openPopup(article)}>
+        <img src={article.image} alt="Article" />
+        <div className="news-card-content">
+          <h2>{truncateText(article.titlePost, 110)}</h2>
           <p>{truncateText(article.content, 110)}</p>
-          <div className="news-author">
-            {article.member?.image && (
+          <div className="news-card-author">
+            {article.member.image && (
               <img src={article.member.image} alt="Author" />
             )}
             <span>
