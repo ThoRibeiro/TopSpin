@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./News.css";
 import NewsCard from "../../components/NewsCard/NewsCard";
 import { Article } from "../../data/interfaces/Article";
-import { fetchArticles } from "../../services/newsService";
+import eventService from "../../services/eventService";
 
 const News: React.FC = () => {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -12,8 +12,8 @@ const News: React.FC = () => {
   useEffect(() => {
     const getArticles = async () => {
       try {
-        const articles = await fetchArticles();
-        setArticles(articles);
+        const response = await eventService.getAllEvents(); // Utiliser getAllEvents
+        setArticles(response.data);
       } catch (error) {
         setError("Erreur lors de la récupération des articles");
       } finally {
