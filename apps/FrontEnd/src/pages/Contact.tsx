@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { submitContactForm } from "../services/contact.ts";
+import { submitContactForm } from "../services/contactService.ts";
 import "./Contact.css";
 
 const Contact: React.FC = () => {

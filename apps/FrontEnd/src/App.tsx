@@ -16,6 +16,7 @@ import ToastNotification from "./components/Toast/ToastNotification.tsx";
 import ManageContacts from "./pages/AdminPanel/Contact/ManageContact.tsx";
 import ManageGallery from "./pages/AdminPanel/Gallery/ManageGallery.tsx";
 import ManageEvents from "./pages/AdminPanel/Event/ManageEvent.tsx";
+import TermsAndPrivacyPage from "./pages/CGU.tsx";
 
 const App: React.FC = () => {
   return (
@@ -53,6 +54,7 @@ const App: React.FC = () => {
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/policy" element={<TermsAndPrivacyPage />} />
         </Routes>
         <ToastNotification />
       </div>

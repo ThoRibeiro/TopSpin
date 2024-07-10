@@ -32,6 +32,9 @@ const Footer: React.FC = () => {
           <li>
             <a href="/contact">Contact</a>
           </li>
+          <li>
+            <a href="/policy">Conditions générales d'utilisation</a>
+          </li>
         </ul>
         <div className="footer-socials">
           <a
