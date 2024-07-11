@@ -8,7 +8,6 @@
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  margin-bottom: 20px;
 }
 
 .article-card:hover {
@@ -37,15 +36,15 @@
   color: #555;
 }
 
-.article-card-content .author-info {
-  display: flex;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.article-card-content .author-info img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-right: 10px;
+.register-button{
+  padding: 10px 20px;
+    background-color: #ff7f00;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 15px auto;
+    font-size: 16px;
+    display: block;
+    width: fit-content;
 }

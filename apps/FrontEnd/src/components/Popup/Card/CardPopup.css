@@ -2,84 +2,54 @@
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
+    width: 100%;
+    height: 100%;
     background: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
-}
-
-.popup-content {
-    background: #fff;
-    padding: 20px;
-    border-radius: 6px;
-    max-width: 100%;
-    width: 1200px;
-    max-height: 100%;
-    height: 450px;
-    overflow-y: auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    position: relative;
+  }
+  
+  .popup-content {
     display: flex;
-    gap: 20px;
-}
-
-.close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-}
-
-.popup-content img {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90%;
+    overflow-y: auto; /* Ajoute un défilement vertical si le contenu dépasse la hauteur */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .popup-left {
+    flex: 2;
+    padding: 20px;
+  }
+  
+  .popup-right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .popup-right img {
     max-width: 100%;
     height: auto;
+    object-fit: cover;
+  }
+  
+  .register-button {
+    padding: 10px 20px;
+    border: none;
     border-radius: 5px;
-}
-
-.popup-left {
-    flex: 1;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-}
-
-.popup-right {
-    flex: 1;
-    margin: auto;
-}
-
-.popup-content h2 {
-    font-size: 36px;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.popup-content p {
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-.popup-content .article-author {
-    display: flex;
-    align-items: center;
-    position: absolute;
-    bottom: 40px;
-    left: 30px;
-}
-
-.popup-content .article-author img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
-
-.popup-content .article-author span {
-    font-size: 16px;
-}
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    margin-top: 20px;
+    align-self: flex-start; /* Aligne le bouton à gauche */
+  }
+  

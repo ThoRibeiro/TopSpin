@@ -27,8 +27,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ article }) => {
     setSelectedArticle(null);
   };
 
-  const openForm = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const openForm = () => {
     setShowForm(true);
   };
 
@@ -39,27 +38,17 @@ const NewsCard: React.FC<NewsCardProps> = ({ article }) => {
   return (
     <>
       <div className="article-card" onClick={() => openPopup(article)}>
-        <img src={article.image} alt={article.titlePost || "Article"} />
+        <img src={article.images} alt={article.title || "Article"} />
         <div className="article-card-content">
-          <h3>{truncateText(article.titlePost, 110)}</h3>
+          <h3>{truncateText(article.title, 110)}</h3>
           <p>{truncateText(article.content, 110)}</p>
-          <div className="author-info">
-            {article.member?.image && (
-              <img
-                src={article.member.image}
-                alt={article.member.firstname || "Author"}
-              />
-            )}
-            <span>{`${article.member?.firstname || ""} ${article.member?.lastname || ""}`}</span>
-          </div>
-          <button onClick={openForm} className="register-button">S'inscrire à l'événement</button>
         </div>
       </div>
       {selectedArticle && (
-        <Popup article={selectedArticle} onClose={closePopup} />
+        <Popup article={selectedArticle} onClose={closePopup} openForm={openForm} />
       )}
       {showForm && (
-        <EventRegistrationForm onClose={closeForm} />
+        <EventRegistrationForm eventId={article._id} onClose={closeForm} />
       )}
     </>
   );

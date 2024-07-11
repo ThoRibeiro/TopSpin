@@ -16,9 +16,9 @@
     padding: 20px;
     border-radius: 10px;
     width: 90%;
-    max-width: 400px; /* Limite la largeur maximale */
+    max-width: 400px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden; /* Empêche le dépassement du contenu */
+    overflow: hidden;
   }
   
   .registration-form-container h2 {
@@ -41,7 +41,7 @@
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-sizing: border-box; /* Assure que le padding est inclus dans la largeur */
+    box-sizing: border-box;
   }
   
   .form-group textarea {
@@ -50,25 +50,19 @@
   
   .form-actions {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
   }
   
   .form-actions button {
     padding: 10px 20px;
+    background-color: #ff7f00;
+    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    flex: 1; /* Pour que les boutons prennent toute la largeur disponible */
-    margin: 5px; /* Espacement entre les boutons */
-  }
-  
-  .form-actions button[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
-  }
-  
-  .form-actions button[type="button"] {
-    background-color: #f44336;
-    color: white;
+    margin: 0 15px auto;
+    font-size: 16px;
+    display: block;
+    width: fit-content;
   }
   

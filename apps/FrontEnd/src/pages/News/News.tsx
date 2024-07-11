@@ -13,6 +13,7 @@ const News: React.FC = () => {
     const getArticles = async () => {
       try {
         const response = await eventService.getAllEvents();
+        console.log(response);
         setArticles(response.data);
       } catch (error) {
         setError('Erreur lors de la récupération des articles');

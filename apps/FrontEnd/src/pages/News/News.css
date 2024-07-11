@@ -1,7 +1,9 @@
 .news {
-    padding: 20px;
-    background-color: #f5f5f5;
+    margin: 100px auto 100px auto;
     color: #202228;
+    padding: 10px;
+    margin-left: 150px;
+    margin-right: 150px;
 }
 
 .news h1 {
@@ -10,7 +12,7 @@
 }
 
 .articles {
-    display: grid;
+    display: flex;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
   }

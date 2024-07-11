@@ -1,40 +1,78 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./EventRegistrationForm.css";
+import eventService from "../../services/eventService";
 
 interface EventRegistrationFormProps {
+  eventId: string;
   onClose: () => void;
 }
 
-const EventRegistrationForm: React.FC<EventRegistrationFormProps> = ({ onClose }) => {
+const EventRegistrationForm: React.FC<EventRegistrationFormProps> = ({ eventId, onClose }) => {
   const [formData, setFormData] = useState({
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
-    message: '',
+    age: '',
   });
+
+  const formRef = useRef<HTMLDivElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    console.log(eventId)
     e.preventDefault();
-    // Ajoutez la logique pour envoyer les données du formulaire à votre serveur
-    console.log(formData);
-    onClose(); // Fermez le formulaire après soumission
+    try {
+      await eventService.addParticipantToEvent(eventId, {
+        email: formData.email,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        age: parseInt(formData.age),
+      });
+      onClose();
+    } catch (error) {
+      console.error("Erreur lors de l'inscription à l'événement", error);
+    }
   };
+
+  const handleClickOutside = (e: MouseEvent) => {
+    if (formRef.current && !formRef.current.contains(e.target as Node)) {
+      onClose();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className="registration-form-overlay">
-      <div className="registration-form-container">
+      <div className="registration-form-container" ref={formRef}>
         <h2>Inscription à l'événement</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="name">Nom</label>
+            <label htmlFor="firstname">Prénom</label>
             <input
               type="text"
-              id="name"
-              name="name"
-              value={formData.name}
+              id="firstname"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="lastname">Nom</label>
+            <input
+              type="text"
+              id="lastname"
+              name="lastName"
+              value={formData.lastName}
               onChange={handleChange}
               required
             />
@@ -51,18 +89,18 @@ const EventRegistrationForm: React.FC<EventRegistrationFormProps> = ({ onClose }
             />
           </div>
           <div className="form-group">
-            <label htmlFor="message">Message</label>
-            <textarea
-              id="message"
-              name="message"
-              value={formData.message}
+            <label htmlFor="age">Âge</label>
+            <input
+              type="number"
+              id="age"
+              name="age"
+              value={formData.age}
               onChange={handleChange}
               required
             />
           </div>
           <div className="form-actions">
             <button type="submit">S'inscrire</button>
-            <button type="button" onClick={onClose}>Annuler</button>
           </div>
         </form>
       </div>
