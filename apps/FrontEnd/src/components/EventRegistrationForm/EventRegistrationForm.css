@@ -1,0 +1,74 @@
+.registration-form-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .registration-form-container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px; /* Limite la largeur maximale */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Empêche le dépassement du contenu */
+  }
+  
+  .registration-form-container h2 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Assure que le padding est inclus dans la largeur */
+  }
+  
+  .form-group textarea {
+    resize: vertical;
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .form-actions button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    flex: 1; /* Pour que les boutons prennent toute la largeur disponible */
+    margin: 5px; /* Espacement entre les boutons */
+  }
+  
+  .form-actions button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .form-actions button[type="button"] {
+    background-color: #f44336;
+    color: white;
+  }
+  

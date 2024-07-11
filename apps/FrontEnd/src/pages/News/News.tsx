@@ -12,10 +12,10 @@ const News: React.FC = () => {
   useEffect(() => {
     const getArticles = async () => {
       try {
-        const response = await eventService.getAllEvents(); // Utiliser getAllEvents
+        const response = await eventService.getAllEvents();
         setArticles(response.data);
       } catch (error) {
-        setError("Erreur lors de la récupération des articles");
+        setError('Erreur lors de la récupération des articles');
       } finally {
         setLoading(false);
       }
@@ -37,7 +37,7 @@ const News: React.FC = () => {
       <h1>Actualités</h1>
       <div className="articles">
         {articles.map((article) => (
-          <NewsCard key={article.id} article={article} />
+          <NewsCard key={article._id} article={article} />
         ))}
       </div>
     </main>
