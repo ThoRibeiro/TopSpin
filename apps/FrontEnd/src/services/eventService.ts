@@ -69,9 +69,21 @@ export const getParticipantsByEvent = async (eventId: string) => {
   );
 };
 
-export const addParticipantToEvent = async (eventId: string, participantData: { email: string, firstName: string, lastName: string, age: number }) => {
-  console.log(participantData)
-  return await axios.post(`${API_URL}/${eventId}/addParticipant`, participantData, getAuthHeaders());
+export const addParticipantToEvent = async (
+  eventId: string,
+  participantData: {
+    email: string;
+    firstName: string;
+    lastName: string;
+    age: number;
+  },
+) => {
+  console.log(participantData);
+  return await axios.post(
+    `${API_URL}/${eventId}/addParticipant`,
+    participantData,
+    getAuthHeaders(),
+  );
 };
 
 export default {

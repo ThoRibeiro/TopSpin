@@ -7,22 +7,27 @@ interface EventRegistrationFormProps {
   onClose: () => void;
 }
 
-const EventRegistrationForm: React.FC<EventRegistrationFormProps> = ({ eventId, onClose }) => {
+const EventRegistrationForm: React.FC<EventRegistrationFormProps> = ({
+  eventId,
+  onClose,
+}) => {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    age: '',
+    firstName: "",
+    lastName: "",
+    email: "",
+    age: "",
   });
 
   const formRef = useRef<HTMLDivElement>(null);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    console.log(eventId)
+    console.log(eventId);
     e.preventDefault();
     try {
       await eventService.addParticipantToEvent(eventId, {

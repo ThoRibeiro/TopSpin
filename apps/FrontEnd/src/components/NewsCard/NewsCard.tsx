@@ -45,7 +45,11 @@ const NewsCard: React.FC<NewsCardProps> = ({ article }) => {
         </div>
       </div>
       {selectedArticle && (
-        <Popup article={selectedArticle} onClose={closePopup} openForm={openForm} />
+        <Popup
+          article={selectedArticle}
+          onClose={closePopup}
+          openForm={openForm}
+        />
       )}
       {showForm && (
         <EventRegistrationForm eventId={article._id} onClose={closeForm} />
