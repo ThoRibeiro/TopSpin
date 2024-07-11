@@ -3,7 +3,7 @@ import axios from "axios";
 const API_URL = "http://localhost:3500/contact";
 
 const getAuthHeaders = () => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("jwtToken");
   return {
     headers: {
       Authorization: `Bearer ${token}`,

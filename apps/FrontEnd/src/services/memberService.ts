@@ -8,7 +8,7 @@ import {
 const API_URL = "http://localhost:3500/members";
 
 const getAuthHeaders = () => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("jwtToken");
   return {
     headers: {
       Authorization: `Bearer ${token}`,

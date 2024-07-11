@@ -4,7 +4,7 @@ import { Gallery } from "../data/interfaces/Gallery";
 const API_URL = "http://localhost:3500/gallery";
 
 const getAuthHeaders = () => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("jwtToken");
   return {
     headers: {
       Authorization: `Bearer ${token}`,

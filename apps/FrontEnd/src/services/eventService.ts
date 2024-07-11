@@ -4,7 +4,7 @@ import { Event, Participant } from "../data/interfaces/Event";
 const API_URL = "http://localhost:3500/event";
 
 const getAuthHeaders = () => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("jwtToken");
   return {
     headers: {
       Authorization: `Bearer ${token}`,
