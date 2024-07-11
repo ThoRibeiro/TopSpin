@@ -3,6 +3,7 @@ import { Section } from "../../components/Section/Section";
 import "./Gallery.css";
 import { Gallery_ } from "../../data/interfaces/Gallery.ts";
 import Footer from "../../components/Footer/Footer.tsx";
+import { getAllGalleries } from "../../services/galleryService.ts";
 
 const Gallery: React.FC = () => {
   const [galleries, setGalleries] = useState<Gallery_[]>([]);
@@ -12,8 +13,8 @@ const Gallery: React.FC = () => {
   useEffect(() => {
     const fetchGalleries = async () => {
       try {
-        const response = await fetch("http://localhost:3500/gallery");
-        const data = await response.json();
+        const response = await getAllGalleries();
+        const data = response.data;
         setGalleries(data);
         setLoading(false);
       } catch (error) {
@@ -21,7 +22,6 @@ const Gallery: React.FC = () => {
         setLoading(false);
       }
     };
-
     fetchGalleries();
   }, []);
 

@@ -15,8 +15,8 @@ export interface EditGalleryPopinProps {
 export interface Gallery {
   _id: string;
   title: string;
-  startDate: string;
-  endDate: string;
+  startDate: Date;
+  endDate: Date;
   images: string[];
 }
 
@@ -29,7 +29,7 @@ export interface Gallery_ {
 }
 export interface NewGallery {
   title: string;
-  startDate: string;
-  endDate: string;
+  startDate: Date;
+  endDate: Date;
   images: File[];
 }
