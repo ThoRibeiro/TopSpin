@@ -3,6 +3,7 @@ export interface Article {
   titlePost: string;
   content: string;
   image: string;
+  status: string;
   member: {
     firstname: string;
     lastname: string;

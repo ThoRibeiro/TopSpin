@@ -2,24 +2,25 @@ import React from "react";
 import "./CardPopup.css";
 import { PopupProps } from "../../../data/interfaces/Article.ts";
 
-const Popup: React.FC<PopupProps> = ({ article, onClose }) => {
+interface CardPopupProps extends PopupProps {
+  openForm: () => void;
+}
+
+const Popup: React.FC<CardPopupProps> = ({ article, onClose, openForm }) => {
   return (
     <div className="popup-overlay" onClick={onClose}>
       <div className="popup-content" onClick={(e) => e.stopPropagation()}>
         <div className="popup-left">
-          <h2>{article.titlePost}</h2>
+          <h2>{article.title}</h2>
           <p>{article.content}</p>
-          <div className="article-author">
-            {article.member?.image && (
-              <img src={article.member.image} alt="Author" />
-            )}
-            <span>
-              {article.member?.firstname} {article.member?.lastname}
-            </span>
-          </div>
+          {article.status !== "fermé" && (
+            <button onClick={openForm} className="register-button">
+              S'inscrire à l'événement
+            </button>
+          )}
         </div>
         <div className="popup-right">
-          <img src={article.image} alt="Article" />
+          <img src={article.images} alt="Article" />
         </div>
       </div>
     </div>

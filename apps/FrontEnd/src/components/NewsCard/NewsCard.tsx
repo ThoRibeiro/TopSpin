@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./NewsCard.css";
 import Popup from "../Popup/Card/CardPopup";
+import EventRegistrationForm from "../EventRegistrationForm/EventRegistrationForm";
 import { Article } from "../../data/interfaces/Article";
 
 interface NewsCardProps {
@@ -9,15 +10,16 @@ interface NewsCardProps {
 
 const NewsCard: React.FC<NewsCardProps> = ({ article }) => {
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
+  const [showForm, setShowForm] = useState<boolean>(false);
 
   const truncateText = (text: string, maxLength: number) => {
-    if (text.length > maxLength) {
+    if (text && text.length > maxLength) {
       return text.substring(0, maxLength) + "...";
     }
-    return text;
+    return text || "";
   };
 
-  const openPopup = () => {
+  const openPopup = (article: Article) => {
     setSelectedArticle(article);
   };
 
@@ -25,27 +27,32 @@ const NewsCard: React.FC<NewsCardProps> = ({ article }) => {
     setSelectedArticle(null);
   };
 
+  const openForm = () => {
+    setShowForm(true);
+  };
+
+  const closeForm = () => {
+    setShowForm(false);
+  };
+
   return (
     <>
-      <div className="news-card" onClick={openPopup}>
-        <div className="news-image">
-          <img src={article.image} alt="Article" />
-        </div>
-        <div className="news-content">
-          <h2>{truncateText(article.title, 110)}</h2>
+      <div className="article-card" onClick={() => openPopup(article)}>
+        <img src={article.images} alt={article.title || "Article"} />
+        <div className="article-card-content">
+          <h3>{truncateText(article.title, 110)}</h3>
           <p>{truncateText(article.content, 110)}</p>
-          <div className="news-author">
-            {article.member?.image && (
-              <img src={article.member.image} alt="Author" />
-            )}
-            <span>
-              {article.member.firstname} {article.member.lastname}
-            </span>
-          </div>
         </div>
       </div>
       {selectedArticle && (
-        <Popup article={selectedArticle} onClose={closePopup} />
+        <Popup
+          article={selectedArticle}
+          onClose={closePopup}
+          openForm={openForm}
+        />
+      )}
+      {showForm && (
+        <EventRegistrationForm eventId={article._id} onClose={closeForm} />
       )}
     </>
   );
